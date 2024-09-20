@@ -1,11 +1,14 @@
 import React from "react";
+import ReactLogo from "../components/reactlogo/ReactLogo";
+import ComponentNavbar from "../components/navbar/ComponentNavbar";
 
 const Testing = () => {
-    return (
-        <section>
-            <h1>TESTING PAGE</h1>
-        </section>
-    )
-}
+  return (
+    <section>
+      <ComponentNavbar />
+      {/* <ComponentButton text={"Daftar"} style={""} /> */}
+    </section>
+  );
+};
 
-export default Testing
+export default Testing;
