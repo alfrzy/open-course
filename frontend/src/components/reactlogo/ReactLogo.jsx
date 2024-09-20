@@ -1,5 +1,6 @@
 import React from "react";
 
+// react logo
 const ReactLogo = ({width, height, color}) => {
   return (
     <svg
