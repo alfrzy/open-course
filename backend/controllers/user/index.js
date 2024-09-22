@@ -5,3 +5,5 @@ const saveUser = require('./save')
 const userApiController = Router()
 
 userApiController.use(saveUser)
+
+module.exports = userApiController
