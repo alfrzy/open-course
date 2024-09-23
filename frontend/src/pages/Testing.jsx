@@ -1,11 +1,11 @@
 import React from "react";
 import ReactLogo from "../components/reactlogo/ReactLogo";
-import ComponentNavbar from "../components/navbar/ComponentNavbar";
+import Navbar from "../components/Navbar/Navbar";
 
 const Testing = () => {
   return (
     <section>
-      <ComponentNavbar />
+      <Navbar />
       {/* <ComponentButton text={"Daftar"} style={""} /> */}
     </section>
   );

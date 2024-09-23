@@ -1,100 +1,223 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaGoogle } from "react-icons/fa";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { Toaster, toast } from "react-hot-toast";
 import ReactLogo from "../../../components/reactlogo/ReactLogo";
+import Navbar from "../../../components/Navbar/Navbar";
 
-const Register = () => {
+const Register2 = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [userData, setUserData] = useState({
+    full_name: "",
+    username: "", // Menambahkan username
+    email: "",
+    password: "",
+    ulangi_password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target; // Menggunakan name untuk mendapatkan key
+    setUserData({ ...userData, [name]: value }); // Mengupdate userData dengan key yang benar
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Kirim data ke backend
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/user/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const result = await response.json();
+      console.log(result); // Tampilkan hasil di console
+
+      if (response.ok) {
+        toast.success("Registrasi berhasil!", {
+          duration: 3000,
+          position: "top-center",
+        });
+      } else {
+        toast.error(result.message || "Terjadi kesalahan saat registrasi.", {
+          duration: 3000,
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat menghubungi server.", {
+        duration: 3000,
+        position: "top-right",
+      });
+    }
+  };
+
   return (
-    <section className="flex mx-auto justify-center items-center font-poppins ">
-      <section className=" w-[80%] lg:w-[40%] pb-20">
-        {/* GAMBAR && FE OPEN COURSE */}
-        <section className="md:flex items-center gap-5 pt-[50px] pb-[0px] mb-[10px]">
-          {/* GAMBAR */}
-          <div className="flex justify-center">
-            <div className="w-20 h-20 items-center flex">
+    <div className="font-poppins ">
+      <Toaster />
+      <Navbar />
+      <section className="bg-gray-50">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-8 shadow-lg">
+          <div className="md:flex md:justify-center md:items-center md:gap-3 mb-6">
+            <div className="flex justify-center">
               <ReactLogo width={"75"} height={"75"} color={"#1172B4"} />
             </div>
-          </div>
-
-          {/* FE OPEN COURSE */}
-          <h1 className="text-[35px] text-biru1 font-bold text-center">
-            FE OPEN COURSES
-          </h1>
-        </section>
-
-        {/* KOTAK */}
-        <section className="bg-white  p-[24px] rounded-xl shadow-xl">
-          {/* daftar */}
-          <h1 className="text-[32px] text-biru1">Daftar</h1>
-
-          {/* line */}
-          <div className="h-1 bg-biru1 mb-[24px]"></div>
-
-          {/* Input Fields */}
-          <InputField
-            label="Nama Lengkap"
-            id="nama_lengkap"
-            placeholder="Nama Lengkap"
-          />
-          <InputField label="Email" id="email" placeholder="Email" />
-          <InputField
-            label="Password"
-            id="password"
-            placeholder="Password"
-            type="password"
-          />
-          <InputField
-            label="Ulangi Password"
-            id="password_ulang"
-            placeholder="Ulangi Password"
-            type="password"
-          />
-
-          {/* Saya sudah punya akun */}
-          <section className="flex justify-between text-[12px] mb-[40px] text-biru1">
-            <h1>Sudah punya akun?</h1>
-            <a href="forgot">
-              <h1 className="hover:opacity-50  hover:font-bold">
-                Lupa password
-              </h1>
+            <a
+              href="#"
+              className="flex items-center text-4xl font-bold text-biru1"
+            >
+              FE Open Course
             </a>
-          </section>
+          </div>
+          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight text-biru1 md:text-2xl">
+                Register
+              </h1>
+              <hr className="border-biru1 border-1" />
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                {/* nama lengkap */}
+                <InputField
+                  label="Nama Lengkap"
+                  type="text"
+                  id="full_name"
+                  name="full_name"
+                  placeholder="ahmad aziz fauzi"
+                  value={userData.full_name}
+                  onChange={handleChange}
+                />
 
-          {/* Tombol Daftar */}
-          <Button text="Daftar" />
+                {/* username */}
+                <InputField
+                  label="Username"
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="username123"
+                  value={userData.username}
+                  onChange={handleChange}
+                />
 
-          {/* Login Google */}
-        </section>
+                {/* email */}
+                <InputField
+                  label="Email"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="name@company.com"
+                  value={userData.email}
+                  onChange={handleChange}
+                />
+
+                {/* password */}
+                <div className="relative">
+                  <InputField
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    placeholder="••••••••"
+                    value={userData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 mt-5 px-3 text-black focus:outline-none "
+                  >
+                    {showPassword ? (
+                      <IoMdEyeOff size={24} />
+                    ) : (
+                      <IoMdEye size={24} />
+                    )}
+                  </button>
+                </div>
+
+                {/* retipe password */}
+                <div className="relative">
+                  <InputField
+                    label="Ulangi password"
+                    type={showPassword ? "text" : "password"}
+                    id="ulangi_password"
+                    name="ulangi_password"
+                    placeholder="••••••••"
+                    value={userData.ulangi_password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 mt-5 px-3 text-black focus:outline-none"
+                  >
+                    {showPassword ? (
+                      <IoMdEyeOff size={24} />
+                    ) : (
+                      <IoMdEye size={24} />
+                    )}
+                  </button>
+                </div>
+
+                {/* sudah punya akun */}
+                <div className="flex items-center justify-between">
+                  <a
+                    href="#"
+                    className="text-sm font-medium text-biru3 hover:underline"
+                  >
+                    Sudah punya akun?
+                  </a>
+                  <a
+                    href="#"
+                    className="text-sm font-medium text-biru3 hover:underline"
+                  >
+                    Lupa password?
+                  </a>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full text-white bg-biru3 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-biru1 transition-all duration-200 hover:bg-opacity-80"
+                >
+                  Register
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
-    </section>
+    </div>
   );
 };
 
-// Komponen InputField
-const InputField = ({ label, id, placeholder, type = "text" }) => {
-  return (
-    <section className="mb-[24px]">
-      <label htmlFor={id}>
-        <h1 className="text-[12px] font-bold">{label}</h1>
-      </label>
-      <input
-        id={id}
-        type={type}
-        className="p-3 border-gray-700 w-full rounded-xl"
-        placeholder={placeholder}
-      />
-    </section>
-  );
-};
-
-// Komponen Button
-const Button = ({ text, onClick }) => {
-  return (
-    <button
-      className="bg-biru1 py-[8px] w-full hover:bg-biru2 transition-all duration-800"
-      onClick={onClick}
+const InputField = ({
+  label,
+  type,
+  id,
+  name,
+  placeholder,
+  value,
+  onChange,
+}) => (
+  <div className="relative">
+    <label
+      htmlFor={id}
+      className="block mb-2 text-sm font-medium text-gray-900"
     >
-      <h1 className="font-bold text-[16px] text-white">{text}</h1>
-    </button>
-  );
-};
+      <h1 className="text-biru1">{label}</h1>
+    </label>
+    <input
+      type={type}
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:border-transparent block w-full p-2.5"
+      required
+    />
+  </div>
+);
 
-export default Register;
+export default Register2;

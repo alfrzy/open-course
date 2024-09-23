@@ -12,6 +12,7 @@ export default {
       colors: {
         biru1: '#1172B4',
         biru2: '#009CDC',
+        biru3: '#2563EB',
         abang: '#DD0000',
       },
     },
