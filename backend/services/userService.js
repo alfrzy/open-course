@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 const userRepo = new UserRepository();
 
+//register
 exports.save = async (data) => {
   return await userRepo.save(data);
 };
@@ -56,4 +57,14 @@ exports.getUserById = async (id) => {
     console.error("error finding user by id: ", error);
     throw new Error("error finding user");
   }
+};
+
+// get
+exports.findAll = async () => {
+  return await userRepo.findAll();
+};
+
+// delete
+exports.deleteById = async (id) => {
+  return await userRepo.deleteById(id);
 };

@@ -4,43 +4,40 @@ const { sequelize } = require("../config/database");
 const User = sequelize.define(
   "Users",
   {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-    },
     full_name: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
     username: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     gmail: {
       type: DataTypes.STRING(255),
       unique: true,
     },
     password: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     phone: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
     role: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     nim: {
       type: DataTypes.STRING(255),
       allowNull: true,
+      unique: true,
     },
     nidn: {
       type: DataTypes.STRING(255),
       allowNull: true,
+      unique: true,
     },
     profile_picture: {
       type: DataTypes.STRING(255),
@@ -48,9 +45,26 @@ const User = sequelize.define(
     },
   },
   {
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+      field: "deleted_at",
+    },
+  },
+  {
     sequelize,
     tableName: "Users",
-    paranoid: true,
+    freezeTableName: true,
+    timestamps: true,
+    paranoid: true, // Enable soft deletes
+    underscored: true,
   }
 );
 

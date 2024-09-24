@@ -4,6 +4,7 @@ import Testing from "./pages/Testing";
 import Home from "./pages/Home";
 import Login from "./pages/Login/Login";
 import PrivateRoute from "./PrivateRoute";
+import Register from "./pages/auth/register/register";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -24,7 +25,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
-        <Route path="/testing" element={<Testing />} />
+        <Route path="/register" element={<Register setAuth={setIsAuth} />} />
         <Route element={<PrivateRoute isAuth={isAuth} />}>
           <Route path="/home" element={<Home onLogout={handleLogout} />} />
         </Route>

@@ -1,16 +1,13 @@
 const User = require("../models/user");
 
 class UserRepository {
+  // save
   async save(data) {
-    const { id } = data;
+    // Hapus id dari data jika ada
+    delete data.id;
 
-    const [user, created] = await User.findOrCreate({
-      where: {
-        id,
-      },
-      defaults: data,
-    });
-    if (!created) await user.update(data);
+    // Buat user baru
+    const user = await User.create(data);
 
     return user.toJSON();
   }
@@ -20,8 +17,24 @@ class UserRepository {
   }
 
   async getUser(id) {
-    const user = await User.findByPk(id); 
+    const user = await User.findByPk(id);
     return user ? user.toJSON() : null;
+  }
+  // get
+  async findAll() {
+    const users = await User.findAll();
+    return users.map((user) => user.toJSON());
+  }
+
+  // delete
+  async deleteById(id) {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return null;
+    }
+
+    await user.destroy();
+    return user.toJSON();
   }
 }
 
