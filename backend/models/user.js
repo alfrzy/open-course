@@ -1,58 +1,50 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
 
-// Define role constants starting from 0
-const ROLES = {
-  MAHASISWA: 0,
-  DOSEN: 1,
-  ADMIN: 2,
-};
-
 const User = sequelize.define(
   "Users",
   {
     full_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING(255),
+      allowNull: true,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    phone: {
-      type: DataTypes.STRING,
-    },
     gmail: {
-      type: DataTypes.STRING,
-      validate: {
-        isEmail: true,
-      },
+      type: DataTypes.STRING(255),
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    role: {
-      type: DataTypes.INTEGER,
-      defaultValue: ROLES.MAHASISWA,
-      validate: {
-        isIn: [[ROLES.MAHASISWA, ROLES.DOSEN, ROLES.ADMIN]],
-      },
-    },
-    nim: {
-      type: DataTypes.STRING,
-    },
-    nidn: {
-      type: DataTypes.STRING,
-    },
-    position: {
-      type: DataTypes.STRING,
-    },
-    profile_picture: {
-      type: DataTypes.STRING,
+    phone: {
+      type: DataTypes.STRING(255),
       allowNull: true,
     },
+    role: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    nim: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      unique: true,
+    },
+    nidn: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      unique: true,
+    },
+    profile_picture: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+  },
+  {
     created_at: {
       type: DataTypes.DATE,
       defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
@@ -67,6 +59,8 @@ const User = sequelize.define(
     },
   },
   {
+    sequelize,
+    tableName: "Users",
     freezeTableName: true,
     timestamps: true,
     paranoid: true, // Enable soft deletes

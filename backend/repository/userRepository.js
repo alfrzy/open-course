@@ -12,21 +12,29 @@ class UserRepository {
     return user.toJSON();
   }
 
+  async login(gmail) {
+    return await User.findOne({ where: { gmail } });
+  }
+
+  async getUser(id) {
+    const user = await User.findByPk(id);
+    return user ? user.toJSON() : null;
+  }
   // get
   async findAll() {
-    const users = await User.findAll(); 
+    const users = await User.findAll();
     return users.map((user) => user.toJSON());
   }
 
-   // delete
-   async deleteById(id) {
-    const user = await User.findByPk(id); 
+  // delete
+  async deleteById(id) {
+    const user = await User.findByPk(id);
     if (!user) {
-      return null; 
+      return null;
     }
-    
-    await user.destroy(); 
-    return user.toJSON(); 
+
+    await user.destroy();
+    return user.toJSON();
   }
 }
 
