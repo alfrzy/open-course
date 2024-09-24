@@ -1,9 +1,13 @@
-const { Router } = require('express')
+const { Router } = require("express");
 
-const saveUser = require('./save')
+const saveUser = require("./save");
+const loginUser = require("./login");
+const getUser = require("./getuser");
 
-const userApiController = Router()
+const userApiController = Router();
 
-userApiController.use(saveUser)
+userApiController.use(saveUser);
+userApiController.use(loginUser);
+userApiController.use(getUser);
 
-module.exports = userApiController
+module.exports = userApiController;
