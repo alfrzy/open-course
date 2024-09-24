@@ -1,49 +1,5 @@
-// const { DataTypes } = require('sequelize')
-// const { sequelize } = require('../config/database')
-
-// const User = sequelize.define(
-//   'Users',
-//   {
-//     id: {
-//       autoIncrement: true,
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       primaryKey: true,
-//     },
-//     name: {
-//       type: DataTypes.STRING(255),
-//       allowNull: true,
-//     },
-//     username: {
-//       type: DataTypes.STRING(255),
-//       allowNull: true,
-//     },
-//     password: {
-//       type: DataTypes.STRING(255),
-//       allowNull: true,
-//     },
-//     role: {
-//       type: DataTypes.STRING(255),
-//       allowNull: true,
-//     },
-//   },
-//   {
-//     sequelize,
-//     tableName: 'Users',
-//     paranoid: true,
-//   }
-// )
-
-// module.exports = User
-
-
-// ===================================================
-// ===================================================
-// ===================================================
-
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database')
-
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/database");
 
 // Define role constants starting from 0
 const ROLES = {
@@ -53,9 +9,8 @@ const ROLES = {
 };
 
 const User = sequelize.define(
-  'Users', // Gunakan 'users' untuk konsisten dengan tabel di database
+  "Users",
   {
-   
     full_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -98,24 +53,24 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    created_at: { // Tanpa underscore
+    created_at: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
     },
-    updated_at: { // Tanpa underscore
+    updated_at: {
       type: DataTypes.DATE,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
     },
-    deleted_at: { // Tanpa underscore
+    deleted_at: {
       type: DataTypes.DATE,
-      field: 'deleted_at',
+      field: "deleted_at",
     },
   },
   {
     freezeTableName: true,
-    timestamps: true, // Enable timestamps (created_at, updated_at)
-    paranoid: true,   // Enable soft deletes (deleted_at)
-    underscored: true
+    timestamps: true,
+    paranoid: true, // Enable soft deletes
+    underscored: true,
   }
 );
 

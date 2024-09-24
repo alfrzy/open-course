@@ -1,24 +1,3 @@
-// const User = require('../models/user');
-
-// class UserRepository {
-
-//     async save(data) {
-//         const { id } = data
-
-//         const [user, created] = await User.findOrCreate({
-//             where: {
-//                 id
-//             },
-//             defaults: data
-//         })
-//         if(!created) await user.update(data)
-
-//         return user.toJSON()
-//     }
-// }
-
-// module.exports = UserRepository
-
 const User = require("../models/user");
 
 class UserRepository {
@@ -35,19 +14,19 @@ class UserRepository {
 
   // get
   async findAll() {
-    const users = await User.findAll(); // Mengambil semua pengguna
+    const users = await User.findAll(); 
     return users.map((user) => user.toJSON());
   }
 
    // delete
    async deleteById(id) {
-    const user = await User.findByPk(id); // Mencari pengguna berdasarkan ID
+    const user = await User.findByPk(id); 
     if (!user) {
-      return null; // Jika tidak ditemukan, kembalikan null
+      return null; 
     }
     
-    await user.destroy(); // Hapus pengguna dari database
-    return user.toJSON(); // Kembalikan data pengguna yang dihapus
+    await user.destroy(); 
+    return user.toJSON(); 
   }
 }
 

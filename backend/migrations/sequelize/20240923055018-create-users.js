@@ -10,14 +10,14 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      full_name: { // Menggunakan full_name untuk konsistensi
+      full_name: { 
         type: Sequelize.STRING,
         allowNull: false,
       },
       username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true, // Pastikan username unik
+        unique: true, 
       },
       phone: {
         type: Sequelize.STRING,
@@ -35,20 +35,20 @@ module.exports = {
       role: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0, // Default ke MAHASISWA
+        defaultValue: 0, 
       },
       nim: { // Tambahkan kolom nim
         type: Sequelize.STRING,
-        allowNull: true, // Sesuaikan dengan kebutuhan Anda
+        allowNull: true, 
       },
-      nidn: { // Tambahkan kolom nidn
+      nidn: { 
         type: Sequelize.STRING,
-        allowNull: true, // Sesuaikan dengan kebutuhan Anda
+        allowNull: true, 
       },
-      position: { // Tambahkan kolom position
+      position: { 
         type: Sequelize.STRING,
       },
-      profile_picture: { // Tambahkan kolom profile_picture
+      profile_picture: { 
         type: Sequelize.STRING,
         allowNull: true,
       },

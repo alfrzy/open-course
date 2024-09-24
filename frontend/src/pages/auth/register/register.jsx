@@ -9,15 +9,15 @@ const Register2 = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
     full_name: "",
-    username: "", // Menambahkan username
-    email: "",
+    username: "", 
+    gmail: "",
     password: "",
     ulangi_password: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target; // Menggunakan name untuk mendapatkan key
-    setUserData({ ...userData, [name]: value }); // Mengupdate userData dengan key yang benar
+    const { name, value } = e.target; 
+    setUserData({ ...userData, [name]: value }); 
   };
 
   const handleSubmit = async (e) => {
@@ -67,7 +67,7 @@ const Register2 = () => {
             </div>
             <a
               href="#"
-              className="flex items-center text-4xl font-bold text-biru1"
+              className="flex items-center text-center text-4xl font-bold text-biru1"
             >
               FE Open Course
             </a>
@@ -101,14 +101,14 @@ const Register2 = () => {
                   onChange={handleChange}
                 />
 
-                {/* email */}
+                {/* gmail */}
                 <InputField
-                  label="Email"
-                  type="email"
-                  id="email"
-                  name="email"
+                  label="gmail"
+                  type="gmail"
+                  id="gmail"
+                  name="gmail"
                   placeholder="name@company.com"
-                  value={userData.email}
+                  value={userData.gmail}
                   onChange={handleChange}
                 />
 

@@ -10,10 +10,10 @@ exports.save = async (data) => {
 
 // get
 exports.findAll = async () => {
-    return await userRepo.findAll(); // Pastikan ini ada
+    return await userRepo.findAll(); 
 };
 
 // delete
 exports.deleteById = async (id) => {
-    return await userRepo.deleteById(id); // Memanggil metode delete dari repository
+    return await userRepo.deleteById(id); 
 };

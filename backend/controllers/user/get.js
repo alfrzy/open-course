@@ -6,7 +6,7 @@ const get = Router();
 
 get.get('/', async (req, res) => {
   try {
-    const users = await UserService.findAll(); // Mengambil semua pengguna dari database
+    const users = await UserService.findAll(); 
 
     // Mengembalikan respon sukses dengan data pengguna
     return success(res, 'Pengguna berhasil diambil', users); 
