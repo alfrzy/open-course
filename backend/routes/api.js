@@ -1,11 +1,13 @@
-const { Router } = require('express')
+const { Router } = require("express");
 
-const userApiController = require('../controllers/user')
-const bookApiController = require('../controllers/book')
+const { verifyToken } = require("../cores/authMiddleware");
 
-const api = Router()
+const userApiController = require("../controllers/user");
+const bookApiController = require("../controllers/book");
 
-api.use('/api/v1/user', userApiController)
-api.use('/api/v1/book', bookApiController)
+const api = Router();
 
-module.exports = api
+api.use("/api/v1/user", userApiController);
+api.use("/api/v1/book", bookApiController);
+
+module.exports = api;
