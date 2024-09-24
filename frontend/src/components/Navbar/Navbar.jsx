@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import ComponentButtonNavbar from "../button/ComponentButtonNavbar";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
+import ReactLogo from "../reactlogo/ReactLogo";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,9 +13,10 @@ const Navbar = () => {
   };
 
   return (
-    <section className="h-[60px] bg-green-300 font-poppins px-[32px] flex items-center justify-between">
+    <section className="h-[60px] bg-blue-700 font-poppins px-[32px] flex items-center justify-between font-poppins">
       {/* Left section */}
-      <section className="flex items-center justify-between w-full md:w-auto">
+      <section className="flex items-center justify-between w-full md:w-auto gap-3">
+        <ReactLogo color={"white"} height={"50"} width={"50"} />
         <div className="mr-[25px]">
           <h1 className="font-bold text-[18px] md:text-[24px] text-white">Fe Open Courses</h1>
         </div>
@@ -54,7 +56,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <section className="md:hidden absolute top-[60px] left-0 w-full bg-green-300 flex flex-col items-center py-4 space-y-3">
+        <section className="md:hidden absolute top-[60px] left-0 w-full bg-blue-500 flex flex-col items-center py-4 space-y-3">
           <NavLink to="/kelas" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
             Kelas
           </NavLink>
