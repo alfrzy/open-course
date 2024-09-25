@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Testing from "./pages/Testing";
 import Home from "./pages/Home";
+import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
-import Login from "./pages/Login/Login";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
 

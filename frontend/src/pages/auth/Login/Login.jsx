@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; // Import toast
-import ReactLogo from "../../components/reactlogo/ReactLogo";
+import ReactLogo from "../../../components/reactlogo/ReactLogo";
 
 const Login = ({ setAuth }) => {
   const [showPassword, setShowPassword] = useState(false);
