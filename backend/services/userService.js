@@ -19,7 +19,7 @@ exports.login = async ({ gmail, password }) => {
     if (!validPassword) return null;
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.id, email: user.gmail }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id, email: user.gmail, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 

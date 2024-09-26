@@ -4,7 +4,7 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast"; // Import toast
+import { toast } from "react-hot-toast";
 import ReactLogo from "../../../components/reactlogo/ReactLogo";
 
 const Login = ({ setAuth }) => {
@@ -28,12 +28,19 @@ const Login = ({ setAuth }) => {
         }
       );
       const data = response.data;
+      console.log(data);
+
       if (response.status === 200) {
         toast.success("Login successful!");
-        //store token
         localStorage.setItem("token", data.token);
         setAuth(true);
-        navigate("/home");
+        if (data.user && data.user.role === "2") {
+          navigate("/admin-ui", { replace: true });
+        } else if (data.user && data.user.role === "1") {
+          navigate("/dosen-ui", { replace: true });
+        } else {
+          navigate("/home", { replace: true });
+        }
       }
     } catch (error) {
       console.error(error);

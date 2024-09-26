@@ -10,6 +10,7 @@ import Table from "./components/Table/Table";
 import ComponentAddDosen from "./components/Form/ComponentAddDosen";
 import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
         <Route path="/register" element={<Register setAuth={setIsAuth} />} />
+        <Route path="/admin-ui" element={<Dashboard />} />
         <Route element={<PrivateRoute isAuth={isAuth} />}>
           <Route path="/home" element={<Home onLogout={handleLogout} />} />
         </Route>
