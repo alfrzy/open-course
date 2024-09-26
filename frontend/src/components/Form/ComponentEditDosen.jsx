@@ -3,8 +3,6 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import Swal from "sweetalert2"; // Import SweetAlert2
 
 const ComponentEditDosen = ({ dosenData }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRetypePassword, setShowRetypePassword] = useState(false);
   const [formData, setFormData] = useState({
     full_name: "",
     username: "",
@@ -12,8 +10,6 @@ const ComponentEditDosen = ({ dosenData }) => {
     position: "",
     phone: "",
     gmail: "",
-    password: "",
-    retype_password: "",
   });
   const [profilePicture, setProfilePicture] = useState(null); // State untuk gambar
   const [previewPicture, setPreviewPicture] = useState(null); // State untuk preview gambar
@@ -27,8 +23,6 @@ const ComponentEditDosen = ({ dosenData }) => {
         position: dosenData.position || "",
         phone: dosenData.phone || "",
         gmail: dosenData.gmail || "",
-        password: "",
-        retype_password: "",
       });
       setProfilePicture(dosenData.profile_picture || null); // Menyimpan gambar dari data dosen
       setPreviewPicture(dosenData.profile_picture || null); // Menyimpan preview gambar dari data dosen
@@ -55,8 +49,7 @@ const ComponentEditDosen = ({ dosenData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { password, retype_password, ...dataToSend } = formData;
-    dataToSend.role = 1;
+    const dataToSend = { ...formData, role: 1 };
     const id = dosenData?.id;
 
     if (!id) {
@@ -66,21 +59,6 @@ const ComponentEditDosen = ({ dosenData }) => {
         text: "ID dosen tidak ditemukan.",
       });
       return;
-    }
-
-    // Validasi password
-    if (password && password !== retype_password) {
-      Swal.fire({
-        icon: "error",
-        title: "Password Mismatch",
-        text: "Password dan Ulangi Password tidak sama.",
-      });
-      return;
-    }
-
-    // Sertakan password hanya jika tidak kosong
-    if (password) {
-      dataToSend.password = password;
     }
 
     try {
@@ -112,8 +90,6 @@ const ComponentEditDosen = ({ dosenData }) => {
         position: "",
         phone: "",
         gmail: "",
-        password: "",
-        retype_password: "",
       });
       setProfilePicture(null); // Reset gambar
       setPreviewPicture(null); // Reset preview gambar
@@ -212,32 +188,6 @@ const ComponentEditDosen = ({ dosenData }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-3">
-          <InputField
-            id="password"
-            label="Password"
-            type="password"
-            placeholder="*diisi jika ingin ganti password"
-            showPasswordToggle={true}
-            showPassword={showPassword}
-            onTogglePassword={() => setShowPassword(!showPassword)}
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <InputField
-            id="retype_password"
-            label="Ulangi Password"
-            type="password"
-            placeholder="*diisi jika ingin ganti password"
-            showPasswordToggle={true}
-            showPassword={showRetypePassword}
-            onTogglePassword={() => setShowRetypePassword(!showRetypePassword)}
-            name="retype_password"
-            value={formData.retype_password}
-            onChange={handleChange}
-          />
-        </div>
 
         {/* Input untuk upload gambar */}
         <div className="mb-3">
@@ -277,8 +227,6 @@ const InputField = ({
   type,
   placeholder,
   showPasswordToggle,
-  showPassword,
-  onTogglePassword,
   name,
   value,
   onChange,
@@ -294,22 +242,13 @@ const InputField = ({
       <div className="relative">
         <input
           id={id}
-          type={showPassword ? "text" : type}
+          type={type}
           placeholder={placeholder}
           name={name}
           value={value}
           onChange={onChange}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
         />
-        {showPasswordToggle && (
-          <button
-            type="button"
-            onClick={onTogglePassword}
-            className="absolute right-2 top-2 text-gray-500"
-          >
-            {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
-          </button>
-        )}
       </div>
     </div>
   );

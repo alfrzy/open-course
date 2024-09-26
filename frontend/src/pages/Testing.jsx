@@ -36,7 +36,7 @@ const Testing = () => {
         <h1 className="text-center text-3xl font-bold mb-2">DOSEN</h1>
         <div className="flex justify-center">
           <button
-            className="bg-biru1 text-white px-4 py-2 rounded"
+            className="bg-biru1 text-white px-4 py-1 rounded hover:bg-biru2 transition-all duration-200"
             onClick={toggleModal} // Klik untuk membuka modal tambah
           >
             + Tambah Dosen
