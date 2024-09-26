@@ -164,13 +164,13 @@ const Register2 = () => {
                 <div className="flex items-center justify-between">
                   <a
                     href="#"
-                    className="text-sm font-medium text-biru3 hover:underline"
+                    className="text-sm font-medium text-biru2 hover:underline"
                   >
                     Sudah punya akun?
                   </a>
                   <a
                     href="#"
-                    className="text-sm font-medium text-biru3 hover:underline"
+                    className="text-sm font-medium text-biru2 hover:underline"
                   >
                     Lupa password?
                   </a>
@@ -178,7 +178,7 @@ const Register2 = () => {
 
                 <button
                   type="submit"
-                  className="w-full text-white bg-biru3 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-biru1 transition-all duration-200 hover:bg-opacity-80"
+                  className="w-full text-white bg-biru2 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-biru3 transition-all duration-200 hover:bg-opacity-80"
                 >
                   Register
                 </button>

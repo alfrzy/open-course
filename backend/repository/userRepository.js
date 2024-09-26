@@ -36,6 +36,17 @@ class UserRepository {
     await user.destroy();
     return user.toJSON();
   }
+
+  // update
+  async update(id, data) {
+    const user = await User.findByPk(id); 
+    if (!user) {
+      return null; 
+    }
+
+    await user.update(data); 
+    return user.toJSON();
+  }
 }
 
 module.exports = UserRepository;
