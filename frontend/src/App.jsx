@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
         <Route path="/register" element={<Register setAuth={setIsAuth} />} />
+        <Route path="/admin-ui" element={<Dashboard />} />
         <Route element={<PrivateRoute isAuth={isAuth} />}>
           <Route path="/home" element={<Home onLogout={handleLogout} />} />
         </Route>
