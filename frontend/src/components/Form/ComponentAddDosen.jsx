@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import Swal from "sweetalert2"; 
+import { addDosen } from "../../Data/DataDosen";
+import Swal from "sweetalert2";
 
-const ComponentAddDosen = () => {
+const ComponentAddDosen = ({ toggleModal }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRetypePassword, setShowRetypePassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,14 +16,14 @@ const ComponentAddDosen = () => {
     password: "",
     profile_picture: null,
   });
-  const [preview, setPreview] = useState(null); // State untuk pratayang gambar
+  const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-    if (type === 'file') {
+    if (type === "file") {
       const file = e.target.files[0];
       setFormData({ ...formData, profile_picture: file });
-      setPreview(URL.createObjectURL(file)); // Membuat URL untuk pratayang
+      setPreview(URL.createObjectURL(file));
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -32,22 +33,14 @@ const ComponentAddDosen = () => {
     e.preventDefault();
 
     const dataToSend = new FormData();
-    Object.keys(formData).forEach(key => {
+    Object.keys(formData).forEach((key) => {
       dataToSend.append(key, formData[key]);
     });
-    dataToSend.append('role', 1);
+    dataToSend.append("role", 1);
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/save", {
-        method: "POST",
-        body: dataToSend,
-      });
+      await addDosen(dataToSend);
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // Reset form data
       setFormData({
         full_name: "",
         username: "",
@@ -58,24 +51,23 @@ const ComponentAddDosen = () => {
         password: "",
         profile_picture: null,
       });
-      setPreview(null); // Reset pratayang gambar
+      setPreview(null);
 
       Swal.fire({
-        icon: 'success',
-        title: 'Akun Dosen berhasil ditambahkan!',
-        confirmButtonText: 'OK',
+        icon: "success",
+        title: "Akun Dosen berhasil ditambahkan!",
+        confirmButtonText: "OK",
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.reload();
         }
       });
     } catch (error) {
-      console.error("Error:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'Gagal menambahkan akun dosen',
-        text: 'Terjadi kesalahan saat menambahkan akun dosen.',
-        confirmButtonText: 'OK',
+        icon: "error",
+        title: "Gagal menambahkan akun dosen",
+        text: "Terjadi kesalahan saat menambahkan akun dosen.",
+        confirmButtonText: "OK",
       });
     }
   };
@@ -89,7 +81,7 @@ const ComponentAddDosen = () => {
         <hr className="border-1 border-solid border-black" />
       </div>
       <form className="w-[80%] mx-auto" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-3">
+        <div className="flex flex-col md:flex-row md:space-x-4 md:mb-3">
           <InputField
             id="full_name"
             label="Full Name"
@@ -111,7 +103,7 @@ const ComponentAddDosen = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-3">
+        <div className="flex flex-col md:flex-row md:space-x-4 md:mb-3">
           <InputField
             id="nidn"
             label="NIDN"
@@ -126,14 +118,14 @@ const ComponentAddDosen = () => {
             id="position"
             label="Position"
             type="text"
-            placeholder="rektor"
+            placeholder="Rektor"
             showPasswordToggle={false}
             name="position"
             value={formData.position}
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-3">
+        <div className="flex flex-col md:flex-row md:space-x-4 md:mb-3">
           <InputField
             id="phone"
             label="Telepon"
@@ -155,7 +147,7 @@ const ComponentAddDosen = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-3">
+        <div className="flex flex-col md:flex-row md:space-x-4 md:mb-3">
           <InputField
             id="password"
             label="Password"
@@ -179,71 +171,89 @@ const ComponentAddDosen = () => {
           />
         </div>
 
-        {/* Tambahkan kolom upload gambar */}
         <div className="mb-3">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Upload Gambar
+            Profile Picture
           </label>
           <input
             type="file"
-            accept="image/*"
+            accept="image/png, image/jpeg"
             onChange={handleChange}
-            name="profile_picture"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
-
-        {/* Tampilkan pratayang gambar jika ada */}
         {preview && (
-          <div className="mb-3 w-72">
-            <img src={preview} alt="Preview" className="w-full h-auto rounded" />
+          <div className="mb-3">
+            <img src={preview} alt="Preview" className="w-24 h-24 rounded-md" />
           </div>
         )}
-
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-4"
-        >
-          Tambah Akun Dosen
-        </button>
+        
+        {/* button bawah */}
+        <div className="md:flex md:justify-between">
+          {/* desktop */}
+          <button
+            className="mt-0 text-red-700 font-bold hover:opacity-50 hidden md:block"
+            onClick={toggleModal}
+          >
+            Tutup
+          </button>
+          <button
+            type="submit"
+            className="w-full md:w-[30%] bg-biru1 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
+          >
+            Tambah Dosen
+          </button>
+          {/* mobile */}
+          <button
+            className="mt-0 text-red-700 font-bold hover:opacity-50 block md:hidden"
+            onClick={toggleModal}
+          >
+            Tutup
+          </button>
+        </div>
       </form>
     </>
   );
 };
 
-// Komponen InputField
-const InputField = (props) => {
-  const { id, label, type, placeholder, showPasswordToggle, showPassword, onTogglePassword, name, value, onChange } = props;
-
+const InputField = ({
+  id,
+  label,
+  type,
+  placeholder,
+  showPasswordToggle,
+  showPassword,
+  onTogglePassword,
+  name,
+  value,
+  onChange,
+}) => {
   return (
-    <div className="mb-3 relative flex-1">
-      <label
-        htmlFor={id}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
+    <div className="mb-3 w-full">
+      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {label}
       </label>
-      <input
-        type={showPasswordToggle && showPassword ? "text" : type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder={placeholder}
-        required
-      />
-      {showPasswordToggle && (
-        <button
-          type="button"
-          className="absolute inset-y-0 right-0 flex items-center pr-3"
-          onClick={onTogglePassword}
-        >
-          <div className="relative top-3">
-            {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-          </div>
-        </button>
-      )}
+      <div className="relative">
+        <input
+          type={showPasswordToggle ? (showPassword ? "text" : "password") : type}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          className="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300 w-full"
+          required
+        />
+        {showPasswordToggle && (
+          <button
+            type="button"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+            onClick={onTogglePassword}
+          >
+            {showPassword ? <IoMdEye /> : <IoMdEyeOff />}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

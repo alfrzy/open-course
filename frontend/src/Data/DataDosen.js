@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2"; 
 
 const dataDosenApiUrl = "http://localhost:3000/api/v1/user/";
 
@@ -34,9 +34,8 @@ const useFetchData = () => {
   return { dataDosen, loading, error, refetchData: () => fetchData() };
 };
 
-// Fungsi untuk delete dosen dengan SweetAlert2
+// Fungsi untuk delete dosen 
 export const deleteDosen = async (id, refetchData, toast) => {
-  // Menggunakan SweetAlert untuk konfirmasi
   Swal.fire({
     title: "Apakah Anda yakin?",
     text: "Data dosen ini akan dihapus secara permanen!",
@@ -48,21 +47,19 @@ export const deleteDosen = async (id, refetchData, toast) => {
     cancelButtonText: "Batal",
   }).then(async (result) => {
     if (result.isConfirmed) {
-      // Jika konfirmasi "Ya"
       try {
         const response = await fetch(`${dataDosenApiUrl}delete/${id}`, {
           method: "DELETE",
         });
 
         if (response.ok) {
-          // Tampilkan popup sukses dengan tombol "Oke"
           Swal.fire({
             icon: "success",
             title: "Akun Dosen berhasil dihapus!",
             confirmButtonText: "OK",
           }).then((result) => {
             if (result.isConfirmed) {
-              window.location.reload(); // Refresh halaman
+              window.location.reload(); 
             }
           });
         } else {
@@ -73,6 +70,53 @@ export const deleteDosen = async (id, refetchData, toast) => {
       }
     }
   });
+};
+
+// Fungsi untuk menambahkan dosen
+export const addDosen = async (data) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/v1/user/save", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding dosen:", error);
+    throw error;
+  }
+};
+
+// Fungsi untuk update dosen 
+export const updateDosen = async (id, formData, toast) => {
+  try {
+    const response = await fetch(`${dataDosenApiUrl}update/${id}`, {
+      method: "PUT",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "Berhasil",
+      text: "Akun Dosen berhasil diperbarui!",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload(); 
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Gagal memperbarui akun dosen.");
+  }
 };
 
 export default useFetchData;

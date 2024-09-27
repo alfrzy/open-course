@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2"; 
+import { updateDosen } from "../../Data/DataDosen";
 
-const ComponentEditDosen = ({ dosenData }) => {
+const ComponentEditDosen = ({ dosenData, toggleModal }) => {
   const [formData, setFormData] = useState({
     full_name: "",
     username: "",
@@ -11,8 +11,8 @@ const ComponentEditDosen = ({ dosenData }) => {
     phone: "",
     gmail: "",
   });
-  const [profilePicture, setProfilePicture] = useState(null); // State untuk gambar
-  const [previewPicture, setPreviewPicture] = useState(null); // State untuk preview gambar
+  const [profilePicture, setProfilePicture] = useState(null); 
+  const [previewPicture, setPreviewPicture] = useState(null); 
 
   useEffect(() => {
     if (dosenData) {
@@ -24,8 +24,8 @@ const ComponentEditDosen = ({ dosenData }) => {
         phone: dosenData.phone || "",
         gmail: dosenData.gmail || "",
       });
-      setProfilePicture(dosenData.profile_picture || null); // Menyimpan gambar dari data dosen
-      setPreviewPicture(dosenData.profile_picture || null); // Menyimpan preview gambar dari data dosen
+      setProfilePicture(dosenData.profile_picture || null);
+      setPreviewPicture(dosenData.profile_picture || null); 
     }
   }, [dosenData]);
 
@@ -39,8 +39,8 @@ const ComponentEditDosen = ({ dosenData }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfilePicture(file); // Menyimpan file gambar yang diupload
-        setPreviewPicture(reader.result); // Menyimpan URL gambar yang diupload untuk preview
+        setProfilePicture(file); 
+        setPreviewPicture(reader.result); 
       };
       reader.readAsDataURL(file);
     }
@@ -49,7 +49,6 @@ const ComponentEditDosen = ({ dosenData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const dataToSend = { ...formData, role: 1 };
     const id = dosenData?.id;
 
     if (!id) {
@@ -61,58 +60,17 @@ const ComponentEditDosen = ({ dosenData }) => {
       return;
     }
 
-    try {
-      const formDataToSend = new FormData(); // Menggunakan FormData untuk mengirim data
-      Object.keys(dataToSend).forEach((key) => {
-        formDataToSend.append(key, dataToSend[key]);
-      });
-      if (profilePicture) {
-        formDataToSend.append("profile_picture", profilePicture); // Menambahkan gambar ke FormData
-      }
-
-      const response = await fetch(
-        `http://localhost:3000/api/v1/user/update/${id}`,
-        {
-          method: "PUT",
-          body: formDataToSend,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // Reset form setelah sukses
-      setFormData({
-        full_name: "",
-        username: "",
-        nidn: "",
-        position: "",
-        phone: "",
-        gmail: "",
-      });
-      setProfilePicture(null); // Reset gambar
-      setPreviewPicture(null); // Reset preview gambar
-
-      // SweetAlert setelah sukses
-      Swal.fire({
-        icon: "success",
-        title: "Berhasil",
-        text: "Akun Dosen berhasil diperbarui!",
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.reload(); // Reload halaman saat tombol OK diklik
-        }
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Gagal",
-        text: "Gagal memperbarui akun dosen.",
-      });
+    const dataToSend = { ...formData, role: 1 };
+    const formDataToSend = new FormData(); 
+    Object.keys(dataToSend).forEach((key) => {
+      formDataToSend.append(key, dataToSend[key]);
+    });
+    if (profilePicture) {
+      formDataToSend.append("profile_picture", profilePicture); 
     }
+
+    // Memanggil fungsi updateDosen
+    await updateDosen(id, formDataToSend);
   };
 
   return (
@@ -207,49 +165,50 @@ const ComponentEditDosen = ({ dosenData }) => {
               alt="Preview"
               className="mt-2 w-72 object-cover"
             />
-          )} {/* Preview gambar */}
+          )}
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-4"
-        >
-          Perbarui Akun Dosen
-        </button>
+        <div className="md:flex md:justify-between">
+          {/* desktop */}
+          <button
+            className="mt-0 text-red-700 font-bold hover:opacity-50 hidden md:block"
+            onClick={toggleModal}
+          >
+            Tutup
+          </button>
+          <button
+            type="submit"
+            className="w-full md:w-[30%] bg-biru1 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
+          >
+            Perbarui
+          </button>
+          {/* mobile */}
+          <button
+            className="mt-0 text-red-700 font-bold hover:opacity-50 block md:hidden"
+            onClick={toggleModal}
+          >
+            Tutup
+          </button>
+        </div>
       </form>
     </>
   );
 };
 
-// Komponen InputField
-const InputField = ({
-  id,
-  label,
-  type,
-  placeholder,
-  showPasswordToggle,
-  name,
-  value,
-  onChange,
-}) => {
+const InputField = ({ id, label, type, placeholder, showPasswordToggle, name, value, onChange }) => {
   return (
-    <div className="flex-1 mb-3">
-      <label
-        htmlFor={id}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
+    <div className="mb-3 w-full">
+      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
         {label}
       </label>
-      <div className="relative">
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          value={value}
-          onChange={onChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-        />
-      </div>
+      <input
+        id={id}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+      />
     </div>
   );
 };

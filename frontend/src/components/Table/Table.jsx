@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteDosen } from "../../Data/DataDosen"; // Import fungsi deleteDosen
+import { deleteDosen } from "../../Data/DataDosen"; 
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/DataDosen";
 

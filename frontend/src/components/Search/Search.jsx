@@ -5,7 +5,7 @@ const Search = ({ onSearch }) => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    onSearch(e.target.value); // Mengirimkan nilai pencarian ke komponen Table
+    onSearch(e.target.value); 
   };
 
   const handleSubmit = (e) => {
@@ -14,7 +14,7 @@ const Search = ({ onSearch }) => {
   };
 
   return (
-    <section className="w-[90%] md:w-[30%] mb-5">
+    <section className="w-[90%] md:w-[30%] py-3">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
         <label
           htmlFor="default-search"

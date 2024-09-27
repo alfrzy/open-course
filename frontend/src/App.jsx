@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Form } from "react-router-dom";
-import Testing from "./pages/Testing";
 import Home from "./pages/Home";
 import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
-import Table from "./components/Table/Table";
-import ComponentAddDosen from "./components/Form/ComponentAddDosen";
 import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import CRUDDosen from "./components/Dosen/CRUDDosen";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -31,7 +29,7 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/testing" element={<Testing />} />
+        <Route path="/crud-dosen" element={<CRUDDosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />

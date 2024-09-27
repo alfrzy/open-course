@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Search from "../components/Search/Search";
-import Table from "../components/Table/Table";
-import ComponentAddDosen from "../components/Form/ComponentAddDosen";
-import ComponentEditDosen from "../components/Form/ComponentEditDosen"; // Import komponen modal edit
+import Table from "../Table/Table";
+import Search from "../Search/Search";
+import ComponentAddDosen from "../Form/ComponentAddDosen";
+import ComponentEditDosen from "../Form/ComponentEditDosen";
 
-const Testing = () => {
+const CRUDDosen = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,12 +32,12 @@ const Testing = () => {
   return (
     <section>
       {/* Tambah Dosen */}
-      <section className="my-5 md:w-[60%] md:flex md:justify-between md:mx-auto">
+      <section className="my-5 md:w-[60%] md:flex md:justify-between md:mx-auto  ">
         <h1 className="text-center text-3xl font-bold mb-2">DOSEN</h1>
         <div className="flex justify-center">
           <button
             className="bg-biru1 text-white px-4 py-1 rounded hover:bg-biru2 transition-all duration-200"
-            onClick={toggleModal} // Klik untuk membuka modal tambah
+            onClick={toggleModal} 
           >
             + Tambah Dosen
           </button>
@@ -45,7 +45,7 @@ const Testing = () => {
       </section>
 
       {/* Search */}
-      <section className="flex justify-center">
+      <section className="flex justify-end md:w-[60%] md:mx-auto md:items-center ">
         <Search onSearch={handleSearch} />
       </section>
 
@@ -63,13 +63,7 @@ const Testing = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-5 rounded-lg w-[80%] h-[90%] overflow-y-auto">
-            <ComponentAddDosen />
-            <button
-              className="mt-4 text-red-700 font-bold hover:opacity-50"
-              onClick={toggleModal}
-            >
-              Tutup
-            </button>
+            <ComponentAddDosen toggleModal={toggleModal}/>
           </div>
         </div>
       )}
@@ -78,13 +72,7 @@ const Testing = () => {
       {isEditModalOpen && selectedDosen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-5 rounded-lg w-[80%] h-[90%] overflow-y-auto">
-            <ComponentEditDosen dosenData={selectedDosen} /> {/* Pass data dosen yang dipilih */}
-            <button
-              className="mt-4 text-red-700 font-bold hover:opacity-50"
-              onClick={toggleEditModal} // Pastikan ini memanggil fungsi yang tepat
-            >
-              Tutup
-            </button>
+            <ComponentEditDosen dosenData={selectedDosen} toggleModal={toggleEditModal} /> 
           </div>
         </div>
       )}
@@ -92,4 +80,4 @@ const Testing = () => {
   );
 };
 
-export default Testing;
+export default CRUDDosen;
