@@ -29,7 +29,7 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/crud-dosen" element={<CRUDDosen />} />
+        <Route path="/dosen" element={<CRUDDosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
