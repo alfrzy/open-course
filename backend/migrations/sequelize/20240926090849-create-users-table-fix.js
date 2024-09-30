@@ -47,6 +47,7 @@ module.exports = {
       },
       position: { 
         type: Sequelize.STRING,
+        allowNull: true,
       },
       profile_picture: { 
         type: Sequelize.STRING,

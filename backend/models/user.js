@@ -13,6 +13,10 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    position: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     gmail: {
       type: DataTypes.STRING(255),
       unique: true,
@@ -45,26 +49,15 @@ const User = sequelize.define(
     },
   },
   {
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-    },
-    deleted_at: {
-      type: DataTypes.DATE,
-      field: "deleted_at",
-    },
-  },
-  {
     sequelize,
     tableName: "Users",
     freezeTableName: true,
-    timestamps: true,
+    timestamps: true, // Aktifkan timestamps
     paranoid: true, // Enable soft deletes
     underscored: true,
+    createdAt: 'created_at', // Tentukan nama kolom untuk createdAt
+    updatedAt: 'updated_at', // Tentukan nama kolom untuk updatedAt
+    deletedAt: 'deleted_at', // Tentukan nama kolom untuk deletedAt
   }
 );
 
