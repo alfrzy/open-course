@@ -5,38 +5,36 @@ import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
+import Dashboard from "./pages/adminDashboard/Dashboard";
+import PageKelas from "./pages/kelas/PageKelas";
+import { useAuth } from "./redux/auth/authSlice";
+import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
+import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import Dosen from "./components/Dosen/Dosen";
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuth(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  };
-
   return (
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dosen" element={<Dosen />} />
-        {/* <Route path="/editdosen" element={<ComponentEditDosen />} /> */}
         <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/" element={<Login setAuth={setIsAuth} />} />
-        <Route path="/register" element={<Register setAuth={setIsAuth} />} />
-        <Route path="/admin-ui" element={<Dashboard />} />
-        <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path="/home" element={<Home onLogout={handleLogout} />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* admin */}
+        <Route element={<PrivateRoute requiredRole="2" />}>
+          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/dosen" element={<Dosen />} />
+          <Route path="/mahasiswa" element={<PageKelas />} />
+        </Route>
+        {/* dosen */}
+        <Route element={<PrivateRoute requiredRole="1" />}>
+          <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+        </Route>
+        {/* mhs */}
+        <Route element={<PrivateRoute requiredRole="0" />}>
+          <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
         </Route>
       </Routes>
     </Router>
