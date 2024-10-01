@@ -6,13 +6,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import ReactLogo from "../../../components/reactlogo/ReactLogo";
+import { login, setRole } from "../../../redux/auth/authSlice";
+import { useDispatch } from "react-redux";
 
-const Login = ({ setAuth }) => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const Auth = async (e) => {
     e.preventDefault();
@@ -28,18 +32,17 @@ const Login = ({ setAuth }) => {
         }
       );
       const data = response.data;
-      console.log(data);
 
       if (response.status === 200) {
         toast.success("Login successful!");
-        localStorage.setItem("token", data.token);
-        setAuth(true);
-        if (data.user && data.user.role === "2") {
-          navigate("/admin-ui", { replace: true });
-        } else if (data.user && data.user.role === "1") {
-          navigate("/dosen-ui", { replace: true });
-        } else {
-          navigate("/home", { replace: true });
+        dispatch(login(data.data.token));
+        dispatch(setRole(data.data.user.role));
+        if (data.data.user && data.data.user.role === "2") {
+          navigate("/admin-dashboard", { replace: true });
+        } else if (data.data.user && data.data.user.role === "1") {
+          navigate("/dosen-dashboard", { replace: true });
+        } else if (data.data.user && data.data.user.role === "0") {
+          navigate("/mahasiswa-dashboard", { replace: true });
         }
       }
     } catch (error) {

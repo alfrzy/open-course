@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoBookSharp } from "react-icons/io5";
+import { useAuth } from "../../redux/auth/authSlice";
 
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -9,6 +10,8 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  const { role } = useAuth();
 
   return (
     <div className="flex font-poppins">
@@ -26,18 +29,39 @@ const Sidebar = () => {
           <hr className="my-5 border-2 border-blue-700" />
         </div>
         <nav className="mt-10 ">
-          <a href="#" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
-            <MdDashboard className="mr-2" />
-            Dashboard
-          </a>
-          <a href="#" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
-            <IoBookSharp className="mr-2" />
-            Kelas
-          </a>
-          <a href="#" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
-            <FaPeopleGroup className="mr-2" />
-            Manajemen User
-          </a>
+          {/* role dosen */}
+          {role === "1" ? (
+            <>
+              <a href="/dosen-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+                <MdDashboard className="mr-2" />
+                Dashboard
+              </a>
+            </>
+          ) : // role admin
+          role === "2" ? (
+            <>
+              <a href="/admin-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+                <MdDashboard className="mr-2" />
+                Dashboard
+              </a>
+              <a href="/kelas" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
+                <IoBookSharp className="mr-2" />
+                Kelas
+              </a>
+              <a href="#" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
+                <FaPeopleGroup className="mr-2" />
+                Manajemen User
+              </a>
+            </>
+          ) : (
+            // role mahasiswa
+            <>
+              <a href="/mahasiswa-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+                <MdDashboard className="mr-2" />
+                Dashboard
+              </a>
+            </>
+          )}
         </nav>
       </div>
 
