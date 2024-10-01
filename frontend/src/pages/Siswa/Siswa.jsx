@@ -34,7 +34,7 @@ const Siswa = () => {
   return (
     <section>
       {/* Tambah Siswa */}
-      <section className="my-5 md:w-[60%] md:flex md:justify-between md:mx-auto  ">
+      <section className="my-5 md:w-[90%] md:flex md:justify-between md:mx-auto  ">
         <h1 className="text-center text-3xl font-bold mb-2">SISWA</h1>
         <div className="flex justify-center">
           <button
@@ -47,7 +47,7 @@ const Siswa = () => {
       </section>
 
       {/* Search */}
-      <section className="flex justify-end md:w-[60%] md:mx-auto md:items-center ">
+      <section className="flex justify-end md:w-[90%] md:mx-auto md:items-center ">
         <SearchInput onSearch={handleSearch} />
       </section>
 
