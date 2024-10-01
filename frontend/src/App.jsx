@@ -6,33 +6,32 @@ import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/adminDashboard/Dashboard";
+import PageKelas from "./pages/kelas/PageKelas";
+import { useAuth } from "./redux/auth/authSlice";
+import MhsDashboard from "./pages/mhsDashboard/mhsDashboard";
+import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuth(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  };
-
   return (
     <Router>
       <Routes>
         <Route path="/testing" element={<Testing />} />
         <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/" element={<Login setAuth={setIsAuth} />} />
-        <Route path="/register" element={<Register setAuth={setIsAuth} />} />
-        <Route path="/admin-ui" element={<Dashboard />} />
-        <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path="/home" element={<Home onLogout={handleLogout} />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* admin */}
+        <Route element={<PrivateRoute requiredRole="2" />}>
+          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/kelas" element={<PageKelas />} />
+        </Route>
+        {/* dosen */}
+        <Route element={<PrivateRoute requiredRole="1" />}>
+          <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+        </Route>
+        {/* mhs */}
+        <Route element={<PrivateRoute requiredRole="0" />}>
+          <Route path="/mhs-dashboard" element={<MhsDashboard />} />
         </Route>
       </Routes>
     </Router>

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/authSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const DashboardNavbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    Navigate("/");
   };
 
   return (
@@ -26,9 +36,9 @@ const DashboardNavbar = () => {
               Profile
             </a>
             <hr className="h-px border-1 md:border-2 mx-2 bg-gray-500" />
-            <a href="#" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
-              <button type="submit">Logout</button>
-            </a>
+            <button className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         )}
       </div>

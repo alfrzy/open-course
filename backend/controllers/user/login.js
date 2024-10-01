@@ -1,6 +1,5 @@
 const { Router } = require("express");
 
-//response handler
 const response = require("../../cores/response");
 
 const UserService = require("../../services/userService");
@@ -18,7 +17,7 @@ login.post("/login", async (req, res) => {
     const result = await UserService.login({ gmail, password });
 
     if (result) {
-      response.success(res, "Login successful.", result); //return with token
+      response.success(res, "Login successful.", result);
     } else {
       response.unauthorized(res, "Invalid email or password.");
     }

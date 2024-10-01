@@ -10,7 +10,7 @@ const Dashboard = () => {
         <Sidebar />
         <div className="flex-1 p-6 md:ml-64">
           {/* content disini */}
-          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             <div className="bg-white p-6 rounded-lg shadow-md">
