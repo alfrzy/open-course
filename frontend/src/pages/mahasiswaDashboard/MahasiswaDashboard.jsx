@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 
-const MhsDashboard = () => {
+const MahasiswaDashboard = () => {
   return (
     <div className="min-h-screen font-poppins bg-green-200">
       <DashboardNavbar />
@@ -21,4 +21,4 @@ const MhsDashboard = () => {
   );
 };
 
-export default MhsDashboard;
+export default MahasiswaDashboard;

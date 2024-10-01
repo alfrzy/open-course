@@ -37,14 +37,12 @@ const Login = () => {
         toast.success("Login successful!");
         dispatch(login(data.data.token));
         dispatch(setRole(data.data.user.role));
-        // localStorage.setItem("token", data.data.token);
-        // setAuth(true);
         if (data.data.user && data.data.user.role === "2") {
           navigate("/admin-dashboard", { replace: true });
         } else if (data.data.user && data.data.user.role === "1") {
           navigate("/dosen-dashboard", { replace: true });
         } else if (data.data.user && data.data.user.role === "0") {
-          navigate("/mhs-dashboard", { replace: true });
+          navigate("/mahasiswa-dashboard", { replace: true });
         }
       }
     } catch (error) {

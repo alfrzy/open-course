@@ -8,7 +8,7 @@ import Register from "./pages/auth/register/register";
 import Dashboard from "./pages/adminDashboard/Dashboard";
 import PageKelas from "./pages/kelas/PageKelas";
 import { useAuth } from "./redux/auth/authSlice";
-import MhsDashboard from "./pages/mhsDashboard/mhsDashboard";
+import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
@@ -35,7 +35,7 @@ const App = () => {
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
-          <Route path="/mhs-dashboard" element={<MhsDashboard />} />
+          <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
         </Route>
       </Routes>
     </Router>
