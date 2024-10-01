@@ -29,6 +29,7 @@ const Sidebar = () => {
           <hr className="my-5 border-2 border-blue-700" />
         </div>
         <nav className="mt-10 ">
+          {/* role dosen */}
           {role === "1" ? (
             <>
               <a href="/dosen-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
@@ -36,7 +37,8 @@ const Sidebar = () => {
                 Dashboard
               </a>
             </>
-          ) : role === "2" ? (
+          ) : // role admin
+          role === "2" ? (
             <>
               <a href="/admin-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <MdDashboard className="mr-2" />
@@ -52,8 +54,9 @@ const Sidebar = () => {
               </a>
             </>
           ) : (
+            // role mahasiswa
             <>
-              <a href="/mhs-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a href="/mahasiswa-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
