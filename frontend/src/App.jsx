@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
+import Siswa from "./pages/Siswa/Siswa";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
       <Routes>
         <Route path="/dosen" element={<CRUDDosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
+        <Route path="/siswa" element={<Siswa/>}/>
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
         <Route path="/register" element={<Register setAuth={setIsAuth} />} />
