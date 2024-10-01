@@ -31,7 +31,7 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
 
   return (
     <>
-      <section className="md:flex md:justify-center w-full md:w-[60%] mb-5">
+      <section className="md:flex md:justify-center w-full md:w-[90%] mb-5">
         <div className="overflow-x-auto md:w-full">
           <table className="text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300 w-full">
             <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">

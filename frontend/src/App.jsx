@@ -6,9 +6,8 @@ import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
 import { Toaster } from "react-hot-toast";
-import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import CRUDDosen from "./components/Dosen/CRUDDosen";
+import Dosen from "./components/Dosen/Dosen";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -29,8 +28,9 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dosen" element={<Dosen />} />
+        {/* <Route path="/editdosen" element={<ComponentEditDosen />} /> */}
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login setAuth={setIsAuth} />} />
         <Route path="/register" element={<Register setAuth={setIsAuth} />} />
