@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Testing from "./pages/Testing";
+import { BrowserRouter as Router, Route, Routes, Form } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/auth/Login/Login";
 import ChangePassword from "./pages/ChangePassword/changePassword";
@@ -11,12 +10,17 @@ import PageKelas from "./pages/kelas/PageKelas";
 import { useAuth } from "./redux/auth/authSlice";
 import MhsDashboard from "./pages/mhsDashboard/mhsDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
+import { Toaster } from "react-hot-toast";
+import ComponentEditDosen from "./components/Form/ComponentEditDosen";
+import CRUDDosen from "./components/Dosen/CRUDDosen";
 
 const App = () => {
   return (
     <Router>
+      <Toaster />
       <Routes>
-        <Route path="/testing" element={<Testing />} />
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />

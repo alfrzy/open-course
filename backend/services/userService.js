@@ -68,3 +68,24 @@ exports.findAll = async () => {
 exports.deleteById = async (id) => {
   return await userRepo.deleteById(id);
 };
+
+// update
+exports.update = async (id, data) => {
+  try {
+    // Cari user berdasarkan id
+    const user = await userRepo.getUser(id);
+    if (!user) return null;
+
+    // Jika password ada di dalam data, hash password
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    // Update user dengan data baru
+    const updatedUser = await userRepo.update(id, data);
+    return updatedUser;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw new Error("Update failed");
+  }
+};
