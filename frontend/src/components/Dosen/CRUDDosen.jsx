@@ -20,13 +20,13 @@ const CRUDDosen = () => {
   };
 
   const handleSearch = (term) => {
-    setSearchTerm(term); 
-    setCurrentPage(1); 
+    setSearchTerm(term);
+    setCurrentPage(1);
   };
 
   const handleEdit = (dosen) => {
-    setSelectedDosen(dosen); 
-    setIsEditModalOpen(true); 
+    setSelectedDosen(dosen);
+    setIsEditModalOpen(true);
   };
 
   return (
@@ -51,12 +51,12 @@ const CRUDDosen = () => {
 
       {/* Table with Scroll */}
       <section className="flex justify-center overflow-x-auto">
-          <Table
-            searchTerm={searchTerm}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            onEdit={handleEdit}
-          />
+        <Table
+          searchTerm={searchTerm}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          onEdit={handleEdit}
+        />
       </section>
 
       {/* Modal Tambah Dosen */}
