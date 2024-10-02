@@ -74,9 +74,6 @@ const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   <button onClick={() => onEdit(siswa)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                   <button onClick={() => handleDelete(siswa.id)} className="ml-3 font-medium text-red-600 dark:text-red-500 hover:underline">Hapus</button>
                 </td>
-                {/* <td className="px-6 py-4 text-right border-b border-gray-300">
-                  <button onClick={() => handleDelete(siswa.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Hapus</button>
-                </td> */}
               </tr>
             ))}
           </tbody>
