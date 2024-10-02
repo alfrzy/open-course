@@ -57,7 +57,7 @@ const Sidebar = () => {
         </div>
         <nav className="mt-10 ">
           {/* role dosen */}
-          {role === "1" ? (
+          {role === 1 ? (
             <>
               <a
                 href="/dosen-dashboard"
@@ -68,7 +68,7 @@ const Sidebar = () => {
               </a>
             </>
           ) : // Role Admin
-          role === "2" ? (
+          role === 2 ? (
             <>
               <a
                 href="/admin-dashboard"

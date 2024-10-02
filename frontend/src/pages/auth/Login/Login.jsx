@@ -37,11 +37,11 @@ const Login = () => {
         toast.success("Login successful!");
         dispatch(login(data.data.token));
         dispatch(setRole(data.data.user.role));
-        if (data.data.user && data.data.user.role === "2") {
+        if (data.data.user && data.data.user.role === 2) {
           navigate("/admin-dashboard", { replace: true });
-        } else if (data.data.user && data.data.user.role === "1") {
+        } else if (data.data.user && data.data.user.role === 1) {
           navigate("/dosen-dashboard", { replace: true });
-        } else if (data.data.user && data.data.user.role === "0") {
+        } else if (data.data.user && data.data.user.role === 0) {
           navigate("/mahasiswa-dashboard", { replace: true });
         }
       }
