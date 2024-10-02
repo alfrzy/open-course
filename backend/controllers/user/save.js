@@ -48,9 +48,9 @@ const upload = multer({
 const optionalUpload = (req, res, next) => {
   upload.single('profile_picture')(req, res, (err) => {
     if (err && err.message !== 'No file uploaded') {
-      return next(err); // Jika ada kesalahan lain, lanjutkan ke error handler
+      return next(err); 
     }
-    next(); // Jika tidak ada kesalahan, lanjutkan
+    next();
   });
 };
 
@@ -61,13 +61,12 @@ save.post("/save", optionalUpload, async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
 
-    // Menyimpan path gambar profil jika ada
     if (req.file) {
       req.body.profile_picture = req.file.path;
       console.log(`Gambar berhasil diunggah: ${req.file.path}`);
     } else {
       console.log('Tidak ada file yang diunggah.');
-      req.body.profile_picture = null; // Atau bisa dihilangkan jika tidak perlu
+      req.body.profile_picture = null; 
     }
 
     const user = await UserService.save(req.body);
