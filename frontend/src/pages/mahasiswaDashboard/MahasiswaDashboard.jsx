@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
+import Siswa from "../Siswa/Siswa";
 
 const MahasiswaDashboard = () => {
   return (
