@@ -12,7 +12,7 @@ const PrivateRoute = ({ requiredRole, redirectPath = "/" }) => {
     return <Navigate to="/" replace />;
   }
 
-  if (requiredRole && role !== requiredRole) {
+  if (requiredRole && role.toString() !== requiredRole) {
     alert("Access Denied");
     localStorage.removeItem("token");
     return <Navigate to={redirectPath} replace />;

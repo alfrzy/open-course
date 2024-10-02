@@ -31,6 +31,8 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/dosen" element={<Dosen />} />
+          <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>

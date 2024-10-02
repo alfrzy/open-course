@@ -57,33 +57,71 @@ const Sidebar = () => {
         </div>
         <nav className="mt-10 ">
           {/* role dosen */}
-          {role === "1" ? (
+          {role === 1 ? (
             <>
-              <a href="/dosen-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a
+                href="/dosen-dashboard"
+                className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white"
+              >
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
             </>
-          ) : // role admin
-          role === "2" ? (
+          ) : // Role Admin
+          role === 2 ? (
             <>
-              <a href="/admin-dashboard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a
+                href="/admin-dashboard"
+                className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white"
+              >
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
-              <a href="/kelas" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a
+                href="/kelas"
+                className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white"
+              >
                 <IoBookSharp className="mr-2" />
                 Kelas
               </a>
-              <a href="#" className="flex items-center py-2.5 px-4  transition duration-200 hover:bg-blue-700 hover:text-white">
-                <FaPeopleGroup className="mr-2" />
-                Manajemen User
-              </a>
+              <div>
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center py-2.5 px-4 w-full text-left transition duration-200 hover:bg-blue-700 hover:text-white"
+                >
+                  <FaPeopleGroup className="mr-2" />
+                  Manajemen User
+                  <FaChevronDown className="ml-auto" />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isDropdownOpen ? "max-h-40" : "max-h-0"
+                  }`} // Animasi tinggi
+                >
+                  <a
+                    href="/dosen"
+                    className="flex items-center py-2 px-12 transition duration-200 hover:bg-blue-500 hover:text-white"
+                  >
+                    <MdPerson className="mr-2" />
+                    Dosen
+                  </a>
+                  <a
+                    href="/mahasiswa"
+                    className="flex items-center py-2 px-12 transition duration-200 hover:bg-blue-500 hover:text-white"
+                  >
+                    <PiStudentBold className="mr-2" />
+                    Mahasiswa
+                  </a>
+                </div>
+              </div>
             </>
           ) : (
             // role mahasiswa
             <>
-              <a href="/mahasiswa-dashboaard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a
+                href="/mahasiswa-dashboaard"
+                className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white"
+              >
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>

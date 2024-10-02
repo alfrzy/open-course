@@ -2,7 +2,7 @@ const { Router } = require("express");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs"); // Import fs untuk mengelola file system
+const fs = require("fs"); 
 const UserService = require("../../services/userService");
 const { created, error } = require("../../cores/response");
 
@@ -14,31 +14,34 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     fs.mkdir(uploadPath, { recursive: true }, (err) => {
       if (err) {
-        console.error('Gagal membuat folder:', err); // Debug: Tampilkan kesalahan jika gagal membuat folder
+        console.error("Gagal membuat folder:", err);
         return cb(err);
       }
+      console.log(`Menyimpan file di: ${uploadPath}`);
       cb(null, uploadPath);
     });
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Penamaan file
-  }
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Batas ukuran file 5MB
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const filetypes = /jpeg|jpg|png/;
     const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
 
     if (mimetype && extname) {
       return cb(null, true);
     } else {
-      cb(new Error('Hanya gambar yang diizinkan!'));
+      cb(new Error("Hanya gambar yang diizinkan!"));
     }
-  }
+  },
 });
 
 // Middleware untuk menangani upload file secara opsional
@@ -66,8 +69,6 @@ save.post("/save", optionalUpload, async (req, res) => {
       console.log('Tidak ada file yang diunggah.');
       req.body.profile_picture = null; // Atau bisa dihilangkan jika tidak perlu
     }
-
-    // Validasi bisa ditambahkan di sini
 
     const user = await UserService.save(req.body);
 
