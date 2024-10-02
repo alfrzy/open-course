@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteDosen } from "../../Data/DataDosen"; 
+import { deleteDosen } from "../../Data/DataDosen";
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/DataDosen";
 
@@ -31,10 +31,10 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
 
   return (
     <>
-      <section className="md:flex md:justify-center w-full md:w-[60%] mb-5">
-        <div className="overflow-x-auto md:w-full">
-          <table className="text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300 w-full">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+      <section className="md:flex md:justify-center w-full md:w-[90%] mb-5">
+        <div className="overflow-x-auto md:w-full ">
+          <table className="text-sm text-left  text-gray-500  border border-gray-300 w-full">
+            <thead className="text-xs text-white uppercase bg-biru3 ">
               <tr>
                 <th scope="col" className="px-6 py-3 border-b border-gray-300">
                   No
@@ -48,11 +48,11 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                 <th scope="col" className="px-6 py-3 border-b border-gray-300">
                   NIDN
                 </th>
-                <th scope="col" className="px-6 py-3 border-b border-gray-300">
-                  <span className="sr-only">Edit</span>
-                </th>
-                <th scope="col" className="px-6 py-3 border-b border-gray-300">
-                  <span className="sr-only">Hapus</span>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-center border-b border-gray-300"
+                >
+                  ACTION
                 </th>
               </tr>
             </thead>
@@ -69,7 +69,7 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                     <img
                       src={
                         dosen.profile_picture
-                          ? `http://localhost:3000/${dosen.profile_picture}` 
+                          ? `http://localhost:3000/${dosen.profile_picture}`
                           : "https://picsum.photos/seed/picsum/200/300"
                       }
                       alt={dosen.full_name}
@@ -85,21 +85,21 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   <td className="px-6 py-4 border-b border-gray-300">
                     {dosen.nidn || "N/A"}
                   </td>
-                  <td className="px-6 py-4 text-right border-b border-gray-300">
-                    <button
-                      onClick={() => onEdit(dosen)} // Memanggil fungsi onEdit
-                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
-                      Edit
-                    </button>
-                  </td>
-                  <td className="px-6 py-4 text-right border-b border-gray-300">
-                    <button
-                      onClick={() => handleDelete(dosen.id)}
-                      className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                    >
-                      Hapus
-                    </button>
+                  <td className="px-6  py-4 text-right border-b border-gray-300">
+                    <div className="flex justify-center gap-3">
+                      <button
+                        onClick={() => onEdit(dosen)} // Memanggil fungsi onEdit
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(dosen.id)}
+                        className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                      >
+                        Hapus
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
