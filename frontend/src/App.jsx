@@ -13,19 +13,21 @@ import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
+import MainLanding from "./pages/mainLanding/mainLanding";
 
 const App = () => {
   return (
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
-        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/mainLanding" element={<MainLanding />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
+          <Route path="/dosen" element={<CRUDDosen />} />
+          <Route path="/editdosen" element={<ComponentEditDosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/kelas" element={<PageKelas />} />
         </Route>

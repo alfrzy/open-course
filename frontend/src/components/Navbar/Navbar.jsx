@@ -23,7 +23,7 @@ const Navbar = () => {
 
         {/* Menu links for desktop */}
         <div className="hidden md:flex gap-3">
-          <NavLink to="/kelas" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
+          <NavLink to="/mainLanding" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
             Kelas
           </NavLink>
           <NavLink to="/sertifikat" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
@@ -51,13 +51,13 @@ const Navbar = () => {
         </div>
 
         <ComponentButton text={"Daftar"} color={"bg-blue-500"} link={"register"} />
-        <ComponentButton text={"Masuk"} color={"bg-blue-800"} link={"login"} />
+        <ComponentButton text={"Masuk"} color={"bg-blue-800"} link={"/"} />
       </section>
 
       {/* Mobile menu */}
       {isMenuOpen && (
         <section className="md:hidden absolute top-[60px] left-0 w-full bg-blue-700 flex flex-col items-center py-4 space-y-3">
-          <NavLink to="/kelas" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
+          <NavLink to="/mainLanding" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
             Kelas
           </NavLink>
           <NavLink to="/sertifikat" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
@@ -75,7 +75,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          <ComponentButton text={"Daftar"} color={"bg-blue-500"} link={"register"} />
+          <ComponentButton text={"Daftar"} color={"bg-blue-500"} link={"/register"} />
           <ComponentButton text={"Masuk"} color={"bg-blue-800"} link={"/"} />
         </section>
       )}
