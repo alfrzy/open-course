@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const Search = ({ onSearch }) => {
+const SearchInput = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    onSearch(e.target.value);
+    onSearch(e.target.value); 
   };
 
   const handleSubmit = (e) => {
@@ -14,7 +14,7 @@ const Search = ({ onSearch }) => {
   };
 
   return (
-    <section className="w-[90%] md:w-[30%] mb-3 ">
+    <section className="w-[90%] md:w-[30%] py-3">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
         <label
           htmlFor="default-search"
@@ -44,9 +44,9 @@ const Search = ({ onSearch }) => {
             type="search"
             id="default-search"
             value={searchTerm}
-            onChange={handleSearchChange}
+            onChange={handleSearchChange} 
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search by NIDN or Name"
+            placeholder="Search by Name"
             required
           />
         </div>
@@ -55,4 +55,4 @@ const Search = ({ onSearch }) => {
   );
 };
 
-export default Search;
+export default SearchInput;

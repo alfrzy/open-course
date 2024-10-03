@@ -14,6 +14,8 @@ import { Toaster } from "react-hot-toast";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
 import MainLanding from "./pages/mainLanding/mainLanding";
+import Siswa from "./pages/Siswa/Siswa";
+import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 
 const App = () => {
   return (
@@ -26,10 +28,11 @@ const App = () => {
         <Route path="/mainLanding" element={<MainLanding />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
-          <Route path="/dosen" element={<CRUDDosen />} />
+          <Route path="/adddosen" element={<CRUDDosen />} />
           <Route path="/editdosen" element={<ComponentEditDosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
