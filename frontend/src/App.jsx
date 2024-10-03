@@ -14,12 +14,17 @@ import { Toaster } from "react-hot-toast";
 import Dosen from "./components/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
+import Siswa from "./pages/Siswa/Siswa";
+import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 
 const App = () => {
   return (
     <Router>
       <Toaster />
       <Routes>
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
+        <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
