@@ -22,10 +22,10 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<MainLanding />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/mainLanding" element={<MainLanding />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/adddosen" element={<CRUDDosen />} />

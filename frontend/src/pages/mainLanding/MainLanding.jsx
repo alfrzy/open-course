@@ -52,7 +52,7 @@ const MainLanding = () => {
           {/*  */}
           <div className="flex flex-col md:flex-row justify-center gap-10 py-8">
             <div className="flex flex-col text-center md:text-left md:w-1/3 md:mt-10">
-              <h2 className="font-bold text-xl md:text-2xl">Semua Kelas</h2>
+              <h2 className="font-bold text-xl md:text-2xl">KENAPA HARUS FE OPEN COURSE?</h2>
               <p className="mt-3 text-sm md:text-base text-gray-600">Et omnia in potestate nostra esse natura liber, libera, libere valeant; sed illis non est in nostra.</p>
             </div>
 
@@ -69,8 +69,8 @@ const MainLanding = () => {
           <hr className="border-1 border-black" />
           {/*  */}
           <div className="flex flex-col items-center gap-10 py-5">
-            <div className="flex flex-col text-center md:w-1/3 md:mt-10">
-              <h2 className="font-bold text-xl md:text-2xl">KENAPA HARUS FE OPEN COURSE?</h2>
+            <div className="flex flex-col text-center  md:w-1/3 md:mt-10">
+              <h2 className="font-bold text-xl md:text-2xl">Semua Kelas</h2>
               <p className="mt-3 text-sm md:text-base text-gray-600">Et omnia in potestate nostra esse natura liber, libera, libere valeant; sed illis non est in nostra.</p>
             </div>
 
