@@ -3,11 +3,12 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import KontenKanan from "./componentKontenKanan";
 import KontenKiri from "./componentKontenKiri";
+import Swal from "sweetalert2";
 
 const AddKelas = () => {
   const languages = ["Indonesia", "Inggris", "Jawa", "Spanyol"];
   const Tags = ["Akuntansi", "Filosofi", "Fikih", "Manajemen", "Sejarah"];
-  const [selectedTags, setSelectedTags] = useState([]); // State untuk menyimpan tag yang dipilih
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const [instructors, setInstructors] = useState([
     {
@@ -37,6 +38,10 @@ const AddKelas = () => {
   const [isBabMenuOpen, setIsBabMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
+  // input
+  const [courseName, setCoursename] = useState(""); // State untuk nama kelas
+  const [courseDescription, setCourseDescription] = useState(""); // State untuk deskripsi kelas
+
   const handleAddInstructor = (instructor) => {
     setAddedInstructors((prev) => [...prev, instructor]);
     setInstructors((prev) =>
@@ -46,15 +51,18 @@ const AddKelas = () => {
 
   const handleAddTopic = () => {
     if (newTopic) {
+      // diset ke learning topic sblme
       setLearningTopics((prev) => [...prev, newTopic]);
       setNewTopic("");
     }
   };
 
+  // titik tiga
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  // 
   const toggleBabMenu = () => {
     setIsBabMenuOpen((prev) => !prev);
   };
@@ -80,14 +88,46 @@ const AddKelas = () => {
     );
   };
 
+  // Fungsi untuk menyimpan kelas ke database
+  const handleSaveClass = async () => {
+    const classData = {
+      name: courseName,
+      description: courseDescription,
+    };
+
+    try {
+      await addCourse(classData); // Simpan ke database
+      // Tampilkan SweetAlert2
+      await Swal.fire({
+        title: "Sukses!",
+        text: "Kelas berhasil disimpan!",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/dosen-kelas"; // Arahkan ke /dosen-kelas
+        }
+      });
+      setCoursename("");
+      setCourseDescription("");
+    } catch (error) {
+      console.error("Error saving class:", error);
+      // Tampilkan SweetAlert2 untuk error
+      Swal.fire({
+        title: "Error!",
+        text: "Gagal menyimpan kelas!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen font-poppins bg-gray-200">
       <DashboardNavbar />
       <div className="flex">
         <Sidebar />
         <div className="flex-1 p-6 md:ml-64">
-          {/* KONTEN */}
-          {/* Teks atas */}
           <div className="flex justify-between">
             <h1 className="font-bold mb-2 text-lg">Tambah Kelas</h1>
             <div className="flex justify-between gap-3">
@@ -95,21 +135,22 @@ const AddKelas = () => {
                 <h1 className="">Hapus Kelas</h1>
               </button>
 
-              <button className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white">
-                <h1 className="   ">Simpan Kelas</h1>
+              <button
+                onClick={handleSaveClass}
+                className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white"
+              >
+                <h1 className="">Simpan Kelas</h1>
               </button>
 
               <button className="px-2 bg-blue-700 text-white hover:bg-opacity-30 hover:bg-blue-700 py-2 transition-all duration-300">
-                <h1 className=" hover:text-white text-white">Publikasikan</h1>
+                <h1 className="hover:text-white text-white">Publikasikan</h1>
               </button>
             </div>
           </div>
 
           <hr className="border-0.5 border-solid border-black my-3" />
 
-          {/* Main content */}
           <section className="flex justify-between py-10">
-            {/* =========================== KONTEN kiri ======================== */}
             <KontenKiri
               learningTopics={learningTopics}
               newTopic={newTopic}
@@ -123,9 +164,12 @@ const AddKelas = () => {
               toggleMenu={toggleMenu}
               isMenuOpen={isMenuOpen}
               setNewTopic={setNewTopic}
+              courseName={courseName}
+              setCourseName={setCoursename}
+              courseDescription={courseDescription}
+              setCourseDescription={setCourseDescription}
             />
 
-            {/* =========================== KONTEN kanan ======================== */}
             <KontenKanan
               languages={languages}
               Tags={Tags}

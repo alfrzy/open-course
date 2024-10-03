@@ -9,8 +9,6 @@ import {
 } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-
-
 const KontenKiri = ({
   learningTopics,
   newTopic,
@@ -24,6 +22,11 @@ const KontenKiri = ({
   toggleMenu,
   isMenuOpen,
   setNewTopic,
+  // kursus name
+  courseName, 
+  setCourseName,
+  courseDescription, 
+  setCourseDescription
 }) => {
   // State untuk mengontrol modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,12 +39,16 @@ const KontenKiri = ({
     setIsModalOpen(false);
   };
 
+ 
+
   return (
     <>
       <section className="w-full lg:w-4/5">
         <div className="mb-4">
           <input
             type="text"
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
             className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
             placeholder="Masukkan nama kelas"
           />
@@ -52,6 +59,8 @@ const KontenKiri = ({
             <h1 className="font-bold">Tentang Kelas ini</h1>
           </label>
           <textarea
+            value={courseDescription}
+            onChange={(e) => setCourseDescription(e.target.value)}
             className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
             placeholder="Deskripsi tentang kelas ini"
             rows={10}
@@ -80,9 +89,9 @@ const KontenKiri = ({
           />
           <button
             onClick={handleAddTopic}
-            className="border-2 border-solid border-gray-400 rounded-md hover:bg-blue-700 transition-all duration-700 p-2 w-full"
+            className="border-2 border-solid border-gray-400 rounded-md hover:bg-blue-700 hover:text-white font-bold transition-all duration-700 p-2 w-full"
           >
-            <h1 className="hover:text-white font-bold">+ Tambahkan</h1>
+            <h1 className="">+ Tambahkan Topik</h1>
           </button>
         </div>
 
