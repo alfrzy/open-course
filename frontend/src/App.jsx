@@ -12,6 +12,8 @@ import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
 import Dosen from "./components/Dosen/Dosen";
+import DosenKelas from "./pages/dosenDashboard/dosenKelas";
+import AddKelas from "./pages/dosenDashboard/addKelas";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+          <Route path="/dosen-kelas" element={<DosenKelas />} />
+          <Route path="/dosen-addkelas" element={<AddKelas />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
