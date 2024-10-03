@@ -22,8 +22,6 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
         <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/" element={<Login />} />
