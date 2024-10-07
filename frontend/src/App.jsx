@@ -28,9 +28,9 @@ const App = () => {
         <Route path="/dosen" element={<CRUDDosen />} />
         <Route path="/detailkelas" element={<Detail />} />
         <Route path="/siswa" element={<SiswaDashboard/>}/>
-=======
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
+=======
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route element={<PrivateRoute requiredRole="2" />}>
