@@ -17,7 +17,6 @@ import Dosen from "./components/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
 import MainLanding from "./pages/mainLanding/mainLanding";
-import Siswa from "./pages/Siswa/Siswa";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 
@@ -31,7 +30,6 @@ const App = () => {
         <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
-=======
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
