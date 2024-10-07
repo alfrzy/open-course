@@ -34,12 +34,12 @@ const Register2 = () => {
         },
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Registrasi berhasil!", {
           duration: 3000,
           position: "top-center",
         });
-        navigate("/mhs-dashboard", { replace: true });
+        navigate("/mahasiswa-dashboard", { replace: true });
       } else {
         toast.error(response.data.message || "Terjadi kesalahan saat registrasi.", {
           duration: 3000,

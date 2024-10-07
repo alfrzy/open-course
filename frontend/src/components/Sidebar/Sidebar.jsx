@@ -66,6 +66,13 @@ const Sidebar = () => {
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
+              <a
+                href="/dosen-kelas"
+                className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white"
+              >
+                <IoBookSharp className="mr-2" />
+                Kelas
+              </a>
             </>
           ) : // Role Admin
           role === 2 ? (
