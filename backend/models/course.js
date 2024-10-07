@@ -81,7 +81,7 @@ Course.hasMany(UserCourses, {
 });
 
 // relasi
-Course.belongsTo(LearningList, {
+Course.hasMany(LearningList, {
   foreignKey: 'course_id',
 });
 
