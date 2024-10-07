@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
+const UserCourses = require("./userCourse");
 
 const User = sequelize.define(
   "Users",
@@ -52,13 +53,18 @@ const User = sequelize.define(
     sequelize,
     tableName: "Users",
     freezeTableName: true,
-    timestamps: true, // Aktifkan timestamps
-    paranoid: true, // Enable soft deletes
+    timestamps: true, 
+    paranoid: true, 
     underscored: true,
-    createdAt: "created_at", // Tentukan nama kolom untuk createdAt
-    updatedAt: "updated_at", // Tentukan nama kolom untuk updatedAt
-    deletedAt: "deleted_at", // Tentukan nama kolom untuk deletedAt
+    createdAt: "created_at", 
+    updatedAt: "updated_at", 
+    deletedAt: "deleted_at", 
   }
 );
+
+// relasi
+User.hasMany(UserCourses, {
+  foreignKey: "user_id",
+});
 
 module.exports = User;
