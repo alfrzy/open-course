@@ -27,6 +27,7 @@ const App = () => {
         <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-kelas/:id" element={<Detail />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/adddosen" element={<CRUDDosen />} />
