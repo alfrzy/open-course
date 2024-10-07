@@ -55,9 +55,9 @@ const User = sequelize.define(
     timestamps: true, // Aktifkan timestamps
     paranoid: true, // Enable soft deletes
     underscored: true,
-    createdAt: 'created_at', // Tentukan nama kolom untuk createdAt
-    updatedAt: 'updated_at', // Tentukan nama kolom untuk updatedAt
-    deletedAt: 'deleted_at', // Tentukan nama kolom untuk deletedAt
+    createdAt: "created_at", // Tentukan nama kolom untuk createdAt
+    updatedAt: "updated_at", // Tentukan nama kolom untuk updatedAt
+    deletedAt: "deleted_at", // Tentukan nama kolom untuk deletedAt
   }
 );
 
