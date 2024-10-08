@@ -11,27 +11,33 @@ import { useAuth } from "./redux/auth/authSlice";
 import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
-import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
+import Detail from "./pages/kelas/DetailKelas";
+import Dosen from "./components/Dosen/Dosen";
+import DosenKelas from "./pages/dosenDashboard/dosenKelas";
+import AddKelas from "./pages/dosenDashboard/addKelas";
 import MainLanding from "./pages/mainLanding/mainLanding";
-import Siswa from "./pages/Siswa/Siswa";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import AddMateri from "./pages/dosenDashboard/addMateri";
+import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 
 const App = () => {
   return (
     <Router>
       <Toaster />
       <Routes>
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
+        <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/addmateri" element={<AddMateri />} />
+        <Route path="/detail-kelas/:id" element={<Detail />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
-          <Route path="/adddosen" element={<CRUDDosen />} />
-          <Route path="/editdosen" element={<ComponentEditDosen />} />
+          <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/kelas" element={<PageKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
@@ -39,6 +45,8 @@ const App = () => {
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+          <Route path="/dosen-kelas" element={<DosenKelas />} />
+          <Route path="/dosen-addkelas" element={<AddKelas />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
