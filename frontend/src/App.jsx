@@ -16,6 +16,7 @@ import CRUDDosen from "./components/Dosen/CRUDDosen";
 import MainLanding from "./pages/mainLanding/mainLanding";
 import Siswa from "./pages/Siswa/Siswa";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
+import AddMateri from "./pages/dosenDashboard/addMateri";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/addmateri" element={<AddMateri />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/adddosen" element={<CRUDDosen />} />
