@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
-import InstrukturCard from '../../components/DetailKelas/InstrukturCard';
+import InstrukturCard from '../../components/DetailKelas/instrukturCard';
 import LandingFooter from '../../components/Footer/LandingFooter';
 import ComponentButton from '../../components/Button/ComponentButton';
 
