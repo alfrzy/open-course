@@ -11,13 +11,13 @@ import { useAuth } from "./redux/auth/authSlice";
 import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
+import CRUDDosen from "./components/Dosen/CRUDDosen";
+import Detail from "./pages/kelas/DetailKelas";
 import Dosen from "./components/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
 import MainLanding from "./pages/mainLanding/mainLanding";
-import Siswa from "./pages/Siswa/Siswa";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
-import CRUDDosen from "./components/Dosen/CRUDDosen";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 
@@ -26,14 +26,15 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-
         <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/detail-kelas" element={<Detail />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
         <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-kelas/:id" element={<Detail />} />
+        {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
