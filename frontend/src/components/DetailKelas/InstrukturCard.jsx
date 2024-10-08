@@ -1,6 +1,15 @@
 import React from 'react';
 
+const instrukturData = [
+  {
+          id: 'instruktur1',
+          name: 'Mentor A',
+          deskripsi: 'Expert dalam keuangan.',
+      },
+];
+
 const InstrukturCard = () => {
+  const instruktur = instrukturData[0];
   return (
    <section>
     <div className="p-4 sm:p-6 lg:p-10 border-b">
@@ -14,8 +23,10 @@ const InstrukturCard = () => {
                 className="w-12 h-12 rounded-full mr-4"
               />
               <div className="flex flex-col">
-                <p className="font-bold text-sm sm:text-base">Prof. Dr. Khong Guan, S.E., M.E.</p>
-                <p className="text-left text-gray-600 text-xs sm:text-sm">Director, Greater Good Science Center</p>
+                {instruktur.name}
+                {instruktur.deskripsi}
+                {/* <p className="font-bold text-sm sm:text-base">Prof. Dr. Khong Guan, S.E., M.E.</p>
+                <p className="text-left text-gray-600 text-xs sm:text-sm">Director, Greater Good Science Center</p> */}
               </div>
             </div>
             <div className="bg-white shadow p-4 flex items-center rounded">
@@ -25,8 +36,10 @@ const InstrukturCard = () => {
                 className="w-12 h-12 rounded-full mr-4"
               />
               <div className="flex flex-col">
-                <p className="font-bold text-sm sm:text-base">Prof. Dr. Khong Guan, S.E., M.E.</p>
-                <p className="text-left text-gray-600 text-xs sm:text-sm">Director, Greater Good Science Center</p>
+                {instruktur.name}
+                {instruktur.deskripsi}
+                {/* <p className="font-bold text-sm sm:text-base">Prof. Dr. Khong Guan, S.E., M.E.</p>
+                <p className="text-left text-gray-600 text-xs sm:text-sm">Director, Greater Good Science Center</p> */}
          </div>
         </div>
       </div>

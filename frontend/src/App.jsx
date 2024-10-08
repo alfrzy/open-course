@@ -19,6 +19,7 @@ import Siswa from "./pages/Siswa/Siswa";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
+import Detail from "./pages/kelas/DetailKelas";
 
 const App = () => {
   return (
@@ -27,11 +28,10 @@ const App = () => {
       <Routes>
 
         <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/detailkelas" element={<Detail />} />
+        <Route path="/detail-kelas" element={<Detail />} />
         <Route path="/siswa" element={<SiswaDashboard/>}/>
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
-=======
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route element={<PrivateRoute requiredRole="2" />}>

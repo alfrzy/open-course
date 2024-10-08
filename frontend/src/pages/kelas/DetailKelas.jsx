@@ -4,9 +4,22 @@ import InstrukturCard from '../../components/DetailKelas/InstrukturCard';
 import LandingFooter from '../../components/Footer/LandingFooter';
 import ComponentButton from '../../components/Button/ComponentButton';
 
+const kelasData = [
+  {
+      id: 'kelas1',
+      nama: 'Manajemen Keuangan Pribadi',
+      deskripsi: 'Belajar mengelola keuangan pribadi dengan bijak.',
+  },
+  {
+      id: 'kelas2',
+      nama: 'Pemrograman Web Dasar',
+      deskripsi: 'Belajar dasar-dasar pemrograman web.',
+  },
+];
 
 
 const Detail = () => {
+  const kelas = kelasData[0];
   return (
   <div className="min-h-screen font-poppins bg-gray-200">
       <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start mt-4">
@@ -18,9 +31,9 @@ const Detail = () => {
           <div className="flex flex-col lg:flex-row items-center justify-between">
             {/* Teks Header */}
             <div className="w-full lg:w-1/2 text-center lg:text-left mb-6 lg:mb-0">
-              <h1 className="text-2xl sm:text-3xl text-blue-500 font-bold">Manajemen Keuangan Pribadi</h1>
+              <h1 className="text-2xl sm:text-3xl text-blue-500 font-bold">{kelas.nama}</h1>
               <p className="mt-2 text-sm sm:text-base">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.
+                {kelas.deskripsi}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start mt-4">
               <ComponentButton text={"Daftar Sekarang"} color={"bg-blue-600"} link={"/"} />
