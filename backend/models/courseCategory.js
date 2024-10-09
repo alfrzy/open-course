@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
-const Course = require("./course");
 
 const CourseCategory = sequelize.define(
   "CourseCategories",
@@ -26,17 +25,11 @@ const CourseCategory = sequelize.define(
     freezeTableName: true,
     timestamps: true,
     underscored: true,
-    paranoid: true, 
+    paranoid: true,
     createdAt: "created_at",
     updatedAt: "updated_at",
     deletedAt: "deleted_at",
-
   }
 );
-
-// // relasi 
-// CourseCategory.belongsTo(Course, {
-//   foreignKey: 'course_category_id',
-// });
 
 module.exports = CourseCategory;

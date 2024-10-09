@@ -1,7 +1,5 @@
 const { DataTypes, Sequelize } = require("sequelize");
 const { sequelize } = require("../config/database");
-const User = require("./user");
-const Course = require("./course");
 
 const UserCourses = sequelize.define(
   "UserCourses",
@@ -55,15 +53,5 @@ const UserCourses = sequelize.define(
     deletedAt: "deleted_at",
   }
 );
-
-// // relasi
-// UserCourses.belongsTo(User, {
-//   foreignKey: "user_id",
-// });
-
-// // relasi
-// UserCourses.belongsTo(Course, {
-//   foreignKey: "course_id",
-// });
 
 module.exports = UserCourses;

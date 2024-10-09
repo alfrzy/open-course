@@ -1,10 +1,15 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
-const UserCourses = require("./userCourse");
 
 const User = sequelize.define(
   "Users",
   {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+    },
     full_name: {
       type: DataTypes.STRING(255),
       allowNull: true,
@@ -53,18 +58,13 @@ const User = sequelize.define(
     sequelize,
     tableName: "Users",
     freezeTableName: true,
-    timestamps: true, 
-    paranoid: true, 
+    timestamps: true,
+    paranoid: true,
     underscored: true,
-    createdAt: "created_at", 
-    updatedAt: "updated_at", 
-    deletedAt: "deleted_at", 
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    deletedAt: "deleted_at",
   }
 );
-
-// // relasi
-// User.hasMany(UserCourses, {
-//   foreignKey: "user_id",
-// });
 
 module.exports = User;

@@ -1,9 +1,5 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
-const LearningList = require("./learningList");
-const CourseCategory = require("./courseCategory");
-const Section = require("./section");
-const UserCourses = require("./userCourse");
 
 const Course = sequelize.define(
   "Courses",
@@ -17,10 +13,10 @@ const Course = sequelize.define(
     course_category_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // references: {
-      //   model: "CourseCategories",
-      //   key: "id", 
-      // },
+      references: {
+        model: "CourseCategories",
+        key: "id",
+      },
     },
     name: {
       type: DataTypes.STRING(255),
@@ -65,26 +61,4 @@ const Course = sequelize.define(
   }
 );
 
-// // relasi 
-// Course.hasMany(CourseCategory, {
-//   foreignKey: 'course_category_id',
-// });
-
-// // relasi
-// Course.hasMany(Section, {
-//   foreignKey: 'course_id',
-// });
-
-// // relasi
-// Course.hasMany(UserCourses, {
-//   foreignKey: "course_id",
-// });
-
-// // relasi
-// Course.hasMany(LearningList, {
-//   foreignKey: 'course_id',
-// });
-
-
 module.exports = Course;
-

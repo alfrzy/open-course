@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
-const Course = require("./course");
-const Module = require("./module");
 
 const Section = sequelize.define(
   "Sections",
@@ -15,6 +13,10 @@ const Section = sequelize.define(
     course_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: "Courses",
+        key: "id",
+      },
     },
     title: {
       type: DataTypes.STRING(255),
@@ -34,19 +36,4 @@ const Section = sequelize.define(
   }
 );
 
-// // relasi
-// Section.belongsTo(Course, {
-//   foreignKey: 'course_id',
-// });
-
-// // relasi
-// Section.hasMany(Module, {
-//   foreignKey: 'section_id',
-// });
-
 module.exports = Section;
-
-
-
-
-

@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
-const Course = require('./course'); 
 
 const LearningList = sequelize.define(
   "LearningLists",
@@ -15,8 +14,8 @@ const LearningList = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Courses',  
-        key: 'id',     
+        model: "Courses",
+        key: "id",
       },
     },
     name: {
@@ -36,10 +35,5 @@ const LearningList = sequelize.define(
     deletedAt: "deleted_at",
   }
 );
-
-// // relasi
-// LearningList.belongsTo(Course, {
-//   foreignKey: 'course_id',
-// });
 
 module.exports = LearningList;
