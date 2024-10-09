@@ -1,5 +1,3 @@
-// apakah dengan dipisah file seperti ini relasinya masih bisa keconnect mas?
-
 const LearningList = require("./learningList");
 const Course = require("./course");
 const CourseCategory = require("./courseCategory");
