@@ -23,7 +23,6 @@ const InstrukturCard = ({ instrukturList }) => {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

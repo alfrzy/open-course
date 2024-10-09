@@ -1,7 +1,7 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
-import InstrukturCard from '../../components/DetailKelas/InstrukturCard';
+import InstrukturCard from '../../components/DetailKelas/instrukturCard';
 import LandingFooter from '../../components/Footer/LandingFooter';
 import ComponentButton from '../../components/Button/ComponentButton';
 
@@ -67,18 +67,28 @@ const instrukturList = [
 const Detail = () => {
   // Mengambil ID dari URL menggunakan useParams
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // Mencari data kelas berdasarkan ID dari URL
   const kelas = kelasData.find((item) => item.id === id);
 
   if (!kelas) {
       return <div>Kelas tidak ditemukan</div>;
-  }
+  };
+
+  const handleDaftar = () => {
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      navigate('/login');
+    } else {
+      navigate(`/checkout-kelas/${id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen font-poppins bg-gray-200">
       <Navbar />
-
       {/* Header Section */}
       <div className="bg-gray-100 p-4 sm:p-6 lg:p-10 border-b">
         <div className="container mx-auto">
@@ -87,7 +97,9 @@ const Detail = () => {
               <h1 className="text-2xl sm:text-3xl text-blue-500 font-bold">{kelas.nama}</h1>
               <p className="mt-2 text-sm sm:text-base">{kelas.deskripsi}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start mt-4">
-                <ComponentButton text={"Daftar Sekarang"} color={"bg-blue-600"} link={"/"} />
+                <button onClick={handleDaftar}>
+                <ComponentButton text={"Daftar Sekarang"} color={"bg-blue-600"}  />
+                </button>
                 <p className="mt-2 sm:mt-0 sm:ml-4 text-gray-700 text-sm">814 telah mendaftar</p>
               </div>
             </div>

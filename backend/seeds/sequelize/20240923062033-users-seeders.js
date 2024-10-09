@@ -20,8 +20,8 @@ module.exports = {
         phone: "081234567",
         role: 0,
         nim: "A1234",
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         full_name: "dosen satu",
@@ -31,8 +31,8 @@ module.exports = {
         phone: "081234567",
         role: 1,
         nidn: "D1234",
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         full_name: "admin satu",
@@ -40,8 +40,8 @@ module.exports = {
         gmail: "admin@gmail.com",
         password: hashedPassAdmin,
         role: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     ]);
   },
