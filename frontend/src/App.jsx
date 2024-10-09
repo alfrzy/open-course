@@ -19,6 +19,7 @@ import MainLanding from "./pages/mainLanding/mainLanding";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
+import Checkout from "./pages/kelas/checkoutKelas";
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
+          <Route path="/checkout-kelas/:id" element={<Checkout />} />
         </Route>
       </Routes>
     </Router>
