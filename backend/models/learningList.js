@@ -37,9 +37,9 @@ const LearningList = sequelize.define(
   }
 );
 
-// relasi
-LearningList.belongsTo(Course, {
-  foreignKey: 'course_id',
-});
+// // relasi
+// LearningList.belongsTo(Course, {
+//   foreignKey: 'course_id',
+// });
 
 module.exports = LearningList;

@@ -65,25 +65,25 @@ const Course = sequelize.define(
   }
 );
 
-// relasi 
-Course.hasMany(CourseCategory, {
-  foreignKey: 'course_category_id',
-});
+// // relasi 
+// Course.hasMany(CourseCategory, {
+//   foreignKey: 'course_category_id',
+// });
 
-// relasi
-Course.hasMany(Section, {
-  foreignKey: 'course_id',
-});
+// // relasi
+// Course.hasMany(Section, {
+//   foreignKey: 'course_id',
+// });
 
-// relasi
-Course.hasMany(UserCourses, {
-  foreignKey: "course_id",
-});
+// // relasi
+// Course.hasMany(UserCourses, {
+//   foreignKey: "course_id",
+// });
 
-// relasi
-Course.hasMany(LearningList, {
-  foreignKey: 'course_id',
-});
+// // relasi
+// Course.hasMany(LearningList, {
+//   foreignKey: 'course_id',
+// });
 
 
 module.exports = Course;

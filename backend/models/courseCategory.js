@@ -34,9 +34,9 @@ const CourseCategory = sequelize.define(
   }
 );
 
-// relasi 
-CourseCategory.belongsTo(Course, {
-  foreignKey: 'course_category_id',
-});
+// // relasi 
+// CourseCategory.belongsTo(Course, {
+//   foreignKey: 'course_category_id',
+// });
 
 module.exports = CourseCategory;

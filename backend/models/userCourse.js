@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
 const { sequelize } = require("../config/database");
 const User = require("./user");
 const Course = require("./course");
@@ -56,14 +56,14 @@ const UserCourses = sequelize.define(
   }
 );
 
-// relasi
-UserCourses.belongsTo(User, {
-  foreignKey: "user_id",
-});
+// // relasi
+// UserCourses.belongsTo(User, {
+//   foreignKey: "user_id",
+// });
 
-// relasi
-UserCourses.belongsTo(Course, {
-  foreignKey: "course_id",
-});
+// // relasi
+// UserCourses.belongsTo(Course, {
+//   foreignKey: "course_id",
+// });
 
 module.exports = UserCourses;

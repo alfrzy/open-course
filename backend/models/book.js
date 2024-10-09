@@ -10,6 +10,14 @@ const Book = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Users",
+        key: "id",
+      },
+    },
     name: {
       type: DataTypes.STRING(255),
       allowNull: true,
@@ -21,8 +29,14 @@ const Book = sequelize.define(
   },
   {
     sequelize,
-    tableName: 'Books',
+    tableName: "Books",
+    freezeTableName: true,
+    timestamps: true,
     paranoid: true,
+    underscored: true,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    deletedAt: "deleted_at",
   }
 )
 

@@ -36,10 +36,10 @@ const Module = sequelize.define(
   }
 );
 
-// relasi
-Module.belongsTo(Section, {
-  foreignKey: 'section_id',
-});
+// // relasi
+// Module.belongsTo(Section, {
+//   foreignKey: 'section_id',
+// });
 
 
 module.exports = Module;

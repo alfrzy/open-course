@@ -62,9 +62,9 @@ const User = sequelize.define(
   }
 );
 
-// relasi
-User.hasMany(UserCourses, {
-  foreignKey: "user_id",
-});
+// // relasi
+// User.hasMany(UserCourses, {
+//   foreignKey: "user_id",
+// });
 
 module.exports = User;
