@@ -29,7 +29,7 @@ const kelasData = [
 ];
 
 const generateUniqueCode = () => {
-  return Math.floor(100 + Math.random() * 900); // Menghasilkan angka antara 100-999
+  return Math.floor(100 + Math.random() * 900); 
 };
 
 const Checkout = () => {
@@ -37,23 +37,16 @@ const Checkout = () => {
   const kelas = kelasData.find((item) => item.id === id);
   const navigate = useNavigate();
   const [couponCode, setCouponCode] = useState('');
-  const [uniqueCode, setUniqueCode] = useState(generateUniqueCode); // Menyimpan kode unik di state
-  const [isModalOpen, setIsModalOpen] = useState(false); // State untuk modal
-  const [invoiceNumber, setInvoiceNumber] = useState(`INV-${Date.now()}`); // Invoice number
+  const [uniqueCode, setUniqueCode] = useState(generateUniqueCode); 
+ 
 
   useEffect(() => {
-    setUniqueCode(generateUniqueCode()); // Mengenerate kode unik saat component pertama kali dirender
+    setUniqueCode(generateUniqueCode()); 
   }, []);
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    // Tampilkan modal setelah checkout
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    navigate('/'); // Setelah modal ditutup, arahkan ke halaman utama
+    navigate('/');
   };
 
   if (!kelas) {
@@ -144,30 +137,11 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+))};
             </div>
           </div>
         </div>
       </div>
-
-      {/* Modal for Invoice */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg w-96">
-            <h2 className="text-2xl font-bold mb-4 text-blue-600">Invoice Pembayaran</h2>
-            <p className="mb-2">Terima kasih telah melakukan pembelian!</p>
-            <p className="mb-2">Nomor Invoice: <strong>{invoiceNumber}</strong></p>
-            <p className="mb-2">Total Pembayaran: <strong>Rp.{totalHarga.toLocaleString()}</strong></p>
-            <p className="mb-4">Silakan transfer ke rekening yang tersedia.</p>
-            <button
-              onClick={handleCloseModal}
-              className="bg-blue-600 text-white px-4 py-2 rounded w-full"
-            >
-              Tutup
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
