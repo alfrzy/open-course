@@ -4,14 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Sembunyikan scrollbar untuk semua elemen */
 * {
-    scrollbar-width: none; /* Untuk Firefox */
-    -ms-overflow-style: none;  /* Untuk Internet Explorer dan Edge */
-  }
-  
-  *::-webkit-scrollbar {
-    display: none; /* Untuk Chrome, Safari, dan Opera */
-  }
-  
+  scrollbar-width: none; /* Untuk Firefox */
+  -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Untuk Chrome, Safari, dan Opera */
+}
+
+.ql-editor {
+  @apply h-96 !important;
+}
