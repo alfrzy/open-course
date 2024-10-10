@@ -5,13 +5,13 @@ import Navbar from '../../components/Navbar/Navbar';
 
 const kelasData = [
   {
-    id: 'kelas1',
+    id: '1',
     nama: 'Manajemen Keuangan Pribadi',
     deskripsi: 'Belajar mengelola keuangan pribadi dengan bijak.',
     harga: 235000,
   },
   {
-    id: 'kelas2',
+    id: '2',
     nama: 'Pemrograman Web Dasar',
     deskripsi: 'Belajar dasar-dasar pemrograman web.',
     harga: 300000,
