@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/database");
 
-const User = sequelize.define(
-  "Users",
+const Course = sequelize.define(
+  "Courses",
   {
     id: {
       autoIncrement: true,
@@ -10,53 +10,47 @@ const User = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    full_name: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    position: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    gmail: {
-      type: DataTypes.STRING(255),
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    phone: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    role: {
+    course_category_id: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
+      references: {
+        model: "CourseCategories",
+        key: "id",
+      },
     },
-    nim: {
+    name: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    language: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
+    thumbnail: {
       type: DataTypes.STRING(255),
       allowNull: true,
-      unique: true,
     },
-    nidn: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      unique: true,
-    },
-    profile_picture: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
+    is_publish: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
     sequelize,
-    tableName: "Users",
+    tableName: "Courses",
     freezeTableName: true,
     timestamps: true,
     paranoid: true,
@@ -67,4 +61,4 @@ const User = sequelize.define(
   }
 );
 
-module.exports = User;
+module.exports = Course;
