@@ -17,6 +17,7 @@ import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
 import MainLanding from "./pages/mainLanding/mainLanding";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
+import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
