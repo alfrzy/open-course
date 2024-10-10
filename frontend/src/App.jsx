@@ -21,6 +21,7 @@ import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
+import Invoice from "./pages/invoice/invoice";
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
+          <Route path="/invoice" element={<Invoice />} />
         </Route>
       </Routes>
     </Router>
