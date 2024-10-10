@@ -12,7 +12,6 @@ import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
 import CRUDDosen from "./components/Dosen/CRUDDosen";
-import Detail from "./pages/kelas/DetailKelas";
 import Dosen from "./components/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
@@ -20,21 +19,29 @@ import MainLanding from "./pages/mainLanding/mainLanding";
 import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
+import Detail from "./pages/kelas/DetailKelas";
+import Checkout from "./pages/kelas/checkoutKelas";
+import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 
 const App = () => {
   return (
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
-        <Route path="/siswa" element={<SiswaDashboard/>}/>
+        <Route path="/siswa" element={<SiswaDashboard />} />
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        {/* test ui sebelum masuk ke private route */}
+        {/* mhs */}
+        <Route path="/listpurchase" element={<ListPurchase />} />
+        {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+        {/* admin */}
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
@@ -51,6 +58,7 @@ const App = () => {
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
+          <Route path="/checkout-kelas/:id" element={<Checkout />} />
         </Route>
       </Routes>
     </Router>
