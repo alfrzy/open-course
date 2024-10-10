@@ -20,6 +20,7 @@ import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
+import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
+          <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
         </Route>
       </Routes>
     </Router>
