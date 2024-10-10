@@ -27,15 +27,10 @@ function redoChange() {
   this.quill.history.redo();
 }
 
-// // Add sizes to whitelist and register them
-// const Size = Quill.import("formats/size");
-// Size.whitelist = ["extra-small", "small", "medium", "large"];
-// Quill.register(Size, true);
-
-// // Add fonts to whitelist and register them
-// const Font = Quill.import("formats/font");
-// Font.whitelist = ["arial", "comic-sans", "courier-new", "georgia", "helvetica", "lucida"];
-// Quill.register(Font, true);
+// Add sizes to whitelist and register them
+const Size = Quill.import("formats/size");
+Size.whitelist = ["extra-small", "small", "medium", "large"];
+Quill.register(Size, true);
 
 // Modules object for setting up the Quill editor
 export const modules = {
@@ -60,19 +55,11 @@ export const formats = ["header", "font", "size", "bold", "italic", "underline",
 export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
-      {/* <select className="ql-font" defaultValue="arial">
-        <option value="arial">Arial</option>
-        <option value="comic-sans">Comic Sans</option>
-        <option value="courier-new">Courier New</option>
-        <option value="georgia">Georgia</option>
-        <option value="helvetica">Helvetica</option>
-        <option value="lucida">Lucida</option>
-      </select> */}
-      {/* <select className="ql-header" defaultValue="3">
+      <select className="ql-header" defaultValue="3">
         <option value="1">Heading</option>
         <option value="2">Subheading</option>
         <option value="3">Normal</option>
-      </select> */}
+      </select>
     </span>
     <span className="ql-formats">
       <button className="ql-bold" />
