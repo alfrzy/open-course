@@ -6,21 +6,24 @@ const ListPurchase = () => {
     {
       invoiceId: "FEOC10421",
       dueDate: "21/06/2020",
-      courseTitle: "Manajemen Keuangan Pribadi 2",
+      courseTitle: "Manajemen Keuangan Pribadi ",
+      courseTitle2: "Manajemen Keuangan Pribadi 2",
       amount: "470.266,00",
       status: "unverified",
     },
     {
       invoiceId: "FEOC10421",
       dueDate: "21/06/2020",
-      courseTitle: "Manajemen Keuangan Pribadi 2",
+      courseTitle: "Manajemen Keuangan Pribadi ",
+      courseTitle2: "Manajemen Keuangan Pribadi 2",
       amount: "470.266,00",
       status: "verified",
     },
     {
       invoiceId: "FEOC10421",
       dueDate: "21/06/2020",
-      courseTitle: "Manajemen Keuangan Pribadi 2",
+      courseTitle: "Manajemen Keuangan Pribadi ",
+      courseTitle2: "Manajemen Keuangan Pribadi 2",
       amount: "470.266,00",
       status: "verified",
     },
@@ -39,11 +42,14 @@ const ListPurchase = () => {
                   <p className="font-bold text-sm">#{item.invoiceId}</p>
                   <img src="https://via.placeholder.com/60" alt="invoice logo" className="mt-2 w-20" />
                 </div>
-                <div className="ml-4 text-xs md:text-lg flex flex-col md:gap-3">
-                  <p className="text-gray-500 ">
-                    <span className="font-semibold text-black">Batas terakhir: </span> {item.dueDate}
-                  </p>
+                <div className="ml-4 text-xs md:text-lg  ">
+                  <div className="">
+                    <p className="text-gray-500 ">
+                      <span className="font-semibold text-black">Batas terakhir: </span> {item.dueDate}
+                    </p>
+                  </div>
                   <p className="text-gray-700 font-medium">{item.courseTitle}</p>
+                  <p className="text-gray-700 font-medium">{item.courseTitle2}</p>
                   <p className="text-red-500 font-semibold">Rp. {item.amount}</p>
                 </div>
               </div>

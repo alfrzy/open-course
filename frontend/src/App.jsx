@@ -21,10 +21,7 @@ import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
-<<<<<<< HEAD
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
-=======
->>>>>>> 12ac40b0f530da3dd2cabdc9e8db92f607a4f6bd
 
 const App = () => {
   return (
