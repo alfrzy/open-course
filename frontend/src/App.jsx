@@ -28,15 +28,20 @@ const App = () => {
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
-        <Route path="/siswa" element={<SiswaDashboard/>}/>
+        <Route path="/siswa" element={<SiswaDashboard />} />
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        {/* test ui sebelum masuk ke private route */}
+        {/* mhs */}
+        <Route path="/listpurchase" element={<ListPurchase />} />
+        {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+        {/* admin */}
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
