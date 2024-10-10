@@ -21,21 +21,27 @@ import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
+import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 
 const App = () => {
   return (
     <Router>
       <Toaster />
       <Routes>
-        <Route path="/dosen" element={<CRUDDosen />} />
-        <Route path="/editdosen" element={<ComponentEditDosen />} />
-        <Route path="/siswa" element={<SiswaDashboard/>}/>
+        <Route path="/siswa" element={<SiswaDashboard />} />
         <Route path="/" element={<MainLanding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        {/* test ui sebelum masuk ke private route */}
+        {/* mhs */}
+        <Route path="/listpurchase" element={<ListPurchase />} />
+        {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+        {/* admin */}
+        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/editdosen" element={<ComponentEditDosen />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
