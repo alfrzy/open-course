@@ -23,6 +23,7 @@ import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
+import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 
 const App = () => {
   return (
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/invoice" element={<Invoice />} />
+          <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
         </Route>
       </Routes>
     </Router>
