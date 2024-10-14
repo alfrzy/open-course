@@ -7,7 +7,7 @@ import ComponentButton from '../../components/Button/ComponentButton';
 
 const kelasData = [
   {
-    id: 'kelas1',
+    id: '1',
     nama: 'Manajemen Keuangan Pribadi',
     deskripsi: 'Belajar mengelola keuangan pribadi dengan bijak.',
     urlfoto:"https://blog-cdn.kitalulus.com/blog/wp-content/uploads/2024/02/20154131/626e2322c1b6ca1cf2a84104_Cara20mengelola20keuangan20pribadi20dengan20gaji20kecil.jpg",
@@ -23,7 +23,7 @@ const kelasData = [
     ]
   },
   {
-    id: 'kelas2',
+    id: '2',
     nama: 'Pemrograman Web Dasar',
     deskripsi: 'Belajar dasar-dasar pemrograman web.',
     urlfoto:"https://blog-cdn.kitalulus.com/blog/wp-content/uploads/2024/02/20154131/626e2322c1b6ca1cf2a84104_Cara20mengelola20keuangan20pribadi20dengan20gaji20kecil.jpg",
