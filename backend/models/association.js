@@ -5,7 +5,6 @@ const Module = require("./module");
 const Section = require("./section");
 const UserCourses = require("./userCourse");
 const User = require("./user");
-const Book = require("./book");
 
 // learning list dengan course
 LearningList.belongsTo(Course, {
@@ -57,14 +56,5 @@ UserCourses.belongsTo(User, {
 });
 
 User.hasMany(UserCourses, {
-  foreignKey: "user_id",
-});
-
-//  buku dengan user
-Book.belongsTo(User, {
-  foreignKey: "user_id",
-});
-
-User.hasMany(Book, {
   foreignKey: "user_id",
 });
