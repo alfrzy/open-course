@@ -23,18 +23,10 @@ const KontenKanan = ({ languages, Tags, handleTagClick, selectedTags }) => {
 
         <section className="px-2">
           {/* Lama kelas */}
-          <InputField
-            id={"lamakelas"}
-            label={"Durasi (minggu) "}
-            placeholder={"6"}
-          />
+          <InputField id={"lamakelas"} label={"Durasi (minggu) "} placeholder={"6"} />
 
           {/* Lama <Kelas></Kelas> */}
-          <InputField
-            id={"lamakelas"}
-            label={"Lama Kelas (jam/minggu)"}
-            placeholder={"6"}
-          />
+          <InputField id={"lamakelas"} label={"Lama Kelas (jam/minggu)"} placeholder={"6"} />
         </section>
 
         {/* Harga kelas */}
@@ -42,11 +34,7 @@ const KontenKanan = ({ languages, Tags, handleTagClick, selectedTags }) => {
 
         <section className="px-2">
           {/* Harga */}
-          <InputField
-            id={"harga"}
-            label={"Harga Kelas"}
-            placeholder={"200.000"}
-          />
+          <InputField id={"harga"} label={"Harga Kelas"} placeholder={"200.000"} />
         </section>
 
         {/* Bahasa materi */}
@@ -79,15 +67,9 @@ const KontenKanan = ({ languages, Tags, handleTagClick, selectedTags }) => {
           {/* tag kotak */}
           <div className="my-4">
             {selectedTags.map((tag, index) => (
-              <span
-                key={index}
-                className="inline-block bg-gray-500 text-white rounded-full px-3 py-1 text-xs font-semibold mr-2 mb-2"
-              >
+              <span key={index} className="inline-block bg-gray-500 text-white rounded-full px-3 py-1 text-xs font-semibold mr-2 mb-2">
                 {tag}
-                <button
-                  onClick={() => handleTagClick(tag)}
-                  className="ml-1 text-gray-200"
-                ></button>
+                <button onClick={() => handleTagClick(tag)} className="ml-1 text-gray-200"></button>
               </span>
             ))}
           </div>
@@ -96,25 +78,12 @@ const KontenKanan = ({ languages, Tags, handleTagClick, selectedTags }) => {
         {/* Gambar cover */}
         <HeaderGray title={"Gambar Cover"} />
         <section className="p-2">
-          <div className="w-full h-32 border border-gray-300 bg-gray-300">
-            {!isDeleted && (
-              <img
-                src="https://picsum.photos/200/300"
-                alt=""
-                className="w-full h-full"
-              />
-            )}
-          </div>
+          <div className="w-full h-32 border border-gray-300 bg-gray-300">{!isDeleted && <img src="https://picsum.photos/200/300" alt="" className="w-full h-full" />}</div>
           <div className="flex justify-between">
-            <button
-              className="bg-red-600 w-[50%] py-1 hover:bg-red-700 text-white font-bold"
-              onClick={handleDelete}
-            >
+            <button className="bg-red-600 w-[50%] py-1 hover:bg-red-700 text-white font-bold" onClick={handleDelete}>
               Hapus
             </button>
-            <button className="bg-green-600 w-[50%] py-1 hover:bg-green-700 text-white font-bold">
-              Simpan
-            </button>
+            <button className="bg-green-600 w-[50%] py-1 hover:bg-green-700 text-white font-bold">Simpan</button>
           </div>
         </section>
       </section>
@@ -138,12 +107,7 @@ const InputField = ({ label, placeholder, id }) => {
       <label htmlFor={id}>
         <h1 className="font-bold text-sm">{label}</h1>
       </label>
-      <input
-        type="text"
-        id={id}
-        className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-        placeholder={placeholder}
-      />
+      <input type="text" id={id} className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder={placeholder} />
     </div>
   );
 };

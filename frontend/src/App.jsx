@@ -55,7 +55,6 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
           <Route path="/dosen-kelas" element={<DosenKelas />} />
-          <Route path="/dosen-addkelas" element={<AddKelas />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
