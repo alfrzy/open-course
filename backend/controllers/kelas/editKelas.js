@@ -7,7 +7,19 @@ const updateKelas = Router();
 updateKelas.put("/updateKelas/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id } = req.body;
+    const { name, 
+      description, 
+      course_category_id, 
+      tanggal_mulai, 
+      duration, 
+      price, 
+      language, 
+      thumbnail, 
+      is_publish, 
+      lama_kelas_perminggu, 
+      jam_perminggu, 
+      tag, 
+      instructor_id } = req.body;
 
     const kelas = await KelasService.getKelasById(id);
     if (!kelas) {

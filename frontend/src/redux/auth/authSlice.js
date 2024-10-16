@@ -5,6 +5,7 @@ const initialState = {
   isAuth: false,
   token: null,
   role: "",
+  user: [],
 };
 
 const authSlice = createSlice({
@@ -14,6 +15,7 @@ const authSlice = createSlice({
     login: (state, action) => {
       state.isAuth = true;
       state.token = action.payload;
+      state.user = user;
       localStorage.setItem("token", action.payload);
     },
     setRole: (state, action) => {

@@ -9,12 +9,19 @@ const { sequelize } = require("../../config/database");
 const addKelas = Router();
 
 addKelas.post("/addKelas", async (req, res) => {
-  console.log("Request Body:", req.body);
-
   const transaction = await sequelize.transaction();
 
   try {
-    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id, sections } = req.body;
+    const { 
+      name, 
+      description, 
+      course_category_id, 
+      tanggal_mulai, duration, price, 
+      language, thumbnail, is_publish, 
+      lama_kelas_perminggu, jam_perminggu, 
+      tag, 
+      instructor_id, 
+      sections } = req.body;
 
     const addKelas = await KelasService.addKelas(
       {
