@@ -18,9 +18,33 @@ const Course = sequelize.define(
         key: "id",
       },
     },
+    instructor_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Users",
+        key: "id",
+      },
+    },
     name: {
       type: DataTypes.STRING(255),
       allowNull: false,
+    },
+    tanggal_mulai: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    jam_perminggu: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    lama_kelas_perminggu: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     description: {
       type: DataTypes.TEXT,
