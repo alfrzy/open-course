@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Impor Link
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import ComponentButton from "../../components/Button/ComponentButton";
 import useFetchCourses from "../../Data/DataCourse";
-import { useSelector } from "react-redux";
 
-const DosenKelas = () => {
-  const loggedInUserId = useSelector((state) => state.auth.user?.id);
-  const role = useSelector((state) => state.auth.user?.role); 
-  const { dataCourse, loading, error } = useFetchCourses(loggedInUserId, role);
+const AdminKelas = () => {
+  const { dataCourse, loading, error } = useFetchCourses();
   const [filter, setFilter] = useState("Semua");
 
-  // Filter data berdasarkan is_publish
+  // Contoh mendapatkan user_id
+  const loggedInUserId = 1; // misal dari auth state atau context
+
+  // Filter data berdasarkan user_id yang sedang login dan is_publish
   const filteredClasses = dataCourse.filter((kelas) => {
+    console.log("Current Class User ID:", kelas.user_id);
+
+    if (kelas.user_id !== loggedInUserId) {
+      console.log(`Skipping`);
+      return false;
+    }
+
     if (filter === "Publik") {
       return kelas.is_publish === true;
     } else if (filter === "Draft") {
@@ -51,7 +58,11 @@ const DosenKelas = () => {
             {/* Filter text */}
             <div className="flex justify-start space-x-4 mb-4">
               <FilterText filter={filter} setFilter={setFilter} label="Semua" />
-              <FilterText filter={filter} setFilter={setFilter} label="Publik" />
+              <FilterText
+                filter={filter}
+                setFilter={setFilter}
+                label="Publik"
+              />
               <FilterText filter={filter} setFilter={setFilter} label="Draft" />
             </div>
             <ComponentButton
@@ -109,4 +120,4 @@ const FilterText = ({ filter, setFilter, label }) => {
   );
 };
 
-export default DosenKelas;
+export default AdminKelas;

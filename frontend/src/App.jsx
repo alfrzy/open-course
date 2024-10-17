@@ -24,6 +24,9 @@ import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
+import DetailKelas from "./pages/dosenDashboard/detailKelas";
+import AdminKelas from "./pages/adminDashboard/adminKelas";
+import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 
 const App = () => {
   return (
@@ -48,18 +51,20 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
-          <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/admin-kelas" element={<DosenKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
           <Route path="/dosen-kelas" element={<DosenKelas />} />
+          <Route path="/dosen-kelas/:id" element={<DetailKelas />} />
           <Route path="/dosen-addkelas" element={<AddKelas />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
+          <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
