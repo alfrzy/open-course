@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
-const dataUserCourseApiUrl = "http://localhost:3000/api/v1/userCourse/";
 
-// Fungsi untuk fetch data user courses
+
+const dataUserCourseApiUrl = "http://localhost:3000/api/v1/usercourse/";
+
+// Fungsi untuk fetch data user courses berdasarkan user_id
 const useFetchUserCourses = (user_id) => {
   const [dataUserCourses, setDataUserCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(dataUserCourseApiUrl, {
-          params: { user_id }
-        });
+        const response = await axios.get(`${dataUserCourseApiUrl}${user_id}`);
         if (response.data.error) {
           throw new Error(response.data.error);
         }

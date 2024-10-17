@@ -18,8 +18,6 @@ const MahasiswaKelas = () => {
     return <div>Error: {error}</div>;
   }
 
-  console.log(dataUserCourses);
-
   return (
     <section>
       <DashboardNavbar />
@@ -37,7 +35,9 @@ const MahasiswaKelas = () => {
           {dataUserCourses.map((kelas) => (
             <section key={kelas.id} className="mb-4 md:w-[30%]">
               <div className="bg-orange-300 w-full h-28 mb-0 p-4"></div>
-              <h1 className="font-bold text-lg">{kelas.Courses.name}</h1>
+              <h1 className="font-bold text-lg">
+                {kelas.Courses?.name}
+              </h1>
               <p className="text-sm">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
                 culpa aperiam sunt fuga.
@@ -45,7 +45,7 @@ const MahasiswaKelas = () => {
               <div className="mt-2">
                 <div className="flex gap-3 items-center">
                   <FaChalkboardTeacher className="font-bold w-4 h-4 my-1" />
-                  <h1 className="text-sm">{kelas.Courses.name}</h1>
+                  <h1 className="text-sm">Instruktur: {kelas.Courses?.Users?.name}</h1>
                 </div>
                 <div className="flex gap-3 items-center">
                   <MdClass className="font-bold w-4 h-4 my-1" />
