@@ -62,7 +62,7 @@ const DosenKelas = () => {
           </section>
 
           {/* List Card */}
-          <section className="md:flex md:flex-wrap md:justify-between">
+          <section className="md:flex md:flex-wrap md:justify-around">
             {filteredClasses.map((kelas) => (
               <Link
                 key={kelas.id}

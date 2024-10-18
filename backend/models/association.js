@@ -101,3 +101,14 @@ Purchase.belongsTo(User, {
 User.hasMany(Purchase, {
   foreignKey: "user_id",
 });
+
+// Relasi antara Course dan User sebagai Instruktur
+Course.belongsTo(User, {
+  foreignKey: "instructor_id", 
+  as: "Instructor",
+});
+
+User.hasMany(Course, {
+  foreignKey: "instructor_id",
+  as: "InstructedCourses",
+});

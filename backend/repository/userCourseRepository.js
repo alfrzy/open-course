@@ -1,6 +1,7 @@
+const association = require("../models/association");
 const UserCourses = require("../models/userCourse");
 const Course = require("../models/course");
-const association = require("../models/association")
+const User = require("../models/user");
 
 class UserCourseRepository {
   async findAll({ user_id }) {
@@ -13,12 +14,19 @@ class UserCourseRepository {
     }
 
     const userCourses = await UserCourses.findAll({
-      where: whereClause,
+      where: { user_id },
       include: [
         {
           model: Course,
           as: "Courses",
-          attributes: ["name"],
+          attributes: ["name", "instructor_id", "duration"],
+          include: [
+            {
+              model: User,
+              as: "Instructor", 
+              attributes: ["full_name"],
+            },
+          ],
         },
       ],
     });
