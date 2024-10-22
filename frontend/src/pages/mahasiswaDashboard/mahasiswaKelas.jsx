@@ -73,9 +73,9 @@ const MahasiswaKelas = () => {
 
         {/* Konten berdasarkan tab aktif */}
         {activeTab === "kelas" && (
-          <section className="md:flex md:justify-around md:flex-wrap">
+          <section className="md:flex md:justify-start md:flex-wrap">
             {dataUserCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] ">
+              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
@@ -106,9 +106,9 @@ const MahasiswaKelas = () => {
         )}
 
         {activeTab === "progress" && (
-          <section className="md:flex md:justify-around md:flex-wrap">
+          <section className="md:flex md:justify-start md:flex-wrap">
             {ongoingCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] ">
+              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
@@ -139,9 +139,9 @@ const MahasiswaKelas = () => {
         )}
 
         {activeTab === "selesai" && (
-          <section className="md:flex md:justify-around md:flex-wrap">
+          <section className="md:flex md:justify-start md:flex-wrap">
             {finishedCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] ">
+              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
