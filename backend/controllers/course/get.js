@@ -6,8 +6,8 @@ const get = Router();
 
 get.get("/", async (req, res) => {
   try {
-    const { user_id } = req.query;
-    const courses = await CourseService.findAll({ user_id });
+    const { instructor_id } = req.query; 
+    const courses = await CourseService.findAll({ instructor_id });
 
     return success(res, "Kursus berhasil diambil", courses);
   } catch (err) {

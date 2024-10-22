@@ -1,14 +1,13 @@
 const Course = require("../models/course");
 
 class CourseRepository {
-  // Ambil semua kursus yang belum dihapus
-  async findAll({ user_id }) {
+  async findAll({ instructor_id }) { 
     const whereClause = {
       deleted_at: null, 
     };
 
-    if (user_id) {
-      whereClause.user_id = user_id; 
+    if (instructor_id) {
+      whereClause.instructor_id = instructor_id; 
     }
 
     const courses = await Course.findAll({

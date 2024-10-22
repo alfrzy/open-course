@@ -2,6 +2,6 @@ const CourseRepository = require("../repository/courseRepository");
 
 const courseRepo = new CourseRepository();
 
-exports.findAll = async ({ user_id }) => {
-  return await courseRepo.findAll({ user_id });
+exports.findAll = async ({ instructor_id }) => { 
+  return await courseRepo.findAll({ instructor_id });
 };

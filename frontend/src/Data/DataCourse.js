@@ -3,8 +3,7 @@ import axios from "axios";
 
 const dataCourseApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/course/`;
 
-// Fungsi untuk fetch data kursus
-const useFetchCourses = (user_id, role) => {
+const useFetchCourses = (instructor_id, role) => { 
   const [dataCourse, setDataCourse] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +11,7 @@ const useFetchCourses = (user_id, role) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const params = role === 1 ? { user_id } : {};
+        const params = role === 1 ? { instructor_id } : {}; 
 
         const response = await axios.get(dataCourseApiUrl, { params });
         if (response.data.error) {
@@ -27,7 +26,7 @@ const useFetchCourses = (user_id, role) => {
     };
 
     fetchData();
-  }, [user_id, role]);
+  }, [instructor_id, role]);
 
   return { dataCourse, loading, error };
 };

@@ -18,19 +18,11 @@ const Course = sequelize.define(
         key: "id",
       },
     },
-    user_id: {
+    instructor_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: "Users",
-        key: "id",
-      },
-    },
-    instructor_id: { 
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "Users", 
         key: "id",
       },
     },
