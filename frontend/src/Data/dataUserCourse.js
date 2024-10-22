@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-
-
 const dataUserCourseApiUrl = "http://localhost:3000/api/v1/usercourse/";
 
 // Fungsi untuk fetch data user courses berdasarkan user_id
@@ -11,7 +9,6 @@ const useFetchUserCourses = (user_id) => {
   const [dataUserCourses, setDataUserCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   useEffect(() => {
     const fetchData = async () => {

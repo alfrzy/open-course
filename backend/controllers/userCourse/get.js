@@ -4,10 +4,9 @@ const { success, error } = require("../../cores/response");
 
 const get = Router();
 
-// Tambahkan endpoint dengan parameter user_id
 get.get("/:user_id", async (req, res) => {
   try {
-    const { user_id } = req.params; // Ambil user_id dari params
+    const { user_id } = req.params;
     const userCourses = await UserCourseService.findAll({ user_id });
 
     return success(res, "User courses retrieved successfully", userCourses);

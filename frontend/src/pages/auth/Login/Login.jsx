@@ -36,15 +36,12 @@ const Login = () => {
       if (response.status === 200) {
         const { token, user } = data.data;
         const role = user.role;
-        const id = user.id
-        
+        const id = user.id;
+
         console.log("Token:", token);
         console.log("User:", user);
         console.log("Role:", role);
         console.log("id:", id);
-
-        // dispatch(login(data.data.token));
-        // dispatch(setRole(data.data.user.role));
 
         dispatch(
           login({
@@ -53,9 +50,6 @@ const Login = () => {
             role: data.data.user.role,
           })
         );
-
-        // // Simpan user ID ke localStorage
-        // localStorage.setItem("loggedInUserId", data.data.user.id);
 
         if (data.data.user && data.data.user.role === 2) {
           navigate("/admin-dashboard", { replace: true });

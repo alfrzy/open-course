@@ -130,7 +130,7 @@ const MahasiswaKelas = () => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <FaClock className="font-bold w-4 h-4 my-1" />
-                    <h1 className="text-sm">Durasi: {kelas.duration}</h1>
+                    <h1 className="text-sm">Durasi: {kelas.Courses?.duration} jam</h1>
                   </div>
                 </div>
               </section>
@@ -163,7 +163,7 @@ const MahasiswaKelas = () => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <FaClock className="font-bold w-4 h-4 my-1" />
-                    <h1 className="text-sm">Durasi: {kelas.duration}</h1>
+                    <h1 className="text-sm">Durasi: {kelas.Courses?.duration} jam</h1>
                   </div>
                 </div>
               </section>

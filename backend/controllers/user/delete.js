@@ -9,7 +9,7 @@ deleteRouter.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await UserService.deleteById(id); // Menghapus pengguna dari database
+    const result = await UserService.deleteById(id); 
 
     if (result) {
       return raw(res, "sukses hapus user");
