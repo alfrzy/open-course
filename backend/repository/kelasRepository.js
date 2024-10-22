@@ -6,6 +6,20 @@ class KelasRepository {
     const course = await Course.create(data);
     return course.toJSON();
   }
+  // async save(data) {
+  //   const { id } = data;
+
+  //   const [kelas, created] = await Course.findOrCreate({
+  //     where: { id }, //id as key
+  //     defaults: data, //if id not found > create new data
+  //   });
+
+  //   if (!created) {
+  //     await kelas.update(data);
+  //   }
+
+  //   return kelas.toJSON();
+  // }
 
   async findById(id) {
     const course = await Course.findByPk(id);

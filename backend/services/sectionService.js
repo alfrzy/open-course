@@ -2,9 +2,9 @@ const SectionRepository = require("../repository/sectionRepository");
 const sectionRepo = new SectionRepository();
 
 // Add section
-exports.addSection = async (data) => {
+exports.addSection = async (data, options) => {
   try {
-    const newSection = await sectionRepo.createSection(data);
+    const newSection = await sectionRepo.createSection(data, options);
     return newSection;
   } catch (error) {
     console.error("Error adding section:", error);
@@ -13,12 +13,12 @@ exports.addSection = async (data) => {
 };
 
 // Update section
-exports.updateSection = async (id, data) => {
+exports.updateSection = async (id, data, options) => {
   try {
     const section = await sectionRepo.getSectionById(id);
     if (!section) return null;
 
-    const updatedSection = await sectionRepo.updateSection(id, data);
+    const updatedSection = await sectionRepo.updateSection(id, data, options);
     return updatedSection;
   } catch (error) {
     console.error("Error updating section:", error);

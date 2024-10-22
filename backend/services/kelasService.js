@@ -41,11 +41,9 @@ exports.getKelasById = async (id) => {
 // Update class
 exports.updateKelas = async (id, data) => {
   try {
-    const kelas = await kelasRepo.findById(id);
+    const kelas = await kelasRepo.update(id, data); 
     if (!kelas) return null;
-
-    const updatedKelas = await kelasRepo.update(id, data);
-    return updatedKelas;
+    return kelas;
   } catch (error) {
     console.error("Error updating class:", error);
     throw new Error("Failed to update class");

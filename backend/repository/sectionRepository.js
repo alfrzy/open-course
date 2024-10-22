@@ -1,9 +1,9 @@
 const Section = require("../models/section");
 
 class SectionRepository {
-  async createSection(data) {
+  async createSection(data, options) {
     try {
-      const section = await Section.create(data);
+      const section = await Section.create(data, options);
       return section.toJSON();
     } catch (error) {
       console.error("Error creating section:", error);
@@ -21,11 +21,11 @@ class SectionRepository {
     }
   }
 
-  async updateSection(id, data) {
+  async updateSection(id, data, options) {
     try {
       const section = await Section.findByPk(id);
       if (!section) return null;
-      await section.update(data);
+      await section.update(data, options);
       return section.toJSON();
     } catch (error) {
       console.error("Error updating section:", error);

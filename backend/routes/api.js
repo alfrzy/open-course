@@ -4,14 +4,15 @@ const { verifyToken } = require("../cores/authMiddleware");
 
 const userApiController = require("../controllers/user");
 const kelasApiController = require("../controllers/kelas");
-const sectionApiController = require("../controllers/section");
+// const moduleApiController = require("../controllers/module");
+const modulApiController = require("../controllers/modul");
 const kategoriApiController = require("../controllers/kategori");
 
 const api = Router();
 
 api.use("/api/v1/user", userApiController);
 api.use("/api/v1/kelas", kelasApiController);
-api.use("/api/v1/section", sectionApiController);
 api.use("/api/v1/kategori", kategoriApiController);
+api.use("/api/v1/modul", modulApiController);
 
 module.exports = api;

@@ -8,50 +8,83 @@ const { sequelize } = require("../../config/database");
 
 const addKelas = Router();
 
-addKelas.post("/addKelas", async (req, res) => {
+addKelas.post("/addKelas/:id?", async (req, res) => {
   const transaction = await sequelize.transaction();
 
   try {
-    const { 
-      name, 
-      description, 
-      course_category_id, 
-      tanggal_mulai, duration, price, 
-      language, thumbnail, is_publish, 
-      lama_kelas_perminggu, jam_perminggu, 
-      tag, 
-      instructor_id, 
-      sections } = req.body;
+    const { id } = req.params;
+    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id, sections } = req.body;
 
-    const addKelas = await KelasService.addKelas(
-      {
-        name,
-        description,
-        course_category_id,
-        tanggal_mulai,
-        duration,
-        price,
-        language,
-        thumbnail,
-        is_publish,
-        lama_kelas_perminggu,
-        jam_perminggu,
-        tag,
-        instructor_id,
-      },
-      { transaction }
-    );
+    let message;
+    let addKelas;
+
+    if (id) {
+      addKelas = await KelasService.updateKelas(
+        id,
+        {
+          name,
+          description,
+          course_category_id,
+          tanggal_mulai,
+          duration,
+          price,
+          language,
+          thumbnail,
+          is_publish,
+          lama_kelas_perminggu,
+          jam_perminggu,
+          tag,
+          instructor_id,
+        },
+        { transaction }
+      );
+      message = "Kelas Berhasil Diupdate";
+    } else {
+      addKelas = await KelasService.addKelas(
+        {
+          name,
+          description,
+          course_category_id,
+          tanggal_mulai,
+          duration,
+          price,
+          language,
+          thumbnail,
+          is_publish,
+          lama_kelas_perminggu,
+          jam_perminggu,
+          tag,
+          instructor_id,
+        },
+        { transaction }
+      );
+
+      message = "Kelas Berhasil Ditambahkan";
+    }
 
     //section lebih dari 1
     if (sections && sections.length > 0) {
-      const sectionPromises = sections.map((sectionTitle) => {
-        return SectionService.addSection(
-          {
-            course_id: addKelas.id,
-            title: sectionTitle,
-          },
-          { transaction }
-        );
+      const sectionPromises = sections.map((section) => {
+        if (section.id) {
+          // Update section if ID exists
+          return SectionService.updateSection(
+            section.id,
+            {
+              course_id: addKelas.id,
+              title: section.title,
+            },
+            { transaction }
+          );
+        } else {
+          // Create new section if no ID
+          return SectionService.addSection(
+            {
+              course_id: addKelas.id,
+              title: section.title,
+            },
+            { transaction }
+          );
+        }
       });
       await Promise.all(sectionPromises);
     }
@@ -59,7 +92,7 @@ addKelas.post("/addKelas", async (req, res) => {
     // commit
     await transaction.commit();
 
-    response.created(res, "Kelas berhasil ditambahkan", addKelas);
+    response.created(res, message, addKelas);
   } catch (error) {
     console.error(error);
     response.error(res, "Gagal menambahkan kelas. " + error.message);
