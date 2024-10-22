@@ -38,11 +38,6 @@ const Login = () => {
         const role = user.role;
         const id = user.id;
 
-        console.log("Token:", token);
-        console.log("User:", user);
-        console.log("Role:", role);
-        console.log("id:", id);
-
         dispatch(
           login({
             token: data.data.token,

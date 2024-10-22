@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const dataCourseApiUrl = "http://localhost:3000/api/v1/course/";
+const dataCourseApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/course/`;
 
 // Fungsi untuk fetch data kursus
 const useFetchCourses = (user_id, role) => {

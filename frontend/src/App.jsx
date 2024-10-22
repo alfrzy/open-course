@@ -24,8 +24,6 @@ import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
-import DetailKelas from "./pages/dosenDashboard/detailKelas";
-import AdminKelas from "./pages/adminDashboard/adminKelas";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 
 const App = () => {
@@ -58,7 +56,6 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
           <Route path="/dosen-kelas" element={<DosenKelas />} />
-          <Route path="/dosen-kelas/:id" element={<DetailKelas />} />
           <Route path="/dosen-addkelas" element={<AddKelas />} />
         </Route>
         {/* mhs */}
