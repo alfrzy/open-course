@@ -2,14 +2,14 @@ import React from "react";
 import { deleteSiswa } from "../../Data/dataSiswa";
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/dataSiswa";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useFetchUserCourses from "../../Data/dataUserCourse";
 
 const ITEMS_PER_PAGE = 10;
 
 const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
   const { dataSiswa, refetchData } = useFetchData();
-  const { dataUserCourses } = useFetchUserCourses(); // Jangan pass id di sini, karena kita butuh semua data
+  const { dataUserCourses } = useFetchUserCourses(); 
 
   const totalPages = Math.ceil(dataSiswa.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;

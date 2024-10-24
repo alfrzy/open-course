@@ -7,7 +7,7 @@ import useFetchData, {
 import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faCheck } from "@fortawesome/free-solid-svg-icons";
 import useFetchUserCourses from "../../../Data/dataUserCourse";
 
 const SiswaDetail = () => {
@@ -73,7 +73,7 @@ const SiswaDetail = () => {
                     onClick={handleActivateUser}
                     className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-blue-800 flex items-center"
                   >
-                    <FontAwesomeIcon icon={faBan} className="mr-2" />
+                    <FontAwesomeIcon icon={faCheck} className="mr-2" />
                     <h1 className="font-bold text-white text-md">
                       Aktifkan User
                     </h1>
