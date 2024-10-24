@@ -1,27 +1,35 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import ComponentButton from "../../components/Button/ComponentButton";
+import useFetchCourses from "../../Data/DataCourse";
+import { useSelector } from "react-redux";
 
 const DosenKelas = () => {
-  // Data kelas
-  const allClasses = [
-    { id: 1, name: "Manejemen Keuangan Pribadi", type: "Publik" },
-    { id: 2, name: "Analisis Data", type: "Publik" },
-    { id: 3, name: "Pemrograman Web", type: "Publik" },
-    { id: 4, name: "Kecerdasan Buatan", type: "Pending" },
-    { id: 5, name: "Statistika Lanjut", type: "Publik" },
-    { id: 6, name: "Machine Learning", type: "Publik" },
-    { id: 7, name: "Sistem Informasi", type: "Draft" },
-    { id: 8, name: "Pengembangan Perangkat Lunak", type: "Pending" },
-    { id: 9, name: "Keamanan Jaringan", type: "Publik" },
-    { id: 10, name: "Desain Grafis", type: "Publik" },
-  ];
-
+  const loggedInUserId = useSelector((state) => state.auth.user?.id);
+  const role = useSelector((state) => state.auth.user?.role); 
+  const { dataCourse, loading, error } = useFetchCourses(loggedInUserId, role);
   const [filter, setFilter] = useState("Semua");
-  const filteredClasses = allClasses.filter((kelas) => {
-    return filter === "Semua" || kelas.type === filter;
+
+  // Filter data berdasarkan is_publish
+  const filteredClasses = dataCourse.filter((kelas) => {
+    if (filter === "Publik") {
+      return kelas.is_publish === true;
+    } else if (filter === "Draft") {
+      return kelas.is_publish === false;
+    } else {
+      return true;
+    }
   });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="min-h-screen font-poppins bg-gray-200">
@@ -38,6 +46,7 @@ const DosenKelas = () => {
               <ComponentButton color={"bg-blue-700"} text={"Tambah Kelas"} />
             </a>
           </div>
+
           <section className="flex justify-between">
             {/* Filter text */}
             <div className="flex justify-start space-x-4 mb-4">
@@ -53,12 +62,20 @@ const DosenKelas = () => {
           </section>
 
           {/* List Card */}
-          <section className="md:flex md:flex-wrap md:justify-between">
+          <section className="md:flex md:flex-wrap md:justify-start">
             {filteredClasses.map((kelas) => (
-              <section key={kelas.id} className="w-full h-40 mt-6 md:w-[23%] relative">
-                <div className={`bg-red-500 h-[85%] ${kelas.type === "Draft" ? "relative" : ""}`}>
-                  {/* Teks "Draft" ditampilkan di pojok kanan atas  */}
-                  {kelas.type === "Draft" && (
+              <Link
+                key={kelas.id}
+                to={`/dosen-kelas/${kelas.id}`}
+                className="w-full h-40 mt-6 md:w-[23%] relative md:mr-4"
+              >
+                <div
+                  className={`bg-red-500 hover:bg-opacity-50 transition-all duration-300 h-[85%] ${
+                    kelas.is_publish === false ? "relative" : ""
+                  }`}
+                >
+                  {/* Teks "Draft" ditampilkan di pojok kanan atas jika kursus belum dipublish */}
+                  {kelas.is_publish === false && (
                     <span className="absolute top-0 right-0 bg-white text-red-500 text-xs font-bold px-2">
                       Draft
                     </span>
@@ -67,7 +84,7 @@ const DosenKelas = () => {
                 <section className="h-[15%]">
                   <h1 className="font-bold">{kelas.name}</h1>
                 </section>
-              </section>
+              </Link>
             ))}
           </section>
           {/* CONTENT END */}
