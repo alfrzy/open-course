@@ -8,10 +8,8 @@ get.get('/', async (req, res) => {
   try {
     const users = await UserService.findAll(); 
 
-    // Mengembalikan respon sukses dengan data pengguna
     return success(res, 'Pengguna berhasil diambil', users); 
   } catch (err) {
-    // Mengembalikan error
     return response.error(res, 'Terjadi kesalahan saat mengambil pengguna: ' + err.message);
   }
 });

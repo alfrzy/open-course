@@ -43,7 +43,7 @@ const Sidebar = () => {
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
-              <a href="/addMateri" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a href="/dosen-kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <IoBookSharp className="mr-2" />
                 Kelas
               </a>
@@ -55,7 +55,7 @@ const Sidebar = () => {
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
-              <a href="/kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a href="/admin-kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <IoBookSharp className="mr-2" />
                 Kelas
               </a>
@@ -85,6 +85,10 @@ const Sidebar = () => {
               <a href="/mahasiswa-dashboaard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <MdDashboard className="mr-2" />
                 Dashboard
+              </a>
+              <a href="/mahasiswa-kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+                <MdDashboard className="mr-2" />
+                Kelas
               </a>
             </>
           )}

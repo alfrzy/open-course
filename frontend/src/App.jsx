@@ -24,6 +24,7 @@ import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
+import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 
 const App = () => {
   return (
@@ -48,7 +49,7 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
-          <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/admin-kelas" element={<DosenKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
@@ -60,6 +61,7 @@ const App = () => {
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
+          <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
