@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
 import CRUDDosen from "./CRUDDosen";
 
 const Dosen = () => {

@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const dataSiswaApiUrl = "http://localhost:3000/api/v1/user/";
 
-// Fungsi untuk fetch data dosen
+// Fungsi untuk fetch data siswa
 const useFetchData = () => {
   const [dataSiswa, setDataSiswa] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,7 @@ const useFetchData = () => {
   return { dataSiswa, loading, error, refetchData: () => fetchData() };
 };
 
-// Fungsi untuk delete dosen 
+// Fungsi untuk delete siswa
 export const deleteSiswa = async (id, refetchData, toast) => {
   Swal.fire({
     title: "Apakah Anda yakin?",
@@ -127,5 +127,71 @@ export const updateSiswa = async (id, formData, toast) => {
     toast.error("Gagal memperbarui akun siswa.");
   }
 };
+
+// Fungsi untuk block siswa
+export const blockSiswa = async (id) => {
+  try {
+    const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: false }),
+    });
+
+    if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil",
+        text: "Pengguna berhasil diblokir!",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.reload(); 
+      });
+    } else {
+      throw new Error("Gagal memblokir pengguna.");
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: error.message,
+    });
+  }
+};
+
+// Fungsi untuk activate siswa
+export const activateSiswa = async (id) => {
+  try {
+    const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: true }),
+    });
+
+    if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Berhasil",
+        text: "Pengguna berhasil diaktifkan!",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.reload();
+      });
+    } else {
+      throw new Error("Gagal mengaktifkan pengguna.");
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: error.message,
+    });
+  }
+};
+
+
 
 export default useFetchData;
