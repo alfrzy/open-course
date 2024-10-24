@@ -41,9 +41,9 @@ const SiswaDetail = () => {
               {/* siswa and navigation */}
               <div className="flex ">
                 <h1 className="font-bold text-lg">Siswa</h1>
-                <nav className="text-gray-600 ml-[30%]">
-                  <Link to="/" className="hover:text-blue-600">
-                    Section
+                <nav className="text-gray-600 ml-[25%]">
+                  <Link to="/siswa" className="hover:text-blue-600">
+                    Daftar Mahasiswa
                   </Link>
                   <span className="mx-2"> &gt; </span>
                   <span className="font-medium"> {siswa.full_name}</span>

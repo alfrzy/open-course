@@ -128,68 +128,94 @@ export const updateSiswa = async (id, formData, toast) => {
   }
 };
 
-// Fungsi untuk block siswa
+// Fungsi untuk block siswa dengan konfirmasi
 export const blockSiswa = async (id) => {
-  try {
-    const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: false }),
-    });
+  Swal.fire({
+    title: "Apakah Anda yakin?",
+    text: "Mahasiswa ini akan diblokir!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ya, blokir!",
+    cancelButtonText: "Batal",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: false }),
+        });
 
-    if (response.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Berhasil",
-        text: "Pengguna berhasil diblokir!",
-        confirmButtonText: "OK",
-      }).then(() => {
-        window.location.reload(); 
-      });
-    } else {
-      throw new Error("Gagal memblokir pengguna.");
+        if (response.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil",
+            text: "Pengguna berhasil diblokir!",
+            confirmButtonText: "OK",
+          }).then(() => {
+            window.location.reload();
+          });
+        } else {
+          throw new Error("Gagal memblokir pengguna.");
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.message,
+        });
+      }
     }
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: error.message,
-    });
-  }
+  });
 };
 
-// Fungsi untuk activate siswa
+// Fungsi untuk activate siswa dengan konfirmasi
 export const activateSiswa = async (id) => {
-  try {
-    const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: true }),
-    });
+  Swal.fire({
+    title: "Apakah Anda yakin?",
+    text: "Mahasiswa ini akan diaktifkan kembali!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ya, aktifkan!",
+    cancelButtonText: "Batal",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`${dataSiswaApiUrl}update/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: true }),
+        });
 
-    if (response.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Berhasil",
-        text: "Pengguna berhasil diaktifkan!",
-        confirmButtonText: "OK",
-      }).then(() => {
-        window.location.reload();
-      });
-    } else {
-      throw new Error("Gagal mengaktifkan pengguna.");
+        if (response.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Berhasil",
+            text: "Pengguna berhasil diaktifkan!",
+            confirmButtonText: "OK",
+          }).then(() => {
+            window.location.reload();
+          });
+        } else {
+          throw new Error("Gagal mengaktifkan pengguna.");
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.message,
+        });
+      }
     }
-  } catch (error) {
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: error.message,
-    });
-  }
+  });
 };
 
 
