@@ -1,23 +1,28 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import useFetchData, { activateSiswa, blockSiswa } from "../../../Data/dataSiswa";
+import useFetchData, {
+  activateSiswa,
+  blockSiswa,
+} from "../../../Data/dataSiswa";
 import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import useFetchUserCourses from "../../../Data/dataUserCourse";
 
 const SiswaDetail = () => {
   const { id } = useParams();
   const { dataSiswa } = useFetchData();
+  const { dataUserCourses } = useFetchUserCourses(id);
 
   const siswa = dataSiswa.find((s) => String(s.id) === String(id));
 
   const handleBlockUser = () => {
-    blockSiswa(siswa.id);  
+    blockSiswa(siswa.id);
   };
 
   const handleActivateUser = () => {
-    activateSiswa(siswa.id);  
+    activateSiswa(siswa.id);
   };
 
   if (!siswa) {
@@ -47,11 +52,14 @@ const SiswaDetail = () => {
 
               {/* kembali and block/activate user */}
               <div className="mt-5 flex justify-between">
-                <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                  <h1 className="font-bold text-white text-md">
-                    <span className="mr-3">&lt;</span> Kembali
-                  </h1>
-                </button>
+                <a href="/siswa">
+                  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <h1 className="font-bold text-white text-md">
+                      <span className="mr-3">&lt;</span> Kembali
+                    </h1>
+                  </button>
+                </a>
+
                 {siswa.status ? (
                   <button
                     onClick={handleBlockUser}
@@ -112,14 +120,27 @@ const SiswaDetail = () => {
                   {/* kelas yang diikuti */}
                   <div>
                     <h1 className="font-bold">Kelas Yang Diikuti</h1>
-                    <div className="pl-4">
-                      <ul className="list-disc pl-5">
-                        <li className="flex items-center">
-                          <span className="bg-green-500 rounded-full h-3 w-3 mr-2"></span>
-                          <h1 className="text-sm my-1">Algoritma 1</h1>
-                        </li>
-                      </ul>
-                    </div>
+                    <section className="pl-5 mt-3">
+                      {/* Render daftar kelas */}
+                      <div>
+                        <ul className="list-disc pl-5">
+                          {dataUserCourses.map((course) => (
+                            <li key={course.id} className="flex items-center">
+                              <span
+                                className={`${
+                                  course.is_finish
+                                    ? "bg-green-500"
+                                    : "bg-red-500"
+                                } rounded-full h-3 w-3 mr-2`}
+                              ></span>
+                              <h1 className="text-sm my-1">
+                                {course.Courses.name}
+                              </h1>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </section>
                   </div>
 
                   {/* sertifikat */}

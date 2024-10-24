@@ -2,19 +2,14 @@ import React from "react";
 import { deleteSiswa } from "../../Data/dataSiswa";
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/dataSiswa";
-import { Link } from "react-router-dom";
-
-const dataSiswa = [
-  {
-    jumlahKelas: 5,
-    status: "Aktif",
-  },
-];
+import { Link, useParams } from "react-router-dom";
+import useFetchUserCourses from "../../Data/dataUserCourse";
 
 const ITEMS_PER_PAGE = 10;
 
 const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
   const { dataSiswa, refetchData } = useFetchData();
+  const { dataUserCourses } = useFetchUserCourses(); // Jangan pass id di sini, karena kita butuh semua data
 
   const totalPages = Math.ceil(dataSiswa.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
@@ -25,6 +20,22 @@ const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
   );
 
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const getJumlahKelas = (user_id) => {
+    if (!dataUserCourses || dataUserCourses.length === 0) {
+      console.log("Tidak ada data kursus yang terambil.");
+      return 0; // Jika data belum terambil atau kosong
+    }
+
+    console.log("Data kursus yang ada:", dataUserCourses);
+
+    // Filter data kursus berdasarkan user_id
+    const jumlahKelas = dataUserCourses.filter(
+      (course) => Number(course.user_id) === Number(user_id)
+    ).length;
+
+    return jumlahKelas;
+  };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -104,10 +115,10 @@ const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                     {siswa.gmail || "N/A"}
                   </td>
                   <td className="px-6 py-4 border-b text-center border-gray-300">
-                    {siswa.jumlahKelas || 0}
+                    {getJumlahKelas(siswa.id)} 
                   </td>
                   <td className="px-6 py-4 border-b text-center border-gray-300">
-                    {siswa.status || "Tidak Aktif"}
+                    {siswa.status ? "Aktif" : "Diblokir"}
                   </td>
                   <td className="px-6 py-4 text-center border-b border-gray-300">
                     <button
@@ -125,7 +136,7 @@ const TableSiswa = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   </td>
                   <td className="px-6 py-4 border-b text-center border-gray-300">
                     <Link
-                      to={`/siswa/${siswa.id}`} 
+                      to={`/siswa/${siswa.id}`}
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Detail
