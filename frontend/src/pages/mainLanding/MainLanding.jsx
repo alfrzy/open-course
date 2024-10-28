@@ -3,10 +3,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import { FaGoogle } from "react-icons/fa";
 import LandingFooter from "../../components/Footer/LandingFooter";
 import CardKelas from "../../components/Card/CardKelas";
-import CardContent from "../../components/Card/CardContent";
+import { useFetchAllCourses } from "../../Data/DataCourse";
 
 const MainLanding = () => {
   const [visibleCards, setVisibleCards] = useState(6);
+
+  const { dataCourse: courses, loading, error } = useFetchAllCourses();
 
   const loadMoreCards = () => {
     setVisibleCards((prevVisible) => prevVisible + 6);
@@ -49,14 +51,11 @@ const MainLanding = () => {
             </p>
           </div>
           <hr className="border-1 border-black" />
-          {/*  */}
           <div className="flex flex-col md:flex-row justify-center gap-10 py-8">
             <div className="flex flex-col text-center md:text-left md:w-1/3 md:mt-10">
               <h2 className="font-bold text-xl md:text-2xl">KENAPA HARUS FE OPEN COURSE?</h2>
               <p className="mt-3 text-sm md:text-base text-gray-600">Et omnia in potestate nostra esse natura liber, libera, libere valeant; sed illis non est in nostra.</p>
             </div>
-
-            {/* card */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, idx) => (
                 <a href="#" key={idx} className="flex flex-col items-center justify-center p-5 bg-amber-100 border rounded shadow hover:bg-amber-300 transition duration-300 ease-in-out">
@@ -67,24 +66,37 @@ const MainLanding = () => {
             </div>
           </div>
           <hr className="border-1 border-black" />
-          {/*  */}
+
           <div className="flex flex-col items-center gap-10 py-5">
-            <div className="flex flex-col text-center  md:w-1/3 md:mt-10">
+            <div className="flex flex-col text-center md:w-1/3 md:mt-10">
               <h2 className="font-bold text-xl md:text-2xl">Semua Kelas</h2>
               <p className="mt-3 text-sm md:text-base text-gray-600">Et omnia in potestate nostra esse natura liber, libera, libere valeant; sed illis non est in nostra.</p>
             </div>
 
-            {/* card */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {CardContent.slice(0, visibleCards).map((item) => (
-                <CardKelas key={item.id} title={item.title} image={item.image} deskripsi={item.deskripsi} dosen={item.dosen} kelas={item.kelas} waktu={item.waktu} harga={item.harga} />
-              ))}
-            </div>
-            {visibleCards < CardContent.length && (
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p className="text-red-500">{error}</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {courses.slice(0, visibleCards).map((course) => (
+                  <CardKelas
+                    key={course.id}
+                    title={course.name}
+                    image={course.thumbnail} 
+                    deskripsi={course.description}
+                    dosen={course.Instructor.full_name} 
+                    kelas={"Satuan"}
+                    waktu={`${course.duration} hours`}
+                    harga={`$${course.price}`}
+                  />
+                ))}
+              </div>
+            )}
+
               <button onClick={loadMoreCards} className="mt-5 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                 Selengkapnya
               </button>
-            )}
           </div>
           <hr className="border-1 border-black" />
           {/*  */}

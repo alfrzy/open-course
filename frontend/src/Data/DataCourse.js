@@ -3,6 +3,34 @@ import axios from "axios";
 
 const dataCourseApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/course/`;
 
+// All
+const useFetchAllCourses = () => {
+  const [dataCourse, setDataCourse] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        const response = await axios.get(dataCourseApiUrl);
+        if (response.data.error) {
+          throw new Error(response.data.error);
+        }
+        setDataCourse(response.data.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, []);
+
+  return { dataCourse, loading, error };
+};
+
+// batasan role dan instructor_id
 const useFetchCourses = (instructor_id, role) => { 
   const [dataCourse, setDataCourse] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +40,6 @@ const useFetchCourses = (instructor_id, role) => {
     const fetchData = async () => {
       try {
         const params = role === 1 ? { instructor_id } : {}; 
-
         const response = await axios.get(dataCourseApiUrl, { params });
         if (response.data.error) {
           throw new Error(response.data.error);
@@ -31,4 +58,4 @@ const useFetchCourses = (instructor_id, role) => {
   return { dataCourse, loading, error };
 };
 
-export default useFetchCourses;
+export { useFetchCourses, useFetchAllCourses };
