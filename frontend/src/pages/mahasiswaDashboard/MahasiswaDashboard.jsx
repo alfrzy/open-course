@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
-import Siswa from "../Siswa/Siswa";
+import Siswa from "../adminDashboard/Siswa/Siswa";
 
 const MahasiswaDashboard = () => {
   return (

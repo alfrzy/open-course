@@ -72,7 +72,7 @@ const Sidebar = () => {
                     <MdPerson className="mr-2" />
                     Dosen
                   </a>
-                  <a href="/mahasiswa" className="flex items-center py-2 px-12 transition duration-200 hover:bg-blue-500 hover:text-white">
+                  <a href="/siswa" className="flex items-center py-2 px-12 transition duration-200 hover:bg-blue-500 hover:text-white">
                     <PiStudentBold className="mr-2" />
                     Mahasiswa
                   </a>

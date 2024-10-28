@@ -6,17 +6,16 @@ import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
 import Dashboard from "./pages/adminDashboard/Dashboard";
-import PageKelas from "./pages/kelas/PageKelas";
+import PageKelas from "./pages/adminDashboard/kelas/PageKelas";
 import { useAuth } from "./redux/auth/authSlice";
 import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
 import { Toaster } from "react-hot-toast";
-import CRUDDosen from "./components/Dosen/CRUDDosen";
-import Dosen from "./components/Dosen/Dosen";
+import Dosen from "./pages/adminDashboard/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
 import MainLanding from "./pages/mainLanding/mainLanding";
-import SiswaDashboard from "./pages/Siswa/SiswaDashboard";
+import SiswaDashboard from "./pages/adminDashboard/Siswa/SiswaDashboard";
 import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
 import Detail from "./pages/kelas/DetailKelas";
@@ -24,6 +23,7 @@ import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
+import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 
 const App = () => {
@@ -43,12 +43,16 @@ const App = () => {
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
         {/* admin */}
-        <Route path="/dosen" element={<CRUDDosen />} />
+        <Route path="/dosen" element={<Dosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
         {/* admin */}
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/kelas" element={<PageKelas />} />
+          <Route path="/siswa" element={<SiswaDashboard />} />
+          <Route path="/siswa/:id" element={<SiswaDetail />} />
+          {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}
           <Route path="/admin-kelas" element={<DosenKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
@@ -64,7 +68,10 @@ const App = () => {
           <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/invoice" element={<Invoice />} />
-          <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
+          <Route
+            path="/pembelian-kelas-berhasil/:id"
+            element={<InvoicePage />}
+          />
         </Route>
       </Routes>
     </Router>
