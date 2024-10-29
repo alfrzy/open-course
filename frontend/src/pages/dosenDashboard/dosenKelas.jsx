@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import ComponentButton from "../../components/Button/ComponentButton";
-import useFetchCourses from "../../Data/DataCourse";
+import { useFetchCourses } from "../../Data/DataCourse";
 import { useSelector } from "react-redux";
 
 const DosenKelas = () => {
