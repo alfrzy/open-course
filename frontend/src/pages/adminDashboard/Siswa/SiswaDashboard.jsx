@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
 import Siswa from "./Siswa";
 
 const SiswaDashboard = () => {
@@ -11,7 +11,7 @@ const SiswaDashboard = () => {
         <Sidebar />
         <div className="flex-1 p-6 md:ml-64">
           {/* content disini */}
-          <Siswa/>
+          <Siswa />
         </div>
       </div>
     </div>

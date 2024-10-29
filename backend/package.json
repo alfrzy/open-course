@@ -10,6 +10,7 @@
     "migrate:reset": "sequelize-cli db:migrate:undo:all",
     "seed": "sequelize-cli db:seed:all",
     "makeseed": "sequelize-cli seed:generate --name",
+    "makemigrate": "npx sequelize-cli migration:generate --name",
     "db:setup": "sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "db:seed": "sequelize-cli db:seed:all",
     "db:seed:reset": "sequelize-cli db:seed:undo:all",

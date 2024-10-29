@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Table from "../Table/Table";
-import Search from "../Search/Search";
-import ComponentAddDosen from "../Form/ComponentAddDosen";
-import ComponentEditDosen from "../Form/ComponentEditDosen";
+import Table from "../../../components/Table/Table";
+import Search from "../../../components/Search/Search";
+import ComponentAddDosen from "../../../components/Form/ComponentAddDosen";
+import ComponentEditDosen from "../../../components/Form/ComponentEditDosen";
 
 const CRUDDosen = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
