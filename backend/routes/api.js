@@ -4,7 +4,7 @@ const { verifyToken } = require("../cores/authMiddleware");
 
 const userApiController = require("../controllers/user");
 const kelasApiController = require("../controllers/kelas");
-// const moduleApiController = require("../controllers/module");
+const moduleApiController = require("../controllers/modul");
 const modulApiController = require("../controllers/modul");
 const kategoriApiController = require("../controllers/kategori");
 

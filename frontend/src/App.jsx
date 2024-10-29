@@ -41,6 +41,9 @@ const App = () => {
         {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+        <Route path="/dosen-kelas" element={<DosenKelas />} />
+        <Route path="/dosen-addKelas" element={<AddKelas />} />
+
         {/* admin */}
         <Route path="/dosen" element={<CRUDDosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
@@ -54,7 +57,6 @@ const App = () => {
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
-          <Route path="/dosen-kelas" element={<DosenKelas />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>

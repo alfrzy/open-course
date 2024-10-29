@@ -39,35 +39,29 @@ const AddKelas = () => {
   const menuRef = useRef(null);
 
   // input
-  const [courseName, setCoursename] = useState(""); // State untuk nama kelas
-  const [courseDescription, setCourseDescription] = useState(""); // State untuk deskripsi kelas
+  const [courseName, setCoursename] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
 
   const handleAddInstructor = (instructor) => {
     setAddedInstructors((prev) => [...prev, instructor]);
-    setInstructors((prev) =>
-      prev.filter((ins) => ins.name !== instructor.name)
-    );
+    setInstructors((prev) => prev.filter((ins) => ins.name !== instructor.name));
   };
 
   const handleAddTopic = () => {
     if (newTopic) {
-      // diset ke learning topic sblme
       setLearningTopics((prev) => [...prev, newTopic]);
       setNewTopic("");
     }
   };
 
-  // titik tiga
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  // 
   const toggleBabMenu = () => {
     setIsBabMenuOpen((prev) => !prev);
   };
 
-  // Tutup menu kalau ngeklik yang lain
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -83,9 +77,7 @@ const AddKelas = () => {
 
   // Handle perubahan tag
   const handleTagClick = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
+    setSelectedTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
   };
 
   // Fungsi untuk menyimpan kelas ke database
@@ -135,10 +127,7 @@ const AddKelas = () => {
                 <h1 className="">Hapus Kelas</h1>
               </button>
 
-              <button
-                onClick={handleSaveClass}
-                className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white"
-              >
+              <button onClick={handleSaveClass} className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white">
                 <h1 className="">Simpan Kelas</h1>
               </button>
 
@@ -170,12 +159,7 @@ const AddKelas = () => {
               setCourseDescription={setCourseDescription}
             />
 
-            <KontenKanan
-              languages={languages}
-              Tags={Tags}
-              handleTagClick={handleTagClick}
-              selectedTags={selectedTags}
-            />
+            <KontenKanan languages={languages} Tags={Tags} handleTagClick={handleTagClick} selectedTags={selectedTags} />
           </section>
         </div>
       </div>

@@ -5,6 +5,7 @@ const response = require("../../cores/response");
 const KelasService = require("../../services/kelasService");
 const SectionService = require("../../services/sectionService");
 const { sequelize } = require("../../config/database");
+const LearningListService = require("../../services/learningListService");
 
 const addKelas = Router();
 
@@ -13,7 +14,7 @@ addKelas.post("/addKelas/:id?", async (req, res) => {
 
   try {
     const { id } = req.params;
-    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id, sections } = req.body;
+    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id, sections, learningList } = req.body;
 
     let message;
     let addKelas;
@@ -89,12 +90,37 @@ addKelas.post("/addKelas/:id?", async (req, res) => {
       await Promise.all(sectionPromises);
     }
 
+    if (learningList && learningList.length > 0) {
+      const learningListPromises = learningList.map((learning) => {
+        if (learning.id) {
+          return LearningListService.updateList(
+            learning.id,
+            {
+              course_id: addKelas.id,
+              name: learning.name,
+            },
+            { transaction }
+          );
+        } else {
+          return LearningListService.addList(
+            {
+              course_id: addKelas.id,
+              name: learning.name,
+            },
+            { transaction }
+          );
+        }
+      });
+      await Promise.all(learningListPromises);
+    }
+
     // commit
     await transaction.commit();
 
     response.created(res, message, addKelas);
   } catch (error) {
     console.error(error);
+    await transaction.rollback(); //rollback error
     response.error(res, "Gagal menambahkan kelas. " + error.message);
   }
 });
