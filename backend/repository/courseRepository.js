@@ -1,5 +1,7 @@
 const association = require("../models/association");
 const Course = require("../models/course");
+const CourseCategory = require("../models/courseCategory");
+const LearningList = require("../models/learningList");
 const User = require("../models/user");
 
 class CourseRepository {
@@ -18,7 +20,12 @@ class CourseRepository {
         {
           model: User,
           as: "Instructor", 
-          attributes: ["full_name"],
+          attributes: ["full_name", "phone", "gmail"],
+        },
+        {
+          model: LearningList, 
+          as: "LearningLists",
+          attributes: ["name"], 
         },
       ],
      
@@ -26,6 +33,37 @@ class CourseRepository {
 
     return courses.map((course) => course.toJSON());
   }
+
+  async findById(id) {
+    const course = await Course.findOne({
+      where: {
+        id,
+        deleted_at: null,
+      },
+      include: [
+        {
+          model: User,
+          as: "Instructor",
+          attributes: ["full_name", "phone", "gmail"],
+        },
+        {
+          model: LearningList,
+          as: "LearningLists",
+          attributes: ["name"],
+        },
+        {
+          model: CourseCategory,
+          as: "Category",
+          attributes: ["name", "title"],
+        },
+       
+      ],
+    });
+
+    return course ? course.toJSON() : null;
+  }
 }
+
+
 
 module.exports = CourseRepository;
