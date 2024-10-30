@@ -7,12 +7,20 @@ import { MdOutlineLanguage } from "react-icons/md";
 import { FaFileVideo } from "react-icons/fa6";
 import { useFetchCourses } from "../../Data/DataCourse";
 import { MdCategory } from "react-icons/md";
-import {  useFetchCourseRegistrantCount } from "../../Data/dataUserCourse";
+import { useFetchCourseRegistrantCount } from "../../Data/dataUserCourse";
 
 const DetailInformasiKelas = () => {
   const { id } = useParams();
-  const { dataCourse, loading: courseLoading, error: courseError } = useFetchCourses(null, null, id);
-  const { registrantCount, loading: registrantLoading, error: registrantError } = useFetchCourseRegistrantCount(parseInt(id));
+  const {
+    dataCourse,
+    loading: courseLoading,
+    error: courseError,
+  } = useFetchCourses(null, null, id);
+  const {
+    registrantCount,
+    loading: registrantLoading,
+    error: registrantError,
+  } = useFetchCourseRegistrantCount(parseInt(id));
 
   const course = dataCourse[0];
 
@@ -40,11 +48,18 @@ const DetailInformasiKelas = () => {
             </section>
 
             <section className="md:w-[90%] md:mt-4">
-              <p className="text-sm text-justify">{course.description}</p>
+              <p className="text-sm text-justify">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Repellendus accusamus excepturi ex magnam nisi ipsa! Quaerat qui
+                distinctio libero! Iure voluptates dolores eaque iusto corporis
+                enim in, cum saepe ducimus dolore quo accusamus fuga voluptatum,
+                magnam eligendi sequi. Ut itaque dolores odit sequi ad molestiae
+                temporibus sapiente distinctio quas aut!
+              </p>
             </section>
 
             {/* Daftar sekarang && jumlah pendaftar */}
-            <section className="mt-3 md:mt-10  md:flex md:justify-start  md:w-full">
+            <section className="mt-3 md:mt-5  md:flex md:justify-start  md:w-full">
               <button className="py-1 md:py-2 px-4 bg-blue-700 hover:bg-blue-500 transition-all duration-300 text-white rounded-sm w-full md:w-[40%]">
                 <h1 className="font-bold">Daftar Sekarang</h1>
               </button>
@@ -69,24 +84,7 @@ const DetailInformasiKelas = () => {
           {/* deskripsi */}
           <section className="mt-3 md:w-[70%] md:mt-5">
             <p className="text-sm  text-justify md:text-[16px]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              quo sed nulla fugit quos expedita sit, neque ducimus reprehenderit
-              reiciendis illo. Impedit ea facilis illo perferendis quisquam
-              praesentium temporibus accusantium!
-            </p>
-            <br />
-            <p className="text-sm  text-justify md:text-[16px]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              quo sed nulla fugit quos expedita sit, neque ducimus reprehenderit
-              reiciendis illo. Impedit ea facilis illo perferendis quisquam
-              praesentium temporibus accusantium!
-            </p>
-            <br />
-            <p className="text-sm  text-justify md:text-[16px]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              quo sed nulla fugit quos expedita sit, neque ducimus reprehenderit
-              reiciendis illo. Impedit ea facilis illo perferendis quisquam
-              praesentium temporibus accusantium!
+              {course.description}
             </p>
           </section>
 
