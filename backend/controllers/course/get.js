@@ -4,6 +4,7 @@ const { success, error } = require("../../cores/response");
 
 const get = Router();
 
+// get based query parameter (for dashboard admin & dosen)
 get.get("/", async (req, res) => {
   try {
     const { instructor_id } = req.query;
@@ -18,7 +19,7 @@ get.get("/", async (req, res) => {
   }
 });
 
-// GET a course by ID
+// GET a course by ID (for main landing)
 get.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
