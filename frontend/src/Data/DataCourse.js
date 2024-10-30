@@ -11,7 +11,7 @@ const useFetchCourses = (instructor_id, role, id) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = id ? `${dataCourseApiUrl}${id}` : dataCourseApiUrl;
+        const url = id ? `${dataCourseApiUrl}${id}/landing` : dataCourseApiUrl;
         const params = role === 1 ? { instructor_id } : {};
 
         const response = await axios.get(url, { params });
