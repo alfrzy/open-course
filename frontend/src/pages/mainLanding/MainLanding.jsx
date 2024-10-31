@@ -107,7 +107,7 @@ const MainLanding = () => {
                     title={course.name}
                     image={course.thumbnail}
                     deskripsi={course.description}
-                    dosen={course.Instructor.full_name}
+                    dosen={course.instructor_id}
                     kelas={"Satuan"}
                     waktu={`${course.duration} hours`}
                     harga={`$${course.price}`}

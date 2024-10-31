@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const CourseService = require("../../services/courseService");
-const { success, error } = require("../../cores/response");
+const { success, error, notFound } = require("../../cores/response");
+
 
 const get = Router();
 
@@ -17,5 +18,7 @@ get.get("/", async (req, res) => {
     );
   }
 });
+
+
 
 module.exports = get;
