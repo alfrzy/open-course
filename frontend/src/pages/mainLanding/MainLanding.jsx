@@ -104,8 +104,9 @@ const MainLanding = () => {
                 {courses.slice(0, visibleCards).map((course) => (
                   <CardKelas
                     key={course.id}
+                    id={course.id}
                     title={course.name}
-                    image={course.thumbnail}
+                    image={"https://picsum.photos/seed/picsum/200/300"}
                     deskripsi={course.description}
                     dosen={course.Instructor.full_name}
                     kelas={"Satuan"}

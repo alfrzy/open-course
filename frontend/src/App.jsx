@@ -25,6 +25,7 @@ import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
+import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />

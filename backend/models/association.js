@@ -17,16 +17,17 @@ Course.hasMany(LearningList, {
   as: "LearningLists"
 });
 
-// course category dengan course
-Course.hasMany(CourseCategory, {
+// Course dan CourseCategory
+CourseCategory.hasMany(Course, {
   foreignKey: "course_category_id",
-  as: "CourseCategories"
+  as: "Courses",
 });
 
-CourseCategory.belongsTo(Course, {
+Course.belongsTo(CourseCategory, {
   foreignKey: "course_category_id",
-  as: "Courses"
+  as: "Category",
 });
+
 
 // module dengan section
 Module.belongsTo(Section, {

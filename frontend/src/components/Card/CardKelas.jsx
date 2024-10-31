@@ -1,8 +1,16 @@
 import React from "react";
 import { FaUser, FaClock } from "react-icons/fa";
 import { MdClass } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
-const CardKelas = ({ title, image, deskripsi, dosen, kelas, waktu, harga, link }) => {
+
+const CardKelas = ({ title, image, deskripsi, dosen, kelas, waktu, harga, link, id }) => {
+  const navigate = useNavigate();
+
+  const handleDaftarClick = () => {
+    navigate(`/detail-informasi-kelas/${id}`);
+  };
+
   return (
     <div className="max-w-xs bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
       {image ? (
@@ -37,11 +45,12 @@ const CardKelas = ({ title, image, deskripsi, dosen, kelas, waktu, harga, link }
         </div>
 
         <div className="mt-auto">
-          <a href={link}>
-            <button className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded">
-              Daftar
-            </button>
-          </a>
+        <button
+            onClick={handleDaftarClick}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded"
+          >
+            Daftar
+          </button>
         </div>
       </div>
     </div>
