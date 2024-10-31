@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaRegClock } from "react-icons/fa";
 import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { IoIosPricetags } from "react-icons/io";
@@ -8,9 +8,12 @@ import { FaFileVideo } from "react-icons/fa6";
 import { useFetchCourses } from "../../Data/DataCourse";
 import { MdCategory } from "react-icons/md";
 import { useFetchCourseRegistrantCount } from "../../Data/dataUserCourse";
+import { useSelector } from "react-redux";
 
 const DetailInformasiKelas = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); 
+
   const {
     dataCourse,
     loading: courseLoading,
@@ -23,6 +26,10 @@ const DetailInformasiKelas = () => {
   } = useFetchCourseRegistrantCount(parseInt(id));
 
   const course = dataCourse[0];
+
+  const handlePayment = () => {
+      navigate(`/checkout-kelas/${id}`);
+  };
 
   if (courseLoading || registrantLoading) return <p>Loading...</p>;
   if (courseError) return <p>Error: {courseError}</p>;
@@ -60,7 +67,7 @@ const DetailInformasiKelas = () => {
 
             {/* Daftar sekarang && jumlah pendaftar */}
             <section className="mt-3 md:mt-5  md:flex md:justify-start  md:w-full">
-              <button className="py-1 md:py-2 px-4 bg-blue-700 hover:bg-blue-500 transition-all duration-300 text-white rounded-sm w-full md:w-[40%]">
+              <button onClick={handlePayment} className="py-1 md:py-2 px-4 bg-blue-700 hover:bg-blue-500 transition-all duration-300 text-white rounded-sm w-full md:w-[40%]">
                 <h1 className="font-bold">Daftar Sekarang</h1>
               </button>
               <h1 className="text-center mt-1 text-gray-500 md:ml-20 font-bold">

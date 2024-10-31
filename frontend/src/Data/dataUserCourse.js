@@ -6,6 +6,7 @@ const dataUserCourseApiUrl = `${
   import.meta.env.VITE_API_BASE_URL
 }/v1/usercourse/`;
 
+// get
 const useFetchUserCourses = (user_id = null) => {
   const [dataUserCourses, setDataUserCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,5 +74,28 @@ const useFetchCourseRegistrantCount = (course_id) => {
   return { registrantCount, loading, error };
 };
 
-export { useFetchUserCourses, useFetchCourseRegistrantCount };
+// save UserCourses
+const saveUserCourse = async ({ course_id, user_id, is_finish = false, enrollment_date, due_date }) => {
+  try {
+    const response = await axios.post(`${dataUserCourseApiUrl}save`, {
+      course_id,
+      user_id,
+      is_finish,
+      enrollment_date,
+      due_date,
+    });
+
+    if (response.status === 201) {
+      console.log("User course saved successfully:", response.data);
+      return response.data;
+    } else {
+      throw new Error("Failed to save user course.");
+    }
+  } catch (error) {
+    console.error("Error saving user course:", error);
+    throw new Error(error.message);
+  }
+};
+
+export { useFetchUserCourses, useFetchCourseRegistrantCount, saveUserCourse };
 
