@@ -74,7 +74,18 @@ const CourseDetail = () => {
 
       <div className="flex justify-between items-center max-w-6xl mx-auto p-6 md:ml-64">
         <nav className="text-gray-600">
-          <Link to="/dosen-kelas" className="hover:text-blue-600">Kelas</Link>
+        <Link  
+                  to={
+                    role === 0 
+                      ? `/mahasiswa-kelas/` // URL untuk siswa
+                      : role === 1
+                      ? `/dosen-kelas` // URL untuk dosen
+                      : `/admin-kelas` // URL untuk admin
+                  }
+                  className="text-black"
+                >
+                  Kelas 
+                </Link>
           <span className="mx-2"> &gt; </span>
           <span className="font-medium">{course.name}</span>
         </nav>
