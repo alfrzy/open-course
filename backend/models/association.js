@@ -17,7 +17,7 @@ Course.hasMany(LearningList, {
   as: "LearningLists"
 });
 
-/// Course dan CourseCategory
+// Course dan CourseCategory
 CourseCategory.hasMany(Course, {
   foreignKey: "course_category_id",
   as: "Courses",
@@ -27,6 +27,7 @@ Course.belongsTo(CourseCategory, {
   foreignKey: "course_category_id",
   as: "Category",
 });
+
 
 // module dengan section
 Module.belongsTo(Section, {

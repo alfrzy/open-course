@@ -8,7 +8,7 @@ import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faCheck } from "@fortawesome/free-solid-svg-icons";
-import useFetchUserCourses from "../../../Data/dataUserCourse";
+import { useFetchUserCourses } from "../../../Data/dataUserCourse";
 
 const SiswaDetail = () => {
   const { id } = useParams();

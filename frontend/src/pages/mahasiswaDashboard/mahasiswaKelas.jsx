@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
-import useFetchUserCourses from "../../Data/dataUserCourse";
+import { useFetchUserCourses } from "../../Data/dataUserCourse";
 import { useSelector } from "react-redux";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { MdClass } from "react-icons/md";

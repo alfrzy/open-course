@@ -27,6 +27,7 @@ import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
 import ModuleDetail from "./pages/dosenDashboard/detailModule";
+import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
