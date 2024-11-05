@@ -17,15 +17,15 @@ Course.hasMany(LearningList, {
   as: "LearningLists"
 });
 
-// course category dengan course
-Course.hasMany(CourseCategory, {
+// Course dan CourseCategory
+CourseCategory.hasMany(Course, {
   foreignKey: "course_category_id",
-  as: "CourseCategories"
+  as: "Courses",
 });
 
-CourseCategory.belongsTo(Course, {
+Course.belongsTo(CourseCategory, {
   foreignKey: "course_category_id",
-  as: "Courses"
+  as: "Category",
 });
 
 // module dengan section
@@ -72,16 +72,16 @@ User.hasMany(UserCourses, {
   as: "UserCourses"
 });
 
-// dosen dengan kursus
-User.hasMany(Section, {
-  foreignKey: "user_id",
-  as: "Sections"
-});
+// // dosen dengan kursus
+// User.hasMany(Section, {
+//   foreignKey: "user_id",
+//   as: "Sections"
+// });
 
-Section.belongsTo(User, {
-  foreignKey: "user_id",
-  as: "Users"
-});
+// Section.belongsTo(User, {
+//   foreignKey: "user_id",
+//   as: "Users"
+// });
 
 
 // purchase dengan course
