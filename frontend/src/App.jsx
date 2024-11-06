@@ -69,6 +69,7 @@ const App = () => {
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
+          <Route path="/checkout-kelas-sukses/:id" element={<InvoicePage />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route
             path="/pembelian-kelas-berhasil/:id"
