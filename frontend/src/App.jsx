@@ -27,6 +27,7 @@ import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
 import ModuleDetail from "./pages/dosenDashboard/detailModule";
+import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
@@ -56,7 +58,6 @@ const App = () => {
           <Route path="/siswa/:id" element={<SiswaDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-
           {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}
           <Route path="/admin-kelas" element={<DosenKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
@@ -68,7 +69,6 @@ const App = () => {
           <Route path="/dosen-addkelas" element={<AddKelas />} />
           <Route path="/dosen-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/dosen-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
@@ -78,7 +78,6 @@ const App = () => {
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-
           <Route
             path="/pembelian-kelas-berhasil/:id"
             element={<InvoicePage />}

@@ -40,4 +40,38 @@ const useFetchUserCourses = (user_id = null) => {
   return { dataUserCourses, loading, error };
 };
 
-export default useFetchUserCourses;
+//  jumlah pendaftar berdasarkan course_id
+const useFetchCourseRegistrantCount = (course_id) => {
+  const [registrantCount, setRegistrantCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRegistrantCount = async () => {
+      try {
+        const response = await axios.get(dataUserCourseApiUrl);
+
+        if (response.data.error) {
+          throw new Error(response.data.error);
+        }
+
+        // Filter data berdasarkan course_id dan hitung jumlah pendaftar
+        const filteredCourses = response.data.data.filter(
+          (item) => item.course_id === course_id
+        );
+        setRegistrantCount(filteredCourses.length);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRegistrantCount();
+  }, [course_id]);
+
+  return { registrantCount, loading, error };
+};
+
+export { useFetchUserCourses, useFetchCourseRegistrantCount };
+

@@ -28,6 +28,7 @@ Course.belongsTo(CourseCategory, {
   as: "Category",
 });
 
+
 // module dengan section
 Module.belongsTo(Section, {
   foreignKey: "section_id",
