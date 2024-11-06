@@ -6,7 +6,6 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import ClassDetail from "../../components/DetailKelas/dropdownDetailKelas";
 import ComponentButton from "../../components/Button/ComponentButton";
 import { useSelector } from "react-redux";
-// import { useAuth } from "../../redux/auth/authSlice";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -35,7 +34,6 @@ const CourseDetail = () => {
     const fetchCourseDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        // const { token } = useAuth();
         console.log ("Token", token);
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/v1/course/${id}/dashboard`,

@@ -72,18 +72,6 @@ User.hasMany(UserCourses, {
   as: "UserCourses"
 });
 
-// // dosen dengan kursus
-// User.hasMany(Section, {
-//   foreignKey: "user_id",
-//   as: "Sections"
-// });
-
-// Section.belongsTo(User, {
-//   foreignKey: "user_id",
-//   as: "Users"
-// });
-
-
 // purchase dengan course
 Purchase.belongsTo(Course, {
   foreignKey: "course_id",
