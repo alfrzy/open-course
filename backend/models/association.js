@@ -99,6 +99,7 @@ Purchase.belongsTo(Course, {
 // purchase dengan user
 Purchase.belongsTo(User, {
   foreignKey: "user_id",
+  as: "UserPurchase"
 });
 
 User.hasMany(Purchase, {

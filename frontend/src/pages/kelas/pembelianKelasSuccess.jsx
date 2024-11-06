@@ -3,10 +3,15 @@ import { useParams } from "react-router-dom";
 import ComponentButton from "../../components/Button/ComponentButton";
 import Navbar from "../../components/Navbar/Navbar";
 import { useFetchPurchases } from "../../Data/dataPurchase";
+import { useNavigate } from "react-router-dom";
 
-const InvoicePage = () => {
+
+const PembelianKelasSukses = () => {
   const { id } = useParams();
   const [purchaseData, setPurchaseData] = useState(null);
+
+  const navigate = useNavigate();
+
 
   // Fetch purchases data
   const {
@@ -58,8 +63,11 @@ const InvoicePage = () => {
             <ComponentButton
               text={"Lihat Invoice"}
               color={"bg-gray-500"}
-              onClick={() =>
-                alert("Fungsi Lihat Invoice belum diimplementasikan")
+              onClick={() => {
+                console.log("klik");
+                
+                navigate(`/invoice/${id}`)
+              }
               }
             />
           </div>
@@ -69,4 +77,4 @@ const InvoicePage = () => {
   );
 };
 
-export default InvoicePage;
+export default PembelianKelasSukses;
