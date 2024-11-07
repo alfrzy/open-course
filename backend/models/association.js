@@ -28,7 +28,6 @@ Course.belongsTo(CourseCategory, {
   as: "Category",
 });
 
-
 // module dengan section
 Module.belongsTo(Section, {
   foreignKey: "section_id",
@@ -73,19 +72,11 @@ User.hasMany(UserCourses, {
   as: "UserCourses"
 });
 
-// dosen dengan kursus
-User.hasMany(Section, {
-  foreignKey: "user_id",
-  as: "Sections"
+// purchase dengan course
+Purchase.belongsTo(Course, {
+  foreignKey: "course_id",
 });
 
-Section.belongsTo(User, {
-  foreignKey: "user_id",
-  as: "Users"
-});
-
-
-// Relasi antara Course dan Purchase
 Course.hasMany(Purchase, {
   foreignKey: "course_id",
   as: "Purchases",
