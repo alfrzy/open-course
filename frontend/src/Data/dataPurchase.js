@@ -46,4 +46,37 @@ const savePurchase = async ({ user_id, course_id, invoice_number, total }) => {
   }
 };
 
-export { useFetchPurchases, savePurchase };
+// get purchases by user_id
+const useFetchPurchasesByUserId = (userId) => {
+  const [dataPurchase, setDataPurchase] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPurchases = async () => {
+      setLoading(true); // Set loading true sebelum memulai fetch
+      try {
+        const response = await axios.get(`${dataPurchaseApiUrl}/user/${userId}`);
+        if (response.data.error) {
+          throw new Error(response.data.message);
+        }
+        setDataPurchase(response.data.data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false); // Set loading false setelah selesai
+      }
+    };
+
+    if (userId) { // Pastikan userId ada
+      fetchPurchases();
+    } else {
+      setLoading(false); // Set loading false jika userId tidak ada
+    }
+  }, [userId]); // Menjalankan ulang ketika userId berubah
+
+  return { dataPurchase, loading, error };
+};
+
+
+export { useFetchPurchases, useFetchPurchasesByUserId, savePurchase };
