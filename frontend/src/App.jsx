@@ -77,13 +77,9 @@ const App = () => {
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/checkout-kelas-sukses/:id" element={<PembelianKelasSukses />} />
           <Route path="/invoice/:id" element={<Invoice />} />
-        
           <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-          {/* <Route
-            path="/pembelian-kelas-berhasil/:id"
-            element={<InvoicePage />}
-          /> */}
+       
         </Route>
       </Routes>
     </Router>

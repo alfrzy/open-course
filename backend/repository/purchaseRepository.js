@@ -1,4 +1,4 @@
-// repository/purchaseRepository.js
+const association = require("../models/association");
 const Course = require("../models/course");
 const Purchase = require("../models/purchase");
 const User = require("../models/user");
