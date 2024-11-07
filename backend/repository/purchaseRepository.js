@@ -1,6 +1,7 @@
-// repository/purchaseRepository.js
+const association = require("../models/association");
 const Course = require("../models/course");
 const Purchase = require("../models/purchase");
+const User = require("../models/user");
 
 class PurchaseRepository {
   // post
@@ -22,7 +23,14 @@ class PurchaseRepository {
         {
           model: Course,
           as: "Course", 
+          attributes: ["name", "price"],
         },
+        {
+          model: User,
+          as: "UserPurchase", 
+          attributes: ["full_name", "gmail"],
+        },
+       
       ],
     });
     return purchases.map((purchase) => purchase.toJSON());

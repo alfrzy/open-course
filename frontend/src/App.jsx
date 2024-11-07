@@ -22,12 +22,12 @@ import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
-import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
 import ModuleDetail from "./pages/dosenDashboard/detailModule";
 import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
+import PembelianKelasSukses from "./pages/kelas/pembelianKelasSuccess";
 
 const App = () => {
   return (
@@ -75,14 +75,11 @@ const App = () => {
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
-          <Route path="/checkout-kelas-sukses/:id" element={<InvoicePage />} />
-          <Route path="/invoice" element={<Invoice />} />
+          <Route path="/checkout-kelas-sukses/:id" element={<PembelianKelasSukses />} />
+          <Route path="/invoice/:id" element={<Invoice />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-          <Route
-            path="/pembelian-kelas-berhasil/:id"
-            element={<InvoicePage />}
-          />
+       
         </Route>
       </Routes>
     </Router>
