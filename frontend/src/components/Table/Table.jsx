@@ -100,13 +100,19 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   <td className="px-6  py-4 text-right border-b border-gray-300">
                     <div className="flex justify-center gap-3">
                       <button
-                        onClick={() => onEdit(dosen)} // Memanggil fungsi onEdit
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onEdit(dosen);
+                        }} 
                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(dosen.id)}
+                        onClick={(event) =>  {
+                          event.stopPropagation();
+                          handleDelete(dosen.id)}
+                        }
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
                       >
                         Hapus
