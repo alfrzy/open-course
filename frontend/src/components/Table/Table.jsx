@@ -76,7 +76,7 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   <td className="px-6 py-4 border-b border-gray-300 text-black">
                     {index + 1 + indexOfFirstItem}
                   </td>
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     <img
                       src={
                         dosen.profile_picture
@@ -93,7 +93,7 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   >
                     {dosen.full_name}
                   </th>
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     {dosen.nidn || "N/A"}
                   </td>
                   <td className="px-6  py-4 text-right border-b border-gray-300">
@@ -177,17 +177,17 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   <p>{selectedDosen.full_name}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 pr-2">NIDN:</p>
+                  <p className="font-semibold w-24 pr-2">NIDN</p>
                   <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.nidn || "N/A"}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 pr-2">Jabatan:</p>
+                  <p className="font-semibold w-24 pr-2">Jabatan</p>
                   <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.position || "N/A"}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 pr-2">E-mail:</p>
+                  <p className="font-semibold w-24 pr-2">E-mail</p>
                   <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.gmail || "N/A"}</p>
                 </div>
