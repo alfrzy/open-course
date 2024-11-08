@@ -18,7 +18,6 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRowClick = (dosen) => {
-    console.log("Data dosen yang diklik:", dosen);
     setSelectedDosen(dosen);
     setIsModalOpen(true);
   };
@@ -71,10 +70,10 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
               {currentItems.map((dosen, index) => (
                 <tr
                   key={dosen.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-blue-400 transition-all duration-300"
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-blue-500 transition-all duration-100"
                   onClick={() => handleRowClick(dosen)}
                 >
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     {index + 1 + indexOfFirstItem}
                   </td>
                   <td className="px-6 py-4 border-b border-gray-300">
