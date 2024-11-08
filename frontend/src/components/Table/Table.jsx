@@ -171,19 +171,24 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
               </div>
               <div className="text-gray-700 w-full ml-4">
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 text-right pr-2">Nama:</p>
+                  <p className="font-semibold w-24  pr-2">Nama</p>
+                  <p className="text-right mr-4"> : </p>
+                  <p className="">  </p>
                   <p>{selectedDosen.full_name}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 text-right pr-2">NIDN:</p>
+                  <p className="font-semibold w-24 pr-2">NIDN:</p>
+                  <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.nidn || "N/A"}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 text-right pr-2">Jabatan:</p>
+                  <p className="font-semibold w-24 pr-2">Jabatan:</p>
+                  <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.position || "N/A"}</p>
                 </div>
                 <div className="flex mb-2">
-                  <p className="font-semibold w-24 text-right pr-2">E-mail:</p>
+                  <p className="font-semibold w-24 pr-2">E-mail:</p>
+                  <p className="text-right mr-4">:</p>
                   <p>{selectedDosen.gmail || "N/A"}</p>
                 </div>
               </div>
