@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { useFetchPurchasesByUserId } from "../../Data/dataPurchase";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
+import { useNavigate } from "react-router-dom";
 
-const Purchase = () => {
+const Pembelian = () => {
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.user?.id);  // Ambil userId dari objek user
   const { dataPurchase, loading, error } = useFetchPurchasesByUserId(userId);
 
@@ -41,17 +43,16 @@ const Purchase = () => {
             </div>
 
             <div className="flex flex-col items-end space-y-2">
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md">
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                onClick={() => navigate(`/invoice/${purchase.id}`)} // Navigasi ke halaman invoice
+              >
                 Lihat Tagihan
               </button>
-              {purchase.is_verification ? (
+              {purchase.is_verification && (
                 <div className="flex items-center text-green-600 font-semibold">
                   <span className="mr-1">✔️</span> Terverifikasi
                 </div>
-              ) : (
-                <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded-md">
-                  Konfirmasi Pembayaran
-                </button>
               )}
             </div>
           </div>
@@ -61,4 +62,4 @@ const Purchase = () => {
   );
 };
 
-export default Purchase;
+export default Pembelian;
