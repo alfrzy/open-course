@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2"; 
 
-const dataSiswaApiUrl = "http://localhost:3000/api/v1/user/";
+const dataSiswaApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/user/`;
 
 // Fungsi untuk fetch data siswa
 const useFetchData = () => {

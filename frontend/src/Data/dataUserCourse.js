@@ -16,11 +16,14 @@ const useFetchUserCourses = (user_id = null) => {
     const fetchData = async () => {
       try {
         let url = dataUserCourseApiUrl;
+        const params = {}; // simpan query parameters
+        
         if (user_id) {
-          url += user_id; // Jika user_id ada, tambah ke url
+          params.user_id = user_id; //  user_id sebagai query parameter
         }
 
-        const response = await axios.get(url);
+
+        const response = await axios.get(url, { params });
         console.log("API Response:", response.data);
 
         if (response.data.error) {

@@ -4,7 +4,7 @@ const Course = require("../models/course");
 const User = require("../models/user");
 
 class UserCourseRepository {
-  async findAll({ user_id } = {}) {
+  async findAll({ user_id, course_id } = {}) {
     const whereClause = {
       deleted_at: null,
     };
@@ -12,6 +12,11 @@ class UserCourseRepository {
     // Jika user_id disediakan kasih /id
     if (user_id) {
       whereClause.user_id = user_id;
+    }
+
+    // Jika course_id disediakan, tambahkan ke whereClause
+    if (course_id) {
+      whereClause.course_id = course_id;
     }
 
     const userCourses = await UserCourses.findAll({
