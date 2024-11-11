@@ -28,6 +28,7 @@ import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
 import ModuleDetail from "./pages/dosenDashboard/detailModule";
 import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
 import PembelianKelasSukses from "./pages/kelas/pembelianKelasSuccess";
+import Pembelian from "./pages/Pembalian/pembelian";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
+        <Route path="/pembelian" element={<Pembelian />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />

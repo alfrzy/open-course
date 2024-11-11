@@ -35,6 +35,9 @@ const DashboardNavbar = () => {
             <a href="#" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
               Profile
             </a>
+            <a href="/pembelian" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
+              Checkout
+            </a>
             <hr className="h-px border-1 md:border-2 mx-2 bg-gray-500" />
             <button className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200" onClick={handleLogout}>
               Logout

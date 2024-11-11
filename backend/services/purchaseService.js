@@ -11,3 +11,7 @@ exports.createPurchase = async ({ user_id, course_id, invoice_number, total }) =
 exports.getAllPurchases = async () => {
   return await purchaseRepo.getAll();
 };
+
+exports.fetchPurchasesByUserId = async (userId) => {
+  return purchaseRepo.getPurchasesByUserId(userId);
+};
