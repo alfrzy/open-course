@@ -18,7 +18,6 @@ const CourseDetail = () => {
   const loggedInUserId = user?.id;
   const role = user?.role ?? null;
   
-
   // Menampilkan user id yang sudah login
   useEffect(() => {
     if (loggedInUserId) {

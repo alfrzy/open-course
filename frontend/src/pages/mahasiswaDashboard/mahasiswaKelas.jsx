@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import { useFetchUserCourses } from "../../Data/dataUserCourse";
 import { useSelector } from "react-redux";
@@ -75,7 +76,12 @@ const MahasiswaKelas = () => {
         {activeTab === "kelas" && (
           <section className="md:flex md:justify-start md:flex-wrap">
             {dataUserCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
+              <Link
+              key={kelas.course_id}
+              to={`/mahasiswa-detail-kelas/${kelas.course_id}/dashboard`} // Link ke halaman detail
+              className="mb-4 md:w-[30%] md:mr-10"
+            >
+              <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
@@ -101,6 +107,7 @@ const MahasiswaKelas = () => {
                   </div>
                 </div>
               </section>
+              </Link>
             ))}
           </section>
         )}
@@ -108,7 +115,12 @@ const MahasiswaKelas = () => {
         {activeTab === "progress" && (
           <section className="md:flex md:justify-start md:flex-wrap">
             {ongoingCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
+              <Link
+              key={kelas.course_id}
+              to={`/mahasiswa-detail-kelas/${kelas.course_id}/dashboard`} // Link ke halaman detail
+              className="mb-4 md:w-[30%] md:mr-10"
+            >
+              <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
@@ -134,6 +146,7 @@ const MahasiswaKelas = () => {
                   </div>
                 </div>
               </section>
+              </Link>
             ))}
           </section>
         )}
@@ -141,7 +154,12 @@ const MahasiswaKelas = () => {
         {activeTab === "selesai" && (
           <section className="md:flex md:justify-start md:flex-wrap">
             {finishedCourses.map((kelas) => (
-              <section key={kelas.id} className="mb-4 md:w-[30%] md:mr-10">
+              <Link
+              key={kelas.course_id}
+              to={`/mahasiswa-detail-kelas/${kelas.course_id}/dashboard`} // Link ke halaman detail
+              className="mb-4 md:w-[30%] md:mr-10"
+            >
+              <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
                 <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
                 <p className="text-sm">
@@ -167,6 +185,7 @@ const MahasiswaKelas = () => {
                   </div>
                 </div>
               </section>
+              </Link>
             ))}
           </section>
         )}

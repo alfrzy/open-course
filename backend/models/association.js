@@ -73,10 +73,6 @@ User.hasMany(UserCourses, {
 });
 
 // purchase dengan course
-Purchase.belongsTo(Course, {
-  foreignKey: "course_id",
-});
-
 Course.hasMany(Purchase, {
   foreignKey: "course_id",
   as: "Purchases",

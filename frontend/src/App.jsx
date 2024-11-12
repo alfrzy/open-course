@@ -28,6 +28,7 @@ import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
 import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
 import ModuleDetail from "./pages/dosenDashboard/detailModule";
 import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
+import Pembelian from "./pages/pembelian/pembelian";
 
 const App = () => {
   return (
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
+          <Route path="/pembelian" element={<Pembelian />} />
           <Route
             path="/pembelian-kelas-berhasil/:id"
             element={<InvoicePage />}
