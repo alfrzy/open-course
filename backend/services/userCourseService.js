@@ -6,5 +6,9 @@ exports.findAll = async (filter = {}) => {
 };
 
 exports.createUserCourse = async ({ course_id, user_id, is_finish, enrollment_date, due_date }) => {
-  return await userCourseRepo.create({ course_id, user_id, is_finish, enrollment_date, due_date });
+  try {
+    return await userCourseRepo.create({ course_id, user_id, is_finish, enrollment_date, due_date });
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };

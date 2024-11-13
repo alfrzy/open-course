@@ -42,6 +42,17 @@ class UserCourseRepository {
 
   // Fungsi untuk membuat entri baru di UserCourses
   async create({ course_id, user_id, is_finish, enrollment_date, due_date }) {
+     const existingEnrollment = await UserCourses.findOne({
+      where: {
+        course_id: course_id,
+        user_id: user_id,
+      },
+    });
+
+     if (existingEnrollment) {
+      throw new Error("User sudah terdaftar di kelas ini.");
+    }
+
     const userCourse = await UserCourses.create({
       course_id,
       user_id,
