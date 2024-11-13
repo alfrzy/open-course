@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import useFetchData from "../../Data/DataSiswa";
+import { useFetchUserCourses } from "../../Data/dataUserCourse";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import { FaPen } from "react-icons/fa";
-import { useFetchUserCourses } from "../../Data/dataUserCourse";
 import { updateSiswa } from "../../Data/DataSiswa";
-import Swal from "sweetalert2";
-
 
 const MahasiswaProfil = () => {
   const { id } = useParams();
@@ -17,13 +16,27 @@ const MahasiswaProfil = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    full_name: siswa ? siswa.full_name : "",
-    email: siswa ? siswa.gmail : "",
+    full_name: "",
+    email: "",
   });
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [previewPicture, setPreviewPicture] = useState(null);
+
+  useEffect(() => {
+    if (siswa) {
+      setFormData({
+        full_name: siswa.full_name || "",
+        email: siswa.gmail || "",
+      });
+      setProfilePicture(siswa.profile_picture || null);
+      setPreviewPicture(siswa.profile_picture || null);
+    }
+  }, [siswa]);
 
   const handleEditClick = () => {
     if (siswa) {
       setFormData({ full_name: siswa.full_name, email: siswa.gmail });
+      setPreviewPicture(siswa.profile_picture);
       setIsModalOpen(true);
     }
   };
@@ -37,15 +50,28 @@ const MahasiswaProfil = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicture(file);
+        setPreviewPicture(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleUpdate = async () => {
     const formDataToSend = new FormData();
     formDataToSend.append("full_name", formData.full_name);
     formDataToSend.append("gmail", formData.email);
+    if (profilePicture) {
+      formDataToSend.append("profile_picture", profilePicture);
+    }
 
-    // Call updateSiswa with id, formDataToSend, and a toast callback
     await updateSiswa(id, formDataToSend, Swal);
 
-    // Close the modal after update attempt
     setIsModalOpen(false);
   };
 
@@ -68,7 +94,7 @@ const MahasiswaProfil = () => {
           <section className="">
             <div className="mt-5 flex justify-center">
               <div className="w-20 h-20 md:w-40 md:h-40 rounded-full overflow-hidden">
-                <img src="https://picsum.photos/seed/picsum/200/300" alt="" className="w-full h-full" />
+                <img src={`http://localhost:3000/${siswa.profile_picture}`} alt="" className="w-full h-full" />
               </div>
             </div>
 
@@ -125,9 +151,35 @@ const MahasiswaProfil = () => {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 ">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg p-6 md:w-96 w-[70%]">
             <h2 className="text-xl font-bold mb-4">Edit Profil</h2>
+
+            {/* Input untuk memilih dan menampilkan foto */}
+            <div className="flex items-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden mr-4">
+                <img
+                  src={previewPicture || ""}
+                  alt="Profile"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div>
+                <label className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-600">
+                  Pilih Foto
+                  <input
+                    type="file"
+                    name="profile_picture"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                </label>
+                {profilePicture && <p className="text-sm mt-2">{profilePicture.name}</p>}
+              </div>
+            </div>
+
+            {/* Input Nama Lengkap */}
             <label className="block mb-2">
               <span className="text-gray-700">Nama Lengkap</span>
               <input
@@ -139,6 +191,8 @@ const MahasiswaProfil = () => {
                 placeholder="Nama Lengkap"
               />
             </label>
+
+            {/* Input Email */}
             <label className="block mb-2">
               <span className="text-gray-700">Email</span>
               <input
@@ -150,14 +204,18 @@ const MahasiswaProfil = () => {
                 placeholder="Email"
               />
             </label>
+
+            {/* Tombol Aksi */}
             <div className="md:flex md:justify-end mt-4">
               <button
+                type="button"
                 className="mr-2 px-4 py-2 bg-gray-200 rounded-lg mb-3 md:mb-0 w-full active:bg-gray-500 hover:bg-opacity-50"
                 onClick={handleCloseModal}
               >
                 Batal
               </button>
               <button
+                type="button"
                 className="px-4 py-2 bg-blue-500 text-white rounded-lg w-full active:bg-blue-700 hover:bg-opacity-50"
                 onClick={handleUpdate}
               >
