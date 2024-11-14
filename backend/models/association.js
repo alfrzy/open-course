@@ -53,23 +53,23 @@ Course.hasMany(Section, {
 // user course dengan course
 Course.hasMany(UserCourses, {
   foreignKey: "course_id",
-  as: "UserCourses",
+  as: "UserCourseRelations",
 });
 
 UserCourses.belongsTo(Course, {
   foreignKey: "course_id",
-  as: "Courses",
+  as: "CourseRelation",
 });
 
 // user dengan userCourse
 UserCourses.belongsTo(User, {
   foreignKey: "user_id",
-  as: "Users",
+  as: "UserRelation",
 });
 
 User.hasMany(UserCourses, {
   foreignKey: "user_id",
-  as: "UserCourses",
+  as: "UserCourseRelations",
 });
 
 // purchase dengan course
@@ -102,4 +102,16 @@ Course.belongsTo(User, {
 User.hasMany(Course, {
   foreignKey: "instructor_id",
   as: "InstructedCourses",
+});
+
+Course.belongsToMany(User, {
+  through: UserCourses,
+  as: "Members", // Nama alias ini akan digunakan untuk mengambil anggota
+  foreignKey: "course_id",
+});
+
+User.belongsToMany(Course, {
+  through: UserCourses,
+  as: "Courses",
+  foreignKey: "user_id",
 });

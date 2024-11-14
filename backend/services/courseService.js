@@ -12,4 +12,6 @@ exports.findById = async (id) => {
   return await courseRepo.findById(id);
 };
 
-
+exports.addMember = async (courseId, userId) => {
+  return await courseRepo.addMember(courseId, userId);
+};
