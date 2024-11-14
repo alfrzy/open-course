@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2"; 
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import ComponentButton from "../../components/Button/ComponentButton";
@@ -77,13 +78,30 @@ const Checkout = () => {
           enrollment_date: enrollmentDate,
           due_date: dueDate,
         });
-
-        // Redirect ke halaman sukses
-        navigate(`/checkout-kelas-sukses/${nextId}`);
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil",
+          text: "Pendaftaran kursus berhasil!",
+        }).then(() => {
+          navigate(`/checkout-kelas-sukses/${nextId}`);
+        });
       }
-    } catch (error) {
+    }  catch (error) {
       console.error("Error during checkout:", error);
-      alert("Terjadi kesalahan saat proses pembelian. Silakan coba lagi.");
+  
+      if (error.message.includes("User sudah terdaftar di kelas ini")) {
+        Swal.fire({
+          icon: "error",
+          title: "Gagal",
+          text: "Anda sudah terdaftar di kursus ini.",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Gagal",
+          text: "Anda Sudah Terdaftar.",
+        });
+      }
     }
   };
 
