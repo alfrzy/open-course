@@ -83,7 +83,7 @@ const MahasiswaKelas = () => {
             >
               <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
-                <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
+                <h1 className="font-bold text-lg">{kelas.CourseRelation.name}</h1>
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Debitis culpa aperiam sunt fuga.
@@ -93,7 +93,7 @@ const MahasiswaKelas = () => {
                     <FaChalkboardTeacher className="font-bold w-4 h-4 my-1" />
                     <h1 className="text-sm">
                       Instruktur:{" "}
-                      {kelas.Courses?.Instructor?.full_name ||
+                      {kelas.CourseRelation?.Instructor?.full_name ||
                         "data masih null"}
                     </h1>
                   </div>
@@ -103,7 +103,7 @@ const MahasiswaKelas = () => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <FaClock className="font-bold w-4 h-4 my-1" />
-                    <h1 className="text-sm">Durasi: {kelas.Courses?.duration} jam</h1>
+                    <h1 className="text-sm">Durasi: {kelas.CourseRelation?.duration} jam</h1>
                   </div>
                 </div>
               </section>
@@ -122,7 +122,7 @@ const MahasiswaKelas = () => {
             >
               <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
-                <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
+                <h1 className="font-bold text-lg">{kelas.CourseRelation?.name}</h1>
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Debitis culpa aperiam sunt fuga.
@@ -132,7 +132,7 @@ const MahasiswaKelas = () => {
                     <FaChalkboardTeacher className="font-bold w-4 h-4 my-1" />
                     <h1 className="text-sm">
                       Instruktur:{" "}
-                      {kelas.Courses?.Instructor?.full_name ||
+                      {kelas.CourseRelation?.Instructor?.full_name ||
                         "data masih null"}
                     </h1>
                   </div>
@@ -142,7 +142,7 @@ const MahasiswaKelas = () => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <FaClock className="font-bold w-4 h-4 my-1" />
-                    <h1 className="text-sm">Durasi: {kelas.Courses?.duration} jam</h1>
+                    <h1 className="text-sm">Durasi: {kelas.CourseRelation?.duration} jam</h1>
                   </div>
                 </div>
               </section>
@@ -161,7 +161,7 @@ const MahasiswaKelas = () => {
             >
               <section key={kelas.course_id}>
                 <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
-                <h1 className="font-bold text-lg">{kelas.Courses?.name}</h1>
+                <h1 className="font-bold text-lg">{kelas.CourseRelation?.name}</h1>
                 <p className="text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Debitis culpa aperiam sunt fuga.
@@ -171,7 +171,7 @@ const MahasiswaKelas = () => {
                     <FaChalkboardTeacher className="font-bold w-4 h-4 my-1" />
                     <h1 className="text-sm">
                       Instruktur:{" "}
-                      {kelas.Courses?.Instructor?.full_name ||
+                      {kelas.CourseRelation?.Instructor?.full_name ||
                         "data masih null"}
                     </h1>
                   </div>
@@ -181,7 +181,7 @@ const MahasiswaKelas = () => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <FaClock className="font-bold w-4 h-4 my-1" />
-                    <h1 className="text-sm">Durasi: {kelas.Courses?.duration} jam</h1>
+                    <h1 className="text-sm">Durasi: {kelas.CourseRelation?.duration} jam</h1>
                   </div>
                 </div>
               </section>
