@@ -14,113 +14,41 @@ addKelas.post("/addKelas/:id?", async (req, res) => {
 
   try {
     const { id } = req.params;
-    const { name, description, course_category_id, tanggal_mulai, duration, price, language, thumbnail, is_publish, lama_kelas_perminggu, jam_perminggu, tag, instructor_id, sections, learningList } = req.body;
+    const { sections, learningList, language, duration, price, jam_perminggu, tag, ...kelasData } = req.body;
 
-    let message;
-    let addKelas;
+    if (id) kelasData.id = id;
+    kelasData.language = language;
+    kelasData.duration = duration;
+    kelasData.price = price;
+    kelasData.jam_perminggu = jam_perminggu;
+    kelasData.tag = tag;
 
-    if (id) {
-      addKelas = await KelasService.updateKelas(
-        id,
-        {
-          name,
-          description,
-          course_category_id,
-          tanggal_mulai,
-          duration,
-          price,
-          language,
-          thumbnail,
-          is_publish,
-          lama_kelas_perminggu,
-          jam_perminggu,
-          tag,
-          instructor_id,
-        },
-        { transaction }
-      );
-      message = "Kelas Berhasil Diupdate";
-    } else {
-      addKelas = await KelasService.addKelas(
-        {
-          name,
-          description,
-          course_category_id,
-          tanggal_mulai,
-          duration,
-          price,
-          language,
-          thumbnail,
-          is_publish,
-          lama_kelas_perminggu,
-          jam_perminggu,
-          tag,
-          instructor_id,
-        },
-        { transaction }
-      );
+    const savedKelas = await KelasService.saveOrUpdateKelas(kelasData, { transaction });
 
-      message = "Kelas Berhasil Ditambahkan";
-    }
-
-    //section lebih dari 1
     if (sections && sections.length > 0) {
       const sectionPromises = sections.map((section) => {
-        if (section.id) {
-          // Update section if ID exists
-          return SectionService.updateSection(
-            section.id,
-            {
-              course_id: addKelas.id,
-              title: section.title,
-            },
-            { transaction }
-          );
-        } else {
-          // Create new section if no ID
-          return SectionService.addSection(
-            {
-              course_id: addKelas.id,
-              title: section.title,
-            },
-            { transaction }
-          );
-        }
+        const sectionData = { course_id: savedKelas.id, title: section.title };
+        return section.id ? SectionService.updateSection(section.id, sectionData, { transaction }) : SectionService.addSection(sectionData, { transaction });
       });
       await Promise.all(sectionPromises);
     }
 
+    // Handle Learning List
     if (learningList && learningList.length > 0) {
       const learningListPromises = learningList.map((learning) => {
-        if (learning.id) {
-          return LearningListService.updateList(
-            learning.id,
-            {
-              course_id: addKelas.id,
-              name: learning.name,
-            },
-            { transaction }
-          );
-        } else {
-          return LearningListService.addList(
-            {
-              course_id: addKelas.id,
-              name: learning.name,
-            },
-            { transaction }
-          );
-        }
+        const learningData = { course_id: savedKelas.id, name: learning.name };
+        return learning.id ? LearningListService.updateList(learning.id, learningData, { transaction }) : LearningListService.addList(learningData, { transaction });
       });
       await Promise.all(learningListPromises);
     }
 
-    // commit
+    // Commit transaction
     await transaction.commit();
-
-    response.created(res, message, addKelas);
+    const message = id ? "Kelas Berhasil Diupdate" : "Kelas Berhasil Ditambahkan";
+    response.created(res, message, savedKelas);
   } catch (error) {
     console.error(error);
-    await transaction.rollback(); //rollback error
+    await transaction.rollback();
     response.error(res, "Gagal menambahkan kelas. " + error.message);
   }
 });

@@ -19,7 +19,7 @@ const ComponentCheckboxTag = ({ onTagClick }) => {
   }, []);
 
   const handleCheckboxChange = (item) => {
-    onTagClick(item.name);
+    onTagClick(item.id);
   };
 
   return (
@@ -29,7 +29,7 @@ const ComponentCheckboxTag = ({ onTagClick }) => {
           <input
             id={`checkbox-${index}`}
             type="checkbox"
-            value={item.name}
+            value={item.id}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             onChange={() => handleCheckboxChange(item)}
           />

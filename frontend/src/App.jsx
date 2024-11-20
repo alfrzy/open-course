@@ -14,7 +14,7 @@ import { Toaster } from "react-hot-toast";
 import Dosen from "./pages/adminDashboard/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
-import MainLanding from "./pages/mainLanding/mainLanding";
+import MainLanding from "./pages/mainLanding/MainLanding";
 import SiswaDashboard from "./pages/adminDashboard/Siswa/SiswaDashboard";
 import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
@@ -25,6 +25,7 @@ import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
 import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
+import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
@@ -69,10 +71,7 @@ const App = () => {
           <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
           <Route path="/invoice" element={<Invoice />} />
-          <Route
-            path="/pembelian-kelas-berhasil/:id"
-            element={<InvoicePage />}
-          />
+          <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
         </Route>
       </Routes>
     </Router>

@@ -4,9 +4,10 @@ const { success, error } = require("../../cores/response");
 
 const get = Router();
 
+// get all
 get.get("/", async (req, res) => {
   try {
-    const { instructor_id } = req.query; 
+    const { instructor_id } = req.query;
     const courses = await CourseService.findAll({ instructor_id });
 
     return success(res, "Kursus berhasil diambil", courses);

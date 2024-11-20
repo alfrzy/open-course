@@ -3,13 +3,25 @@ const KelasRepository = require("../repository/kelasRepository");
 const kelasRepo = new KelasRepository();
 
 // Add class
-exports.addKelas = async (data) => {
+// exports.addKelas = async (data) => {
+//   try {
+//     const newKelas = await kelasRepo.save(data);
+//     return newKelas;
+//   } catch (error) {
+//     console.error("Error adding class:", error);
+//     throw new Error("Failed to add class");
+//   }
+// };
+
+exports.saveOrUpdateKelas = async (data) => {
   try {
-    const newKelas = await kelasRepo.save(data);
-    return newKelas;
+    if (!data.id) delete data.id;
+
+    const kelas = await kelasRepo.createOrUpdate(data);
+    return kelas;
   } catch (error) {
-    console.error("Error adding class:", error);
-    throw new Error("Failed to add class");
+    console.error("Error saving or updating class:", error);
+    throw new Error("Failed to save or update class");
   }
 };
 
@@ -41,7 +53,7 @@ exports.getKelasById = async (id) => {
 // Update class
 exports.updateKelas = async (id, data) => {
   try {
-    const kelas = await kelasRepo.update(id, data); 
+    const kelas = await kelasRepo.update(id, data);
     if (!kelas) return null;
     return kelas;
   } catch (error) {

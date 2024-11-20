@@ -3,7 +3,7 @@ import { deleteSiswa } from "../../Data/dataSiswa";
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/dataSiswa";
 import { Link } from "react-router-dom";
-import useFetchUserCourses from "../../Data/dataUserCourse";
+import { useFetchUserCourses } from "../../Data/dataUserCourse";
 
 const ITEMS_PER_PAGE = 10;
 
