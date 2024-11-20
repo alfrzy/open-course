@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2"; 
 
-const dataDosenApiUrl = "http://localhost:3000/api/v1/user/";
+const dataDosenApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/user/`;
 
 // Fungsi untuk fetch data dosen
-const useFetchData = () => {
+const useFetchDataDosen = () => {
   const [dataDosen, setDataDosen] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -119,4 +119,4 @@ export const updateDosen = async (id, formData, toast) => {
   }
 };
 
-export default useFetchData;
+export default useFetchDataDosen;

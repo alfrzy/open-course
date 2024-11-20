@@ -22,10 +22,13 @@ import Detail from "./pages/kelas/DetailKelas";
 import Checkout from "./pages/kelas/checkoutKelas";
 import Invoice from "./pages/invoice/invoice";
 import ListPurchase from "./pages/mahasiswaDashboard/ListPurchase";
-import InvoicePage from "./pages/kelas/pembelianKelasSuccess";
 import SiswaDetail from "./pages/adminDashboard/Siswa/siswaDetail";
 import MahasiswaKelas from "./pages/mahasiswaDashboard/mahasiswaKelas";
+import CourseDetail from "./pages/dosenDashboard/dosenDetailKelas";
+import ModuleDetail from "./pages/dosenDashboard/detailModule";
 import DetailInformasiKelas from "./pages/detailInformasiKelas/detailInformasiKelas";
+import PembelianKelasSukses from "./pages/kelas/pembelianKelasSuccess";
+import Pembelian from "./pages/Pembalian/pembelian";
 
 const App = () => {
   return (
@@ -38,14 +41,13 @@ const App = () => {
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
+        <Route path="/pembelian" element={<Pembelian />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
         {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
-        <Route path="/dosen-kelas" element={<DosenKelas />} />
-        <Route path="/dosen-addKelas" element={<AddKelas />} />
 
         {/* admin */}
         <Route path="/dosen" element={<Dosen />} />
@@ -57,6 +59,8 @@ const App = () => {
           <Route path="/kelas" element={<PageKelas />} />
           <Route path="/siswa" element={<SiswaDashboard />} />
           <Route path="/siswa/:id" element={<SiswaDetail />} />
+          <Route path="/admin-detail-kelas/:id/dashboard" element={<CourseDetail />} />
+          <Route path="/admin-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
           {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}
           <Route path="/admin-kelas" element={<DosenKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
@@ -64,14 +68,20 @@ const App = () => {
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+          <Route path="/dosen-addkelas" element={<AddKelas />} />
+          <Route path="/dosen-detail-kelas/:id/dashboard" element={<CourseDetail />} />
+          <Route path="/dosen-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
         </Route>
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
           <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
-          <Route path="/invoice" element={<Invoice />} />
-          <Route path="/pembelian-kelas-berhasil/:id" element={<InvoicePage />} />
+          <Route path="/checkout-kelas-sukses/:id" element={<PembelianKelasSukses />} />
+          <Route path="/invoice/:id" element={<Invoice />} />
+          <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
+          <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
+       
         </Route>
       </Routes>
     </Router>

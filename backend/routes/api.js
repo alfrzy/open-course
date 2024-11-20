@@ -9,6 +9,7 @@ const modulApiController = require("../controllers/modul");
 const kategoriApiController = require("../controllers/kategori");
 const courseApiController = require("../controllers/course");
 const userCourseApiController = require("../controllers/userCourse");
+const purchaseApiController = require("../controllers/purchase");
 
 const api = Router();
 
@@ -18,5 +19,6 @@ api.use("/api/v1/kategori", kategoriApiController);
 api.use("/api/v1/modul", modulApiController);
 api.use("/api/v1/course", courseApiController);
 api.use("/api/v1/userCourse", userCourseApiController);
+api.use("/api/v1/purchase", purchaseApiController);
 
 module.exports = api;

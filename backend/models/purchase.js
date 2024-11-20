@@ -36,6 +36,11 @@ const Purchase = sequelize.define(
       allowNull: false,
       defaultValue: false,
     },
+    total: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
   },
   {
     sequelize,

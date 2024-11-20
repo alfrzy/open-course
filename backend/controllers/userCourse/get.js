@@ -4,31 +4,29 @@ const { success, error } = require("../../cores/response");
 
 const get = Router();
 
-// get berdasar id
-get.get("/:user_id", async (req, res) => {
+get.get("/", async (req, res) => {
   try {
-    const { user_id } = req.params;
-    const userCourses = await UserCourseService.findAll({ user_id });
+    const { user_id, course_id } = req.query;
+    const filter = {};
+
+    // Tambahkan user_id ke filter jika ada
+    if (user_id) {
+      filter.user_id = user_id;
+    }
+    
+    // Tambahkan course_id ke filter jika ada
+    if (course_id) {
+      filter.course_id = course_id;
+    }
+
+    // Panggil service dengan filter dinamis
+    const userCourses = await UserCourseService.findAll(filter);
 
     return success(res, "User courses retrieved successfully", userCourses);
   } catch (err) {
     return error(
       res,
       "An error occurred while fetching user courses: " + err.message
-    );
-  }
-});
-
-// get all
-get.get("/", async (req, res) => {
-  try {
-    const allCourses = await UserCourseService.findAll(); // Panggil service untuk ambil semua kursus
-
-    return success(res, "All user courses retrieved successfully", allCourses);
-  } catch (err) {
-    return error(
-      res,
-      "An error occurred while fetching all user courses: " + err.message
     );
   }
 });

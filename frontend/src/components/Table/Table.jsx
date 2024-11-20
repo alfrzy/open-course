@@ -2,6 +2,7 @@ import React from "react";
 import { deleteDosen } from "../../Data/DataDosen";
 import { toast } from "react-hot-toast";
 import useFetchData from "../../Data/DataDosen";
+import { useState } from "react";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -11,6 +12,15 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
   const totalPages = Math.ceil(dataDosen.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+
+  // --------------------- MODAL -----------------------
+  const [selectedDosen, setSelectedDosen] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRowClick = (dosen) => {
+    setSelectedDosen(dosen);
+    setIsModalOpen(true);
+  };
 
   // Filter data berdasarkan pencarian (NIDN atau Nama Dosen)
   const filteredData = dataDosen.filter(
@@ -60,12 +70,13 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
               {currentItems.map((dosen, index) => (
                 <tr
                   key={dosen.id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:bg-blue-500 transition-all duration-100"
+                  onClick={() => handleRowClick(dosen)}
                 >
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     {index + 1 + indexOfFirstItem}
                   </td>
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     <img
                       src={
                         dosen.profile_picture
@@ -78,23 +89,29 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                   </td>
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-b border-gray-300"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-b border-gray-300 cursor-pointer "
                   >
                     {dosen.full_name}
                   </th>
-                  <td className="px-6 py-4 border-b border-gray-300">
+                  <td className="px-6 py-4 border-b border-gray-300 text-black">
                     {dosen.nidn || "N/A"}
                   </td>
                   <td className="px-6  py-4 text-right border-b border-gray-300">
                     <div className="flex justify-center gap-3">
                       <button
-                        onClick={() => onEdit(dosen)} // Memanggil fungsi onEdit
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onEdit(dosen);
+                        }} 
                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(dosen.id)}
+                        onClick={(event) =>  {
+                          event.stopPropagation();
+                          handleDelete(dosen.id)}
+                        }
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
                       >
                         Hapus
@@ -124,6 +141,61 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
           </div>
         </div>
       </section>
+
+      {/* ---------------------- MODAL ------------------- */}
+      {isModalOpen && selectedDosen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded shadow-lg max-w-lg w-full relative">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4  bg-red-700 hover:bg-red-600 px-2 py-1 text-white text-2xl transition-all duration-300"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-semibold mb-2 text-gray-800">
+              Profil Dosen
+            </h2>
+            <hr className="mb-4 border-gray-300" />
+            <div className="flex items-center w-full mb-4">
+              <div className="w-24 h-20 rounded-full bg-orange-200 overflow-hidden">
+                <img
+                  // src={
+                  //   selectedDosen.profile_picture
+                  //     ? selectedDosen.profile_picture
+                  //     : "https://picsum.photos/seed/picsum/200/300"
+                  // }
+                  src={"https://picsum.photos/seed/picsum/200/300"}
+                  alt={selectedDosen.full_name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-gray-700 w-full ml-4">
+                <div className="flex mb-2">
+                  <p className="font-semibold w-24  pr-2">Nama</p>
+                  <p className="text-right mr-4"> : </p>
+                  <p className="">  </p>
+                  <p>{selectedDosen.full_name}</p>
+                </div>
+                <div className="flex mb-2">
+                  <p className="font-semibold w-24 pr-2">NIDN</p>
+                  <p className="text-right mr-4">:</p>
+                  <p>{selectedDosen.nidn || "N/A"}</p>
+                </div>
+                <div className="flex mb-2">
+                  <p className="font-semibold w-24 pr-2">Jabatan</p>
+                  <p className="text-right mr-4">:</p>
+                  <p>{selectedDosen.position || "N/A"}</p>
+                </div>
+                <div className="flex mb-2">
+                  <p className="font-semibold w-24 pr-2">E-mail</p>
+                  <p className="text-right mr-4">:</p>
+                  <p>{selectedDosen.gmail || "N/A"}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
