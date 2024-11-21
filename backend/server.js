@@ -5,6 +5,10 @@ const middleware = require("./cores/middleware");
 const { port } = require("./config/config");
 
 const app = express();
+
+//  folder static bisa diakses 
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 middleware(express, app);
 router(app);
 

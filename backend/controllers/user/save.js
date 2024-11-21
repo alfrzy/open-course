@@ -62,7 +62,7 @@ save.post("/save", optionalUpload, async (req, res) => {
     req.body.password = hashedPassword;
 
     if (req.file) {
-      req.body.profile_picture = req.file.path;
+      req.body.profile_picture = `uploads/images/${req.file.filename}`;
       console.log(`Gambar berhasil diunggah: ${req.file.path}`);
     } else {
       console.log('Tidak ada file yang diunggah.');
