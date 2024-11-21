@@ -39,7 +39,7 @@ const Register2 = () => {
           duration: 3000,
           position: "top-center",
         });
-        navigate("/mahasiswa-dashboard", { replace: true });
+        navigate("/mahasiswa-kelas", { replace: true });
       } else {
         toast.error(response.data.message || "Terjadi kesalahan saat registrasi.", {
           duration: 3000,

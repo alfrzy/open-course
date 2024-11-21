@@ -89,3 +89,7 @@ exports.update = async (id, data) => {
     throw new Error("Update failed");
   }
 };
+
+exports.searchUsers = async (searchTerm) => {
+  return await userRepo.searchUsers(searchTerm);
+};

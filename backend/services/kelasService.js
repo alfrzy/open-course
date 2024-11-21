@@ -2,16 +2,6 @@ const KelasRepository = require("../repository/kelasRepository");
 
 const kelasRepo = new KelasRepository();
 
-// Add class
-// exports.addKelas = async (data) => {
-//   try {
-//     const newKelas = await kelasRepo.save(data);
-//     return newKelas;
-//   } catch (error) {
-//     console.error("Error adding class:", error);
-//     throw new Error("Failed to add class");
-//   }
-// };
 
 exports.saveOrUpdateKelas = async (data) => {
   try {
@@ -28,7 +18,7 @@ exports.saveOrUpdateKelas = async (data) => {
 // Get all classes
 exports.getAllKelas = async () => {
   try {
-    const kelasList = await kelasRepo.findAll();
+    const kelasList = await kelasRepo.findAll({ raw: true });
     return kelasList;
   } catch (error) {
     console.error("Error fetching all classes:", error);
