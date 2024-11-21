@@ -9,7 +9,7 @@ export const useFetchCourses = (id = null) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = id ? `http://localhost:3000/api/v1/kelas/detailKelas/${id}` : `http://localhost:3000/api/v1/kelas/getAllKelas`;
+        const url = id ? `${import.meta.env.VITE_API_BASE_URL}/v1/kelas/detailKelas/${id}` : `${import.meta.env.VITE_API_BASE_URL}/v1/kelas/getAllKelas`;
         const response = await axios.get(url);
         setDataCourse(id ? [response.data.data] : response.data.data || []);
       } catch (err) {
