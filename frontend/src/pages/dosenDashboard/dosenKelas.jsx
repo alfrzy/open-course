@@ -8,11 +8,13 @@ import { useSelector } from "react-redux";
 
 const DosenKelas = () => {
   const loggedInUserId = useSelector((state) => state.auth.user?.id);
-  const role = useSelector((state) => state.auth.user?.role); 
-  const { dataCourse, loading, error } = useFetchCourses(loggedInUserId, role);
+  const role = useSelector((state) => state.auth.user?.role);
   const [filter, setFilter] = useState("Semua");
 
-  // Filter data berdasarkan is_publish
+  // Fetch all classes
+  const { dataCourse, loading, error } = useFetchCourses(); 
+
+  // Filter data based on is_publish
   const filteredClasses = dataCourse.filter((kelas) => {
     if (filter === "Publik") {
       return kelas.is_publish === true;
@@ -54,11 +56,7 @@ const DosenKelas = () => {
               <FilterText filter={filter} setFilter={setFilter} label="Publik" />
               <FilterText filter={filter} setFilter={setFilter} label="Draft" />
             </div>
-            <ComponentButton
-              color={"bg-blue-600"}
-              link={"/dosen-addkelas"}
-              text={"Tambah kelas"}
-            />
+            <ComponentButton color={"bg-blue-600"} link={"/dosen-addkelas"} text={"Tambah kelas"} />
           </section>
 
           {/* List Card */}
@@ -66,20 +64,12 @@ const DosenKelas = () => {
             {filteredClasses.map((kelas) => (
               <Link
                 key={kelas.id}
-                to={`/dosen-kelas/${kelas.id}`}
+                to={`/dosen-kelas/${kelas.id}`} // Link to detail page
                 className="w-full h-40 mt-6 md:w-[23%] relative md:mr-4"
               >
-                <div
-                  className={`bg-red-500 hover:bg-opacity-50 transition-all duration-300 h-[85%] ${
-                    kelas.is_publish === false ? "relative" : ""
-                  }`}
-                >
+                <div className={`bg-red-500 hover:bg-opacity-50 transition-all duration-300 h-[85%] ${kelas.is_publish === false ? "relative" : ""}`}>
                   {/* Teks "Draft" ditampilkan di pojok kanan atas jika kursus belum dipublish */}
-                  {kelas.is_publish === false && (
-                    <span className="absolute top-0 right-0 bg-white text-red-500 text-xs font-bold px-2">
-                      Draft
-                    </span>
-                  )}
+                  {kelas.is_publish === false && <span className="absolute top-0 right-0 bg-white text-red-500 text-xs font-bold px-2">Draft</span>}
                 </div>
                 <section className="h-[15%]">
                   <h1 className="font-bold">{kelas.name}</h1>
@@ -98,12 +88,7 @@ const FilterText = ({ filter, setFilter, label }) => {
   const isActive = filter === label;
 
   return (
-    <span
-      onClick={() => setFilter(label)}
-      className={`cursor-pointer text-sm font-medium ${
-        isActive ? "underline text-blue-700" : "text-black"
-      } hover:text-blue-700`}
-    >
+    <span onClick={() => setFilter(label)} className={`cursor-pointer text-sm font-medium ${isActive ? "underline text-blue-700" : "text-black"} hover:text-blue-700`}>
       <h1 className="font-bold text-[16px]">{label}</h1>
     </span>
   );

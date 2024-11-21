@@ -46,8 +46,15 @@ const App = () => {
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
         {/* dosen */}
-        <Route path="/addmateri" element={<AddMateri />} />
+        {/* <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+        <Route path="/dosen-addkelas" element={<AddKelas />} />
+        <Route path="/dosen-dashboard" element={<DosenDashboard />} />
+        <Route path="/kelas" element={<PageKelas />} />
+
+        <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
+
+        <Route path="/admin-kelas" element={<DosenKelas />} /> */}
 
         {/* admin */}
         <Route path="/dosen" element={<Dosen />} />
@@ -56,13 +63,13 @@ const App = () => {
         <Route element={<PrivateRoute requiredRole="2" />}>
           <Route path="/dosen" element={<Dosen />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
-          <Route path="/kelas" element={<PageKelas />} />
+          {/* <Route path="/kelas" element={<PageKelas />} /> */}
           <Route path="/siswa" element={<SiswaDashboard />} />
           <Route path="/siswa/:id" element={<SiswaDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
           {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}
-          <Route path="/admin-kelas" element={<DosenKelas />} />
+          {/* <Route path="/admin-kelas" element={<DosenKelas />} /> */}
           <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
@@ -75,13 +82,12 @@ const App = () => {
         {/* mhs */}
         <Route element={<PrivateRoute requiredRole="0" />}>
           <Route path="/mahasiswa-dashboard" element={<MahasiswaDashboard />} />
-          <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas/:id" element={<Checkout />} />
+          <Route path="/mahasiswa-kelas" element={<MahasiswaKelas />} />
           <Route path="/checkout-kelas-sukses/:id" element={<PembelianKelasSukses />} />
           <Route path="/invoice/:id" element={<Invoice />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/mahasiswa-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
-       
         </Route>
       </Routes>
     </Router>

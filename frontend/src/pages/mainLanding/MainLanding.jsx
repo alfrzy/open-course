@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import LandingFooter from "../../components/Footer/LandingFooter";
 import CardKelas from "../../components/Card/CardKelas";
 import { useFetchCourses } from "../../Data/DataCourse";
+import axios from "axios";
 
 const MainLanding = () => {
   const [visibleCards, setVisibleCards] = useState(6);
@@ -68,11 +69,7 @@ const MainLanding = () => {
           <hr className="border-1 border-black" />
 
           <div className="flex flex-col items-center gap-10 py-5">
-            <div className="flex flex-col text-center md:w-1/3 md:mt-10">
-              <h2 className="font-bold text-xl md:text-2xl">Semua Kelas</h2>
-              <p className="mt-3 text-sm md:text-base text-gray-600">Et omnia in potestate nostra esse natura liber, libera, libere valeant; sed illis non est in nostra.</p>
-            </div>
-
+            <h2 className="font-bold text-xl md:text-2xl">Semua Kelas</h2>
             {loading ? (
               <p>Loading...</p>
             ) : error ? (
@@ -82,20 +79,18 @@ const MainLanding = () => {
                 {courses.slice(0, visibleCards).map((course) => (
                   <CardKelas
                     key={course.id}
-                    id={course.id}
-                    title={course.name}
-                    image={"https://picsum.photos/seed/picsum/200/300"}
-                    deskripsi={course.description}
-                    // dosen={course.Instructor.username}
+                    id={course.id || "data kosong"}
+                    title={course.name || "data kosong"}
+                    image={course.image || "https://via.placeholder.com/200"}
+                    deskripsi={course.description || "data kosong"}
+                    dosen={course.instructor || "username dosen tidak ada"}
                     kelas={"Satuan"}
-                    waktu={`${course.duration} hours`}
-                    harga={`$${course.price}`}
+                    waktu={course.duration ? `${course.duration} hours` : "data kosong"}
+                    harga={course.price ? `$${course.price}` : "data kosong"}
                   />
                 ))}
               </div>
             )}
-
-            {/* Conditional rendering  */}
             {visibleCards < courses.length && (
               <button onClick={loadMoreCards} className="mt-5 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                 Selengkapnya
