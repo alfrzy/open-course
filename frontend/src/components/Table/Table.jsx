@@ -102,16 +102,16 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                         onClick={(event) => {
                           event.stopPropagation();
                           onEdit(dosen);
-                        }} 
+                        }}
                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={(event) =>  {
+                        onClick={(event) => {
                           event.stopPropagation();
-                          handleDelete(dosen.id)}
-                        }
+                          handleDelete(dosen.id);
+                        }}
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
                       >
                         Hapus
@@ -173,7 +173,7 @@ const Table = ({ searchTerm, currentPage, setCurrentPage, onEdit }) => {
                 <div className="flex mb-2">
                   <p className="font-semibold w-24  pr-2">Nama</p>
                   <p className="text-right mr-4"> : </p>
-                  <p className="">  </p>
+                  <p className=""> </p>
                   <p>{selectedDosen.full_name}</p>
                 </div>
                 <div className="flex mb-2">

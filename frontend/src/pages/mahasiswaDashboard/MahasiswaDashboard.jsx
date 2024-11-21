@@ -8,7 +8,7 @@ const MahasiswaDashboard = () => {
     <div className="min-h-screen font-poppins bg-green-200">
       <DashboardNavbar />
       <div className="flex">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className="flex-1 p-6 md:ml-64">
           {/* content disini */}
           <h1 className="text-2xl font-bold">Mahasiswa Dashboard</h1>

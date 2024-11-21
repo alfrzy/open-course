@@ -51,7 +51,7 @@ const Login = () => {
         } else if (data.data.user && data.data.user.role === 1) {
           navigate("/dosen-dashboard", { replace: true });
         } else if (data.data.user && data.data.user.role === 0) {
-          navigate("/mahasiswa-dashboard", { replace: true });
+          navigate("/mahasiswa-kelas", { replace: true });
         }
       }
     } catch (error) {
