@@ -13,8 +13,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.auth.user.id);
-
+  const userId = useSelector((state) => state.auth.user?.id);
   const { isAuth, role } = useAuth();
 
   const toggleMenu = () => {
