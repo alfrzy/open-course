@@ -14,9 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.auth.user?.id);
-  console.log('id:', userId)
   const { isAuth, role } = useAuth();
-  console.log('aut: ', isAuth)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
