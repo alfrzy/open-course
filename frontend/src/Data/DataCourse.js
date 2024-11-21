@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const dataCourseApiUrl = `${import.meta.env.VITE_API_BASE_URL}/v1/course/`;
-// batasan role dan instructor_id
-const useFetchCourses = (instructor_id, role, id) => {
+export const useFetchCourses = (id = null) => {
   const [dataCourse, setDataCourse] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,26 +9,18 @@ const useFetchCourses = (instructor_id, role, id) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = id ? `${dataCourseApiUrl}${id}/landing` : dataCourseApiUrl;
-        const params = role === 1 ? { instructor_id } : {};
-
-        const response = await axios.get(url, { params });
-        if (response.data.error) {
-          throw new Error(response.data.error);
-        }
-
-        setDataCourse(id ? [response.data.data] : response.data.data);
-      } catch (error) {
-        setError(error.message);
+        const url = id ? `${import.meta.env.VITE_API_BASE_URL}/v1/kelas/detailKelas/${id}` : `${import.meta.env.VITE_API_BASE_URL}/v1/kelas/getAllKelas`;
+        const response = await axios.get(url);
+        setDataCourse(id ? [response.data.data] : response.data.data || []);
+      } catch (err) {
+        setError(err.message || "Failed to fetch courses");
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [instructor_id, role, id]);
+  }, [id]);
 
   return { dataCourse, loading, error };
 };
-
-export { useFetchCourses };
