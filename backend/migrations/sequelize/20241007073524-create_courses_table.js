@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -17,9 +17,33 @@ module.exports = {
           key: "id",
         },
       },
+      instructor_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      tanggal_mulai: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      jam_perminggu: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      lama_kelas_perminggu: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      tag: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       description: {
         type: Sequelize.TEXT,

@@ -14,7 +14,7 @@ import { Toaster } from "react-hot-toast";
 import Dosen from "./pages/adminDashboard/Dosen/Dosen";
 import DosenKelas from "./pages/dosenDashboard/dosenKelas";
 import AddKelas from "./pages/dosenDashboard/addKelas";
-import MainLanding from "./pages/mainLanding/mainLanding";
+import MainLanding from "./pages/mainLanding/MainLanding";
 import SiswaDashboard from "./pages/adminDashboard/Siswa/SiswaDashboard";
 import AddMateri from "./pages/dosenDashboard/addMateri";
 import ComponentEditDosen from "./components/Form/ComponentEditDosen";
@@ -51,6 +51,7 @@ const App = () => {
         {/* dosen */}
         <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
+
         {/* admin */}
         <Route path="/dosen" element={<Dosen />} />
         <Route path="/editdosen" element={<ComponentEditDosen />} />
@@ -70,7 +71,6 @@ const App = () => {
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
-          <Route path="/dosen-kelas" element={<DosenKelas />} />
           <Route path="/dosen-addkelas" element={<AddKelas />} />
           <Route path="/dosen-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/dosen-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />

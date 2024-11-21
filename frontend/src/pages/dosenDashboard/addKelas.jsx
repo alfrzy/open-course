@@ -1,118 +1,78 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import KontenKanan from "./componentKontenKanan";
 import KontenKiri from "./componentKontenKiri";
 import Swal from "sweetalert2";
+import ModalTambahBab from "./componentModalTambahBab";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
 const AddKelas = () => {
-  const languages = ["Indonesia", "Inggris", "Jawa", "Spanyol"];
-  const Tags = ["Akuntansi", "Filosofi", "Fikih", "Manajemen", "Sejarah"];
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const languages = ["Indonesia", "English", "Spanish", "French"];
+
+  const [courseName, setCoursename] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
-
-  const [instructors, setInstructors] = useState([
-    {
-      name: "Muhammad insan sanjaya gege",
-      title: "Dosen Senior",
-      matkul: "Matematika",
-      imageUrl: "https://picsum.photos/200/300",
-    },
-    {
-      name: "Dosen B",
-      title: "Dosen Junior",
-      matkul: "Matematika",
-      imageUrl: "https://picsum.photos/201/301",
-    },
-    {
-      name: "Dosen C",
-      title: "Dosen Pembimbing",
-      matkul: "Matematika",
-      imageUrl: "https://picsum.photos/202/302",
-    },
-  ]);
-
-  const [addedInstructors, setAddedInstructors] = useState([]);
-  const [learningTopics, setLearningTopics] = useState([]);
+  const [learningList, setLearningList] = useState([]);
   const [newTopic, setNewTopic] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isBabMenuOpen, setIsBabMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const [addedInstructors, setAddedInstructors] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [addedCategory, setAddedCategory] = useState([]);
+  const [selectedInstructor, setSelectedInstructor] = useState(null);
+  const [sections, setSections] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [price, setPrice] = useState("");
+  const [jamPerminggu, setJamPerminggu] = useState("");
+  const [duration, setDuration] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
 
-  // input
-  const [courseName, setCoursename] = useState(""); // State untuk nama kelas
-  const [courseDescription, setCourseDescription] = useState(""); // State untuk deskripsi kelas
-
-  const handleAddInstructor = (instructor) => {
-    setAddedInstructors((prev) => [...prev, instructor]);
-    setInstructors((prev) =>
-      prev.filter((ins) => ins.name !== instructor.name)
-    );
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
-  const handleAddTopic = () => {
-    if (newTopic) {
-      // diset ke learning topic sblme
-      setLearningTopics((prev) => [...prev, newTopic]);
-      setNewTopic("");
-    }
-  };
-
-  // titik tiga
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  // 
-  const toggleBabMenu = () => {
-    setIsBabMenuOpen((prev) => !prev);
-  };
-
-  // Tutup menu kalau ngeklik yang lain
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
-
-  // Handle perubahan tag
-  const handleTagClick = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
-
-  // Fungsi untuk menyimpan kelas ke database
   const handleSaveClass = async () => {
     const classData = {
       name: courseName,
       description: courseDescription,
+      // tags: selectedTags,
+      // learningTopics,
+      course_category_id: selectedTags,
+      instructor_id: selectedInstructor,
+      price: parseFloat(price),
+      jam_perminggu: parseInt(jamPerminggu),
+      duration: parseInt(duration),
+      language: selectedLanguage,
+      sections,
+      learningList,
+      // tag: selectedTags.map((tag) => tag),
     };
+    console.log("Data yang dikirim ke server:", classData);
 
     try {
-      await addCourse(classData); // Simpan ke database
-      // Tampilkan SweetAlert2
-      await Swal.fire({
+      const url = id ? `http://localhost:3000/api/v1/kelas/addKelas/${id}` : "http://localhost:3000/api/v1/kelas/addKelas";
+      const response = await axios.post(url, classData);
+
+      console.log("response :", response.data);
+      console.log("data :", classData);
+
+      Swal.fire({
         title: "Sukses!",
-        text: "Kelas berhasil disimpan!",
+        text: id ? "Kelas berhasil diperbarui!" : "Kelas berhasil ditambahkan!",
         icon: "success",
         confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.location.href = "/dosen-kelas"; // Arahkan ke /dosen-kelas
-        }
-      });
-      setCoursename("");
-      setCourseDescription("");
+      }).then(() => navigate("/dosen-addkelas"));
     } catch (error) {
-      console.error("Error saving class:", error);
-      // Tampilkan SweetAlert2 untuk error
+      if (error.response) {
+        console.error("Error response server:", error.response.data);
+      } else if (error.request) {
+        console.error("No response dari server:", error.request);
+      } else {
+        console.error("Error dalam setup request:", error.message);
+      }
       Swal.fire({
         title: "Error!",
         text: "Gagal menyimpan kelas!",
@@ -122,6 +82,27 @@ const AddKelas = () => {
     }
   };
 
+  const handleAddLearningTopic = () => {
+    if (newTopic.trim() !== "") {
+      setLearningList((prev) => [...prev, { name: newTopic }]);
+      setNewTopic("");
+    }
+    // setSections((prev) => [...prev, { name: newTopic}]);
+  };
+
+  const handleSaveSection = (section) => {
+    setSections((prev) => [...prev, section]);
+  };
+
+  const handleAddInstructor = (instructor) => {
+    setAddedInstructors((prev) => [...prev, instructor]);
+    setSelectedInstructor(instructor.id);
+  };
+  const handleCategorySelect = (categoryId) => {
+    setAddedCategory((prev) => [...prev, categoryId]);
+    setSelectedCategory(categoryId.id);
+  };
+
   return (
     <div className="min-h-screen font-poppins bg-gray-200">
       <DashboardNavbar />
@@ -129,21 +110,10 @@ const AddKelas = () => {
         <Sidebar />
         <div className="flex-1 p-6 md:ml-64">
           <div className="flex justify-between">
-            <h1 className="font-bold mb-2 text-lg">Tambah Kelas</h1>
+            <h1 className="font-bold mb-2 text-lg">{id ? "Edit Kelas" : "Tambah Kelas"}</h1>
             <div className="flex justify-between gap-3">
-              <button className="px-2 border-2 hover:bg-red-700 py-2 transition-all duration-300 text-red-600 hover:text-white">
-                <h1 className="">Hapus Kelas</h1>
-              </button>
-
-              <button
-                onClick={handleSaveClass}
-                className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white"
-              >
-                <h1 className="">Simpan Kelas</h1>
-              </button>
-
-              <button className="px-2 bg-blue-700 text-white hover:bg-opacity-30 hover:bg-blue-700 py-2 transition-all duration-300">
-                <h1 className="hover:text-white text-white">Publikasikan</h1>
+              <button onClick={handleSaveClass} className="text-blue-500 px-2 border-[1px] border-solid border-blue-500 hover:bg-blue-700 py-2 transition-all duration-300 hover:text-white">
+                <h1>Simpan Kelas</h1>
               </button>
             </div>
           </div>
@@ -152,31 +122,32 @@ const AddKelas = () => {
 
           <section className="flex justify-between py-10">
             <KontenKiri
-              learningTopics={learningTopics}
+              learningList={learningList}
               newTopic={newTopic}
-              handleAddTopic={handleAddTopic}
-              instructors={instructors}
-              addedInstructors={addedInstructors}
-              handleAddInstructor={handleAddInstructor}
-              isBabMenuOpen={isBabMenuOpen}
-              toggleBabMenu={toggleBabMenu}
-              menuRef={menuRef}
-              toggleMenu={toggleMenu}
-              isMenuOpen={isMenuOpen}
               setNewTopic={setNewTopic}
+              handleAddTopic={handleAddLearningTopic}
               courseName={courseName}
               setCourseName={setCoursename}
               courseDescription={courseDescription}
               setCourseDescription={setCourseDescription}
+              addedInstructors={addedInstructors}
+              handleAddInstructor={handleAddInstructor}
+              toggleModal={toggleModal}
+              sections={sections}
             />
-
             <KontenKanan
               languages={languages}
-              Tags={Tags}
-              handleTagClick={handleTagClick}
-              selectedTags={selectedTags}
+              Tags={selectedTags}
+              handleTagClick={setSelectedTags}
+              addedCategory={addedCategory}
+              setPrice={setPrice}
+              setJamPerminggu={setJamPerminggu}
+              setDuration={setDuration}
+              setLanguage={setSelectedLanguage}
             />
           </section>
+
+          <ModalTambahBab isOpen={isModalOpen} onClose={toggleModal} onSaveSection={handleSaveSection} setPrice={setPrice} setJamPerminggu={setJamPerminggu} setDuration={setDuration} />
         </div>
       </div>
     </div>

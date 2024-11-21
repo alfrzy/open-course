@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Modules', [
+    await queryInterface.bulkInsert("Modules", [
       {
         section_id: 1, 
         title: 'Module 1: Getting Started',
@@ -47,6 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Modules', null, {});
+    await queryInterface.bulkDelete("Modules", null, {});
   },
 };

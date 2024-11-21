@@ -30,6 +30,22 @@ const Course = sequelize.define(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
+    tanggal_mulai: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    jam_perminggu: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    lama_kelas_perminggu: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
