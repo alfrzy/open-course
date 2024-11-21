@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const { Op } = require("sequelize");
 
 class UserRepository {
   // save
@@ -46,6 +47,19 @@ class UserRepository {
 
     await user.update(data); 
     return user.toJSON();
+  }
+
+  async searchUsers(searchTerm) {
+    const users = await User.findAll({
+      where: {
+        full_name: {
+          [Op.iLike]: `%${searchTerm}%`, // Pencarian case-insensitive
+        },
+      },
+      attributes: ["id", "full_name", "gmail"], // Hanya mengambil field yang diperlukan
+    });
+
+    return users.map((user) => user.toJSON());
   }
 }
 

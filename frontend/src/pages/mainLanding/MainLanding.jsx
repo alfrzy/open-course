@@ -86,7 +86,7 @@ const MainLanding = () => {
                     title={course.name}
                     image={"https://picsum.photos/seed/picsum/200/300"}
                     deskripsi={course.description}
-                    // dosen={course.Instructor.username}
+                    dosen={course.Instructor ? course.Instructor.full_name : "Instructor Tidak Tersedia"}
                     kelas={"Satuan"}
                     waktu={`${course.duration} hours`}
                     harga={`$${course.price}`}

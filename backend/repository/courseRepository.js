@@ -8,6 +8,7 @@ const User = require("../models/user");
 const UserCourses = require("../models/userCourse");
 
 class CourseRepository {
+  //get all
   async findAll({ instructor_id } = {}) {
     const whereClause = {
       deleted_at: null,
@@ -37,6 +38,7 @@ class CourseRepository {
     return courses.map((course) => course.toJSON());
   }
 
+//get by id
   async findById(id) {
     const course = await Course.findOne({
       where: {
@@ -48,6 +50,14 @@ class CourseRepository {
           model: User,
           as: "Instructor",
           attributes: ["full_name", "phone", "gmail"],
+        },
+        {
+          model: User,
+          as: "Members", // Sesuaikan nama alias "Members" dengan kebutuhan
+          attributes: ["id", "full_name", "gmail"],
+          through: {
+            attributes: [], // Tidak perlu atribut tambahan dari tabel penghubung
+          },
         },
         {
           model: LearningList,
@@ -86,5 +96,24 @@ class CourseRepository {
     return courseData;
 }
 
+async addMember(courseId, userId) {
+  // Cek apakah user sudah terdaftar di course
+  const existingEnrollment = await UserCourses.findOne({
+    where: { course_id: courseId, user_id: userId },
+  });
+
+  if (existingEnrollment) {
+    throw new Error("User sudah terdaftar di course ini.");
+  }
+
+  // Tambahkan user ke course
+  const userCourse = await UserCourses.create({
+    course_id: courseId,
+    user_id: userId,
+    is_finish: false, // Set default is_finish ke false
+  });
+
+  return userCourse;
+}
 }
 module.exports = CourseRepository;

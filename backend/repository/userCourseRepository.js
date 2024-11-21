@@ -24,7 +24,7 @@ class UserCourseRepository {
       include: [
         {
           model: Course,
-          as: "Courses",
+          as: "CourseRelation",
           attributes: ["name", "instructor_id", "duration"],
           include: [
             {
@@ -69,7 +69,7 @@ class UserCourseRepository {
       include: [
         {
           model: Course,
-          as: "Course", // Sesuaikan dengan nama alias asosiasi
+          as: "CourseRelation", // Sesuaikan dengan nama alias asosiasi
           attributes: ["name"],
         },
       ],

@@ -134,7 +134,7 @@ const SiswaDetail = () => {
                                 } rounded-full h-3 w-3 mr-2`}
                               ></span>
                               <h1 className="text-sm my-1">
-                                {course.Courses.name}
+                                {course.CourseRelation.name}a
                               </h1>
                             </li>
                           ))}
