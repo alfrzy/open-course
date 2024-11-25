@@ -7,6 +7,8 @@ import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineLanguage, MdCategory } from "react-icons/md";
 import { FaFileVideo } from "react-icons/fa6";
+import LandingFooter from "../../components/Footer/LandingFooter";
+import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 
 const DetailInformasiKelas = () => {
   const { id } = useParams();
@@ -29,6 +31,8 @@ const DetailInformasiKelas = () => {
   if (!course) return <p>Data tidak tersedia</p>;
 
   return (
+    <>
+    <DashboardNavbar />
     <section className="p-5 md:p-14">
       {/* Bagian Gambar dan Informasi Utama */}
       <section className="md:flex md:flex-row-reverse md:justify-between">
@@ -91,7 +95,10 @@ const DetailInformasiKelas = () => {
           </div>
         </div>
       </section>
-    </section>
+      </section>
+    <LandingFooter />
+    </>
+
   );
 };
 
