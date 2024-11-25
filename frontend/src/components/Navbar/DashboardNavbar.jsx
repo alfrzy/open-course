@@ -21,7 +21,11 @@ const DashboardNavbar = () => {
 
   return (
     <nav className="bg-blue-700 shadow px-4 py-3 flex justify-between items-center font-poppins">
-      <div className="text-xl font-bold text-white">FE Open Course</div>
+      <div className="text-xl font-bold text-white">
+        <a href="/">
+          FE OPEN COURSE
+        </a>
+      </div>
 
       <div className="relative">
         <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>

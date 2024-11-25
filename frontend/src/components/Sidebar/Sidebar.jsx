@@ -32,8 +32,10 @@ const Sidebar = () => {
       {/* content sidebar */}
       <div className={`fixed z-20 inset-y-0 left-0 w-64 bg-white text-black transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 transition-transform duration-300 ease-in-out`}>
         <div className="bg-white p-4">
-          <h1 className="text-xl text-center font-bold text-blue-700">FE Open Course</h1>
-          <hr className="my-5 border-2 border-blue-700" />
+          <a href="/">
+            <h1 className="text-xl text-center font-bold text-blue-700">FE Open Course</h1>
+            <hr className="my-5 border-2 border-blue-700" />
+          </a>
         </div>
         <nav className="mt-10 ">
           {/* role dosen */}

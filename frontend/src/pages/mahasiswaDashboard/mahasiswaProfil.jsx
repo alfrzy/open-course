@@ -138,7 +138,7 @@ const MahasiswaProfil = () => {
                               course.is_finish ? "bg-green-500" : "bg-red-500"
                             } rounded-full h-3 w-3 mr-2`}
                           ></span>
-                          <h1 className="text-sm my-1">{course.Courses.name}</h1>
+                          <h1 className="text-sm my-1">{course.CourseRelation.name}</h1>
                         </li>
                       ))}
                     </ul>
