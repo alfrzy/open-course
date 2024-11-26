@@ -6,7 +6,7 @@ import ChangePassword from "./pages/ChangePassword/changePassword";
 import PrivateRoute from "./PrivateRoute";
 import Register from "./pages/auth/register/register";
 import Dashboard from "./pages/adminDashboard/Dashboard";
-import PageKelas from "./pages/adminDashboard/kelas/PageKelas";
+import PageKelas from "./pages/adminDashboard/kelas/adminKelas";
 import { useAuth } from "./redux/auth/authSlice";
 import MahasiswaDashboard from "./pages/mahasiswaDashboard/MahasiswaDashboard";
 import DosenDashboard from "./pages/dosenDashboard/dosenDashboard";
@@ -31,6 +31,7 @@ import PembelianKelasSukses from "./pages/kelas/pembelianKelasSuccess";
 import Pembelian from "./pages/Pembalian/pembelian";
 import AddMemberModal from "./components/Form/tambahAnggota";
 import MahasiswaProfil from "./pages/mahasiswaDashboard/mahasiswaProfil";
+import AdminKelas from "./pages/adminDashboard/kelas/adminKelas";
 
 const App = () => {
   return (
@@ -72,13 +73,15 @@ const App = () => {
           <Route path="/admin-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
           {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}
-          {/* <Route path="/admin-kelas" element={<DosenKelas />} /> */}
+          <Route path="/admin-kelas" element={<AdminKelas />} />
           <Route path="/mahasiswa" element={<PageKelas />} />
         </Route>
         {/* dosen */}
         <Route element={<PrivateRoute requiredRole="1" />}>
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
           <Route path="/dosen-addkelas" element={<AddKelas />} />
+          <Route path="/dosen-kelas" element={<DosenKelas />} />
+          {/* <Route path="/dosen-kelas/:id" element={<DosenKelas />} /> */}
           <Route path="/dosen-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/dosen-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
         </Route>

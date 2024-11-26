@@ -14,7 +14,8 @@ import { GiTeacher } from "react-icons/gi";
 const Dashboard = () => {
   // ---------------------------- JUMLAH KELAS ----------------------------------
   const { dataCourse, loading, error } = useFetchCourses();
-  const totalCourses = dataCourse?.length || 0;
+  const totalCourses = dataCourse?.filter((course) => course.is_publish).length || 0;
+
 
   // ---------------------------- BANYAK SISWA ----------------------------------
   const { dataSiswa } = useFetchData();

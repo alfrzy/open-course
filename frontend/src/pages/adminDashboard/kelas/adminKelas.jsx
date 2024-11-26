@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
-import ComponentButton from "../../components/Button/ComponentButton";
-import { useFetchCourses, useFetchCoursesByInstructor } from "../../Data/DataCourse";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import DashboardNavbar from "../../../components/Navbar/DashboardNavbar";
+import ComponentButton from "../../../components/Button/ComponentButton";
 import { useSelector } from "react-redux";
+import { useFetchCourses } from "../../../Data/DataCourse";
 
-const DosenKelas = () => {
+const AdminKelas = () => {
   const loggedInUserId = useSelector((state) => state.auth.user?.id);
   const role = useSelector((state) => state.auth.user?.role);
   const [filter, setFilter] = useState("Semua");
 
   // Fetch all classes
-  const { dataCourse, loading, error } = useFetchCoursesByInstructor(loggedInUserId); 
+  const { dataCourse, loading, error } = useFetchCourses(); 
 
   // Filter data based on is_publish
   const filteredClasses = dataCourse.filter((kelas) => {
@@ -64,7 +64,7 @@ const DosenKelas = () => {
             {filteredClasses.map((kelas) => (
               <Link
                 key={kelas.id}
-                to={`/dosen-detail-kelas/${kelas.id}/dashboard`} // Link to detail page
+                to={`/admin-detail-kelas/${kelas.id}/dashboard`} // Link to detail page
                 className="w-full h-40 mt-6 md:w-[23%] relative md:mr-4"
               >
                 <div className={`bg-red-500 hover:bg-opacity-50 transition-all duration-300 h-[85%] ${kelas.is_publish === false ? "relative" : ""}`}>
@@ -94,4 +94,4 @@ const FilterText = ({ filter, setFilter, label }) => {
   );
 };
 
-export default DosenKelas;
+export default AdminKelas;

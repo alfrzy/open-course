@@ -17,7 +17,7 @@ api.use("/api/v1/user", userApiController);
 api.use("/api/v1/kelas", kelasApiController);
 api.use("/api/v1/kategori", kategoriApiController);
 api.use("/api/v1/modul", modulApiController);
-// api.use("/api/v1/course", courseApiController);
+api.use("/api/v1/course", courseApiController);
 api.use("/api/v1/userCourse", userCourseApiController);
 api.use("/api/v1/purchase", purchaseApiController);
 
