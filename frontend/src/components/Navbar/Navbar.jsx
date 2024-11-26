@@ -78,7 +78,7 @@ const Navbar = () => {
         ) : (
           <>
             {role === 0 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>
@@ -102,7 +102,7 @@ const Navbar = () => {
               </div>
             )}
             {role === 1 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>
@@ -123,7 +123,7 @@ const Navbar = () => {
               </div>
             )}
             {role === 2 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>

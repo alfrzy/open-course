@@ -33,7 +33,7 @@ const DashboardNavbar = () => {
         </button>
 
         {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md">
+          <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-40">
             <a href="/mahasiswa-kelas" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
               Dashboard
             </a>

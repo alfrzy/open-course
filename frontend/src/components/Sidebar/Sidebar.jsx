@@ -84,14 +84,11 @@ const Sidebar = () => {
           ) : (
             // role mahasiswa
             <>
-              <a href="/mahasiswa-dashboaard" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
+              <a href="/mahasiswa-kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
                 <MdDashboard className="mr-2" />
                 Dashboard
               </a>
-              <a href="/mahasiswa-kelas" className="flex items-center py-2.5 px-4 transition duration-200 hover:bg-blue-700 hover:text-white">
-                <MdDashboard className="mr-2" />
-                Kelas
-              </a>
+             
             </>
           )}
         </nav>
