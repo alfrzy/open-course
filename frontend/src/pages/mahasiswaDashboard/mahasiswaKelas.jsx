@@ -14,8 +14,6 @@ const MahasiswaKelas = () => {
     useFetchUserCourses(loggedInUserId);
 
   const [activeTab, setActiveTab] = useState("kelas"); 
-
-  console.log(dataUserCourses);
   
 
   if (loading) {

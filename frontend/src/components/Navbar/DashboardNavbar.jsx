@@ -8,7 +8,7 @@ const DashboardNavbar = () => {
 
   const dispatch = useDispatch();
   const Navigate = useNavigate();
-  const userId = useSelector((state) => state.auth.user.id);
+  const userId = useSelector((state) => state.auth.user?.id);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);

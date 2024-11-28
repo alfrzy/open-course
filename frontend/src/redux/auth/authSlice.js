@@ -30,9 +30,8 @@ const authSlice = createSlice({
     },
     checkAuth: (state) => {
       const token = localStorage.getItem("token");
-      console.log(token);
+      
       if (token) {
-        console.log("sudah ada token");
         state.isAuth = true;
         state.token = token;
       }
