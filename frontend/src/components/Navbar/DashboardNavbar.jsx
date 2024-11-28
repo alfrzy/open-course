@@ -21,7 +21,11 @@ const DashboardNavbar = () => {
 
   return (
     <nav className="bg-blue-700 shadow px-4 py-3 flex justify-between items-center font-poppins">
-      <div className="text-xl font-bold text-white">FE Open Course</div>
+      <div className="text-xl font-bold text-white">
+        <a href="/">
+          FE OPEN COURSE
+        </a>
+      </div>
 
       <div className="relative">
         <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
@@ -29,7 +33,7 @@ const DashboardNavbar = () => {
         </button>
 
         {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md">
+          <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md z-40">
             <a href="/mahasiswa-kelas" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
               Dashboard
             </a>

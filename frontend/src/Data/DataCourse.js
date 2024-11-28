@@ -24,3 +24,30 @@ export const useFetchCourses = (id = null) => {
 
   return { dataCourse, loading, error };
 };
+
+// Hook untuk mengambil kelas berdasarkan instructor_id
+export const useFetchCoursesByInstructor = (instructorId) => {
+  const [dataCourse, setDataCourse] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${import.meta.env.VITE_API_BASE_URL}/v1/course?instructor_id=${instructorId}`;
+        const response = await axios.get(url);
+        setDataCourse(response.data.data || []);
+      } catch (err) {
+        setError(err.message || "Failed to fetch courses");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (instructorId) {
+      fetchData();
+    }
+  }, [instructorId]);
+
+  return { dataCourse, loading, error };
+};

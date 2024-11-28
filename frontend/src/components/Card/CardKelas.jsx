@@ -10,9 +10,21 @@ const CardKelas = ({ title, image, deskripsi, dosen, kelas, waktu, harga, id }) 
     navigate(`/detail-informasi-kelas/${id}`);
   };
 
+  const handleDaftarClass = () => {
+    navigate(`/checkout-kelas/${id}`);
+  };
+
   return (
-    <div className="max-w-xs bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
-      <img src={image} alt={title || "Gambar Kelas"} className="w-full h-48 object-cover rounded-t-lg" onError={(e) => (e.target.src = "https://via.placeholder.com/200")} />
+    <div
+      className="max-w-xs bg-white rounded-lg shadow-md p-4 flex flex-col justify-between cursor-pointer"
+      onClick={handleDetailClick}
+    >
+      <img
+        src={image}
+        alt={title || "Gambar Kelas"}
+        className="w-full h-48 object-cover rounded-t-lg"
+        onError={(e) => (e.target.src = "https://via.placeholder.com/200")}
+      />
       <div className="flex flex-col p-4">
         <h3 className="font-bold text-lg mb-2 text-gray-800">{title}</h3>
         <p className="text-sm text-gray-600 mb-4">{deskripsi}</p>
@@ -32,8 +44,15 @@ const CardKelas = ({ title, image, deskripsi, dosen, kelas, waktu, harga, id }) 
           <span className="font-semibold text-gray-800">{harga}</span>
         </div>
         <div className="mt-auto">
-          <button onClick={handleDetailClick} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded">
-            Detail Kelas
+          {/* Prevent Card Click overriding the button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDaftarClass();
+            }}
+            className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded"
+          >
+            Daftar Kelas
           </button>
         </div>
       </div>

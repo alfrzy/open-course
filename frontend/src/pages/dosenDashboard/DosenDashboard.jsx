@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
-import { useFetchCourses } from "../../Data/DataCourse";
+import { useFetchCourses, useFetchCoursesByInstructor } from "../../Data/DataCourse";
 import { useSelector } from "react-redux";
 import useFetchTotalSiswaInCourses from "../../Data/dataDosenAndSiswa";
 import DosenCardKelas from "../../components/Card/dosenCardKelas";
@@ -23,7 +23,7 @@ const DosenDashboard = () => {
     dataCourse,
     loading: coursesLoading,
     error: error,
-  } = useFetchCourses(instructorId, role, null);
+  } = useFetchCoursesByInstructor(instructorId);
   const totalCourses = dataCourse?.length || 0;
 
   return (

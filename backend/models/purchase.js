@@ -37,7 +37,7 @@ const Purchase = sequelize.define(
       defaultValue: false,
     },
     total: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 0
     },

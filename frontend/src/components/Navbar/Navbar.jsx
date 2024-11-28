@@ -78,14 +78,14 @@ const Navbar = () => {
         ) : (
           <>
             {role === 0 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>
 
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-md">
-                    <a href="/mahasiswa-dashboard" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
+                    <a href="/mahasiswa-kelas" className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
                       Dashboard
                     </a>
                     <a href={`/profil/${userId}`} className="block px-4 py-2 text-gray-700 hover:font-semibold hover:text-blue-500 hover:bg-gray-100 hover:border-l-4 hover:border-blue-700 transition duration-200">
@@ -102,7 +102,7 @@ const Navbar = () => {
               </div>
             )}
             {role === 1 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>
@@ -123,7 +123,7 @@ const Navbar = () => {
               </div>
             )}
             {role === 2 && (
-              <div className="relative">
+              <div className="relative z-40">
                 <button className="flex items-center space-x-2 focus:outline-none" onClick={toggleDropdown}>
                   <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
                 </button>

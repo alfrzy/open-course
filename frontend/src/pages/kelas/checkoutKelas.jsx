@@ -9,30 +9,28 @@ import { saveUserCourse } from "../../Data/dataUserCourse";
 import { useSelector } from "react-redux";
 
 const generateUniqueCode = () => {
-  return Math.floor(100 + Math.random() * 900);
+  return (Math.random() * 0.98 + 0.01).toFixed(2);
 };
 
 const Checkout = () => {
   const { id } = useParams();
+  const courseId = parseInt(id, 10);
   const navigate = useNavigate();
   const [couponCode, setCouponCode] = useState("");
   const [uniqueCode, setUniqueCode] = useState(generateUniqueCode);
 
-  // Fetch course data based on ID
   const {
     dataCourse,
     loading: courseLoading,
     error: courseError,
-  } = useFetchCourses(null, null, id);
+  } = useFetchCourses(null, null, courseId);
 
-  // Fetch purchases data
   const {
     dataPurchase,
     loading: purchaseLoading,
     error: purchaseError,
   } = useFetchPurchases();
 
-  // Get user_id from Redux
   const loggedInUserId = useSelector((state) => state.auth.user?.id);
 
   useEffect(() => {
@@ -41,14 +39,11 @@ const Checkout = () => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    // tanggal terbaru
     const enrollmentDate = new Date();
-    // enrollment_date + duration
     const dueDate = new Date(
       enrollmentDate.getTime() + kelas.duration * 60 * 60 * 1000
     );
 
-    // last id + 1
     let latestId = 0;
     dataPurchase.forEach((purchase) => {
       if (purchase.id > latestId) {
@@ -57,27 +52,25 @@ const Checkout = () => {
     });
     const nextId = latestId + 1;
 
-    // Generate invoice number using the next ID
     const invoiceNumber = `INV-${new Date().getTime()}${nextId}`;
 
     try {
-      //  savePurchase
       const postResponse = await savePurchase({
-        user_id: loggedInUserId,
-        course_id: id,
+        user_id: parseInt(loggedInUserId, 10),
+        course_id: courseId,
         invoice_number: invoiceNumber,
-        total: totalHarga,
+        total: parseFloat(totalHarga),
       });
 
       if (postResponse.status === 201) {
-        // save usercourse
         await saveUserCourse({
-          course_id: id,
-          user_id: loggedInUserId,
+          course_id: courseId,
+          user_id: parseInt(loggedInUserId, 10),
           is_finish: false,
           enrollment_date: enrollmentDate,
           due_date: dueDate,
         });
+
         Swal.fire({
           icon: "success",
           title: "Berhasil",
@@ -86,41 +79,41 @@ const Checkout = () => {
           navigate(`/checkout-kelas-sukses/${nextId}`);
         });
       }
-    }  catch (error) {
-      console.error("Error during checkout:", error);
-  
-      if (error.message.includes("User sudah terdaftar di kelas ini")) {
+    } catch (error) {
+      if (error.response) {
         Swal.fire({
           icon: "error",
           title: "Gagal",
-          text: "Anda sudah terdaftar di kursus ini.",
+          text: error.response.data.message || "Terjadi kesalahan di server.",
         });
       } else {
         Swal.fire({
           icon: "error",
           title: "Gagal",
-          text: "Anda Sudah Terdaftar.",
+          text: "Anda sudah terdaftar",
         });
       }
     }
   };
 
-  // Check i
-  if (courseLoading || purchaseLoading) return <div>Loading...</div>;
-  if (courseError) return <div>Error: {courseError}</div>;
-  if (purchaseError) return <div>Error: {purchaseError}</div>;
+  if (courseLoading || purchaseLoading) {
+    return <div>Loading...</div>;
+  }
+  if (courseError) {
+    return <div>Error: {courseError}</div>;
+  }
+  if (purchaseError) {
+    return <div>Error: {purchaseError}</div>;
+  }
 
   const kelas = dataCourse[0];
-
-  const totalHarga = kelas.price + uniqueCode;
+  const totalHarga = (parseFloat(kelas.price) + parseFloat(uniqueCode)).toFixed(2);
 
   return (
     <div className="min-h-screen font-poppins bg-gray-200">
       <Navbar />
-      {/* Main Container */}
-      <div className="container mx-auto py-10  ">
+      <div className="container mx-auto py-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:flex md:justify-center">
-          {/* Keranjang Section */}
           <div className="bg-white p-6 rounded shadow-md md:w-[50%]">
             <h2 className="text-xl sm:text-2xl text-blue-500 font-bold">
               Keranjang Kamu
@@ -135,7 +128,7 @@ const Checkout = () => {
                 <div>
                   <h3 className="text-lg font-semibold">{kelas.name}</h3>
                   <p className="text-gray-600">
-                    Rp.{kelas.price.toLocaleString()}
+                    ${parseFloat(kelas.price).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -162,15 +155,15 @@ const Checkout = () => {
               <div className="mt-2">
                 <div className="flex justify-between">
                   <p>{kelas.name}</p>
-                  <p>Rp. {kelas.price.toLocaleString()}</p>
+                  <p>${parseFloat(kelas.price).toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p>Kode Unik</p>
-                  <p>{uniqueCode}</p>
+                  <p>${uniqueCode}</p>
                 </div>
                 <div className="flex justify-between font-bold mt-2">
                   <p>Total</p>
-                  <p>Rp. {totalHarga.toLocaleString()}</p>
+                  <p>${totalHarga}</p>
                 </div>
               </div>
             </div>
