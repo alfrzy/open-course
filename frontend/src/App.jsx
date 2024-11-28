@@ -50,6 +50,7 @@ const App = () => {
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
         {/* dosen */}
+
         {/* <Route path="/addmateri" element={<AddMateri />} />
         <Route path="/detail-kelas/:id" element={<Detail />} />
         <Route path="/dosen-addkelas" element={<AddKelas />} />
@@ -81,7 +82,7 @@ const App = () => {
           <Route path="/dosen-dashboard" element={<DosenDashboard />} />
           <Route path="/dosen-addkelas" element={<AddKelas />} />
           <Route path="/dosen-kelas" element={<DosenKelas />} />
-          {/* <Route path="/dosen-kelas/:id" element={<DosenKelas />} /> */}
+          <Route path="/dosen-kelas/:id" element={<DosenKelas />} />
           <Route path="/dosen-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/dosen-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
         </Route>

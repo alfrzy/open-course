@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom"; 
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useSelector } from "react-redux";
-import ComponentButton from "../../components/Button/ComponentButton"; 
+import ComponentButton from "../../components/Button/ComponentButton";
 
 const ModuleDetail = () => {
-  const { id, moduleId } = useParams(); 
+  const { id, moduleId } = useParams();
   const [Module, setModule] = useState(null);
-  const [Section, setSection] = useState(null); 
-  const [courseName, setCourseName] = useState(""); 
+  const [Section, setSection] = useState(null);
+  const [courseName, setCourseName] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   const role = useSelector((state) => state.auth.user?.role ?? null); // Mengambil role dari Redux store
 
@@ -20,14 +20,11 @@ const ModuleDetail = () => {
     const fetchCourseDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/v1/course/${id}/dashboard`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/course/${id}/dashboard`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const courseData = response.data.data;
 
         setCourseName(courseData.name); // Set nama kelas dari API
@@ -35,8 +32,8 @@ const ModuleDetail = () => {
         let selectedModule = null;
         let selectedSection = null;
 
-        courseData.Sections.forEach(Section => {
-          const foundModule = Section.Modules.find(Module => Module.id === parseInt(moduleId));
+        courseData.Sections.forEach((Section) => {
+          const foundModule = Section.Modules.find((Module) => Module.id === parseInt(moduleId));
           if (foundModule) {
             selectedModule = foundModule;
             selectedSection = Section;
@@ -84,9 +81,9 @@ const ModuleDetail = () => {
           <nav className="mb-4 text-sm text-gray-500">
             <ul className="flex space-x-2">
               <li>
-                <Link  
+                <Link
                   to={
-                    role === 0 
+                    role === 0
                       ? `/mahasiswa-detail-kelas/${id}/dashboard` // URL untuk siswa
                       : role === 1
                       ? `/dosen-detail-kelas/${id}/dashboard` // URL untuk dosen
@@ -94,15 +91,13 @@ const ModuleDetail = () => {
                   }
                   className="text-black"
                 >
-                  {courseName} 
+                  {courseName}
                 </Link>
               </li>
               <li>/</li>
               {Section && (
                 <li>
-                  <span className="text-black">
-                    {Section.title}
-                  </span>
+                  <span className="text-black">{Section.title}</span>
                 </li>
               )}
               <li>/</li>
@@ -115,10 +110,7 @@ const ModuleDetail = () => {
           {/* Konten detail module */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold mb-2">Materi Lengkap</h3>
-            <div
-              className="text-gray-700"
-              dangerouslySetInnerHTML={{ __html: Module.description }} 
-            />
+            <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: Module.description }} />
           </div>
           {role === 0 && (
             <div className="mt-6 text-right">
