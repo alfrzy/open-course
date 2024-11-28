@@ -56,9 +56,6 @@ const AddKelas = () => {
       const url = id ? `http://localhost:3000/api/v1/kelas/addKelas/${id}` : "http://localhost:3000/api/v1/kelas/addKelas";
       const response = await axios.post(url, classData);
 
-      console.log("response :", response.data);
-      console.log("data :", classData);
-
       Swal.fire({
         title: "Sukses!",
         text: id ? "Kelas berhasil diperbarui!" : "Kelas berhasil ditambahkan!",

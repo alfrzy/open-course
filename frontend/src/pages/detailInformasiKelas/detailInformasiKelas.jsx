@@ -16,8 +16,6 @@ const DetailInformasiKelas = () => {
 
   const { dataCourse, loading: courseLoading, error: courseError } = useFetchCourses(id);
   const { registrantCount, loading: registrantLoading, error: registrantError } = useFetchCourseRegistrantCount(parseInt(id));
-  console.log(dataCourse);
-  console.log(registrantCount);
 
   const course = dataCourse[0];
 
