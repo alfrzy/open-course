@@ -9,7 +9,7 @@ const PrivateRoute = ({ requiredRole, redirectPath = "/" }) => {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (requiredRole && role.toString() !== requiredRole) {
