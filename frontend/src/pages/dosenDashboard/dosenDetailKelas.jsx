@@ -35,14 +35,11 @@ const CourseDetail = () => {
     const fetchCourseDetails = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/v1/course/${id}/dashboard`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/course/${id}/dashboard`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setCourse(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -73,7 +70,7 @@ const CourseDetail = () => {
       <div className="flex justify-between items-center max-w-6xl mx-auto p-6 md:ml-64">
         <nav className="text-gray-600">
           <Link to={role === 0 ? `/mahasiswa-kelas/` : role === 1 ? `/dosen-kelas` : `/admin-kelas`} className="text-black">
-            Kelas 
+            Kelas
           </Link>
           <span className="mx-2"> &gt; </span>
           <span className="font-medium">{course.name}</span>
@@ -96,16 +93,14 @@ const CourseDetail = () => {
           </div>
 
           {role === 1 && (
-          <div className="md:w-1/3 md:ml-6 md:mt-10">
-            <div className="bg-white text-blue-800 p-4 border-2 border-blue-600 rounded-lg shadow-md max-w-md mx-auto">
-              <h3 className="text-xl font-semibold mb-4 text-center border-b border-blue-700">
-                Jumlah Siswa
-              </h3>
-              <p className="text-4xl font-bold text-center">{course.userCount} Siswa</p>
+            <div className="md:w-1/3 md:ml-6 md:mt-10">
+              <div className="bg-white text-blue-800 p-4 border-2 border-blue-600 rounded-lg shadow-md max-w-md mx-auto">
+                <h3 className="text-xl font-semibold mb-4 text-center border-b border-blue-700">Jumlah Siswa</h3>
+                <p className="text-4xl font-bold text-center">{course.userCount} Siswa</p>
+              </div>
             </div>
-          </div>
           )}
-          
+
           {role === 2 && (
             <div className="bg-yellow-100 text-gray-800 p-4 border-2 border-yellow-500 rounded-lg shadow-md max-w-md mx-auto md:w-1/3 md:ml-6 md:mt-10">
               <h3 className="text-lg font-semibold mb-4 text-center border-b border-yellow-700">Anggota Kelas</h3>
@@ -124,12 +119,9 @@ const CourseDetail = () => {
               </div>
 
               {course.Members.length > 3 && (
-                 <button
-                 onClick={openMembersModal}
-                 className="px-4 py-2 bg-green-500 text-white flex justify-center rounded-md hover:bg-green-600"
-               >
-                 Lihat Selengkapnya
-               </button>
+                <button onClick={openMembersModal} className="px-4 py-2 bg-green-500 text-white flex justify-center rounded-md hover:bg-green-600">
+                  Lihat Selengkapnya
+                </button>
               )}
               <button onClick={openAddMemberModal} className="mt-4 w-full bg-green-500 text-white py-2 rounded-md font-semibold hover:bg-green-600">
                 Tambah Anggota
