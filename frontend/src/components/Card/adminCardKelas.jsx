@@ -9,9 +9,9 @@ const AdminCardKelas = ({ course }) => {
 
   return (
     <div className="max-w-xs bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
-      {course.image ? (
+      {course.thumbnail ? (
         <img
-          src={course.image}
+          src={course.thumbnail}
           alt={course.name}
           className="w-full h-48 object-cover rounded-t-lg"
         />

@@ -32,6 +32,7 @@ import Pembelian from "./pages/Pembalian/pembelian";
 import AddMemberModal from "./components/Form/tambahAnggota";
 import MahasiswaProfil from "./pages/mahasiswaDashboard/mahasiswaProfil";
 import AdminKelas from "./pages/adminDashboard/kelas/adminKelas";
+import DetailQuiz from "./pages/DetailQuiz/DetailQuiz";
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/detail-informasi-kelas/:id" element={<DetailInformasiKelas />} />
         <Route path="/pembelian" element={<Pembelian />} />
         <Route path="/:courseId/tambah-anggota" element={<AddMemberModal />} />
+        <Route path="/quiz/:courseId" element={<DetailQuiz />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
@@ -71,6 +73,7 @@ const App = () => {
           {/* <Route path="/kelas" element={<PageKelas />} /> */}
           <Route path="/siswa" element={<SiswaDashboard />} />
           <Route path="/siswa/:id" element={<SiswaDetail />} />
+          <Route path="/admin-addkelas" element={<AddKelas />} />
           <Route path="/admin-detail-kelas/:id/dashboard" element={<CourseDetail />} />
           <Route path="/admin-detail-kelas/:id/dashboard/module/:moduleId" element={<ModuleDetail />} />
           {/* <Route path="/mahasiswa" element={<PageKelas />} /> */}

@@ -44,7 +44,7 @@ const AdminKelas = () => {
 
           {/* button tambah kelas */}
           <div className="block md:hidden my-3">
-            <a href="/dosen-addkelas">
+            <a href="/admin-addkelas">
               <ComponentButton color={"bg-blue-700"} text={"Tambah Kelas"} />
             </a>
           </div>
@@ -56,20 +56,28 @@ const AdminKelas = () => {
               <FilterText filter={filter} setFilter={setFilter} label="Publik" />
               <FilterText filter={filter} setFilter={setFilter} label="Draft" />
             </div>
-            <ComponentButton color={"bg-blue-600"} link={"/dosen-addkelas"} text={"Tambah kelas"} />
+            <ComponentButton color={"bg-blue-600"} link={"/admin-addkelas"} text={"Tambah kelas"} />
           </section>
 
           {/* List Card */}
-          <section className="md:flex md:flex-wrap md:justify-start">
+          <section className="md:flex md:flex-wrap md:justify-start gap-4">
             {filteredClasses.map((kelas) => (
               <Link
                 key={kelas.id}
-                to={`/admin-detail-kelas/${kelas.id}/dashboard`} // Link to detail page
-                className="w-full h-40 mt-6 md:w-[23%] relative md:mr-4"
+                to={`/admin-detail-kelas/${kelas.id}/dashboard`}
+                className="w-full h-40 mt-6 md:w-[23%] relative"
               >
-                <div className={`bg-red-500 hover:bg-opacity-50 transition-all duration-300 h-[85%] ${kelas.is_publish === false ? "relative" : ""}`}>
-                  {/* Teks "Draft" ditampilkan di pojok kanan atas jika kursus belum dipublish */}
-                  {kelas.is_publish === false && <span className="absolute top-0 right-0 bg-white text-red-500 text-xs font-bold px-2">Draft</span>}
+                <div className={`max-w-xs bg-white p-[5%] ${kelas.is_publish === false ? "relative" : ""}`}>
+                  <img 
+                    src={kelas.thumbnail}
+                    alt={kelas.name}
+                    className="w-full h-[150px] object-cover rounded-t-lg"
+                  />
+                  {kelas.is_publish === false && (
+                    <span className="absolute top-0 right-0 bg-white text-red-500 text-xs font-bold px-2">
+                      Draft
+                    </span>
+                  )}
                 </div>
                 <section className="h-[15%]">
                   <h1 className="font-bold">{kelas.name}</h1>
@@ -77,6 +85,7 @@ const AdminKelas = () => {
               </Link>
             ))}
           </section>
+
           {/* CONTENT END */}
         </div>
       </div>

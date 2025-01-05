@@ -3,12 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useFetchCourses } from "../../Data/DataCourse";
 import { useFetchCourseRegistrantCount } from "../../Data/dataUserCourse";
 import { FaRegClock } from "react-icons/fa";
-import { GiAnticlockwiseRotation } from "react-icons/gi";
 import { IoIosPricetags } from "react-icons/io";
 import { MdOutlineLanguage, MdCategory } from "react-icons/md";
-import { FaFileVideo } from "react-icons/fa6";
 import LandingFooter from "../../components/Footer/LandingFooter";
-import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 const DetailInformasiKelas = () => {
   const { id } = useParams();
@@ -30,84 +28,82 @@ const DetailInformasiKelas = () => {
 
   return (
     <>
-    <DashboardNavbar />
-    <section className="p-5 md:p-14">
-      {/* Bagian Gambar dan Informasi Utama */}
-      <section className="md:flex md:flex-row-reverse md:justify-between">
-        <section className="w-full h-36 md:h-56 md:w-[45%] md:rounded-xl md:overflow-hidden">
-          <img src={course.image_url || "https://via.placeholder.com/150"} alt={course.name} className="w-full h-full" />
-        </section>
+      <Navbar />
+      <section className="p-5 md:p-14">
+        {/* Bagian Gambar dan Informasi Utama */}
+        <section className="md:flex md:flex-row-reverse md:justify-between mb-8 pb-8 border-b border-gray-300">
+          <section className="w-full h-36 md:h-56 md:w-[45%] md:rounded-xl md:overflow-hidden shadow-lg">
+            <img src={course.thumbnail || "https://via.placeholder.com/150"} alt={course.name} className="w-full h-full object-cover" />
+          </section>
 
-        <section className="md:w-[45%]">
-          <h1 className="font-bold text-2xl md:text-4xl">{course.name}</h1>
-          <p className="text-sm text-justify mt-3 md:mt-4">{course.description}</p>
+          <section className="md:w-[45%]">
+            <h1 className="font-bold text-2xl md:text-4xl text-gray-800">{course.name}</h1>
 
-          <section className="mt-3 md:mt-5 flex justify-between">
-            <button onClick={handlePayment} className="py-2 px-4 bg-blue-700 hover:bg-blue-500 text-white rounded-sm w-[40%] transition-all duration-300">
-              Daftar Sekarang
-            </button>
-            <h1 className="mt-2 text-gray-500 font-bold">{registrantCount} pendaftar</h1>
+            <section className="mt-3 md:mt-10 flex justify-between items-center">
+              <button onClick={handlePayment} className="py-2 px-6 bg-blue-600 hover:bg-blue-500 text-white rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                Daftar Sekarang
+              </button>
+              <h1 className="mt-2 text-gray-500 font-semibold">{registrantCount} pendaftar</h1>
+            </section>
           </section>
         </section>
-      </section>
 
-      {/* Tentang Kelas */}
-      <section className="mt-10">
-        <h1 className="font-bold text-2xl">Tentang Kelas ini</h1>
-        <section className="md:flex md:justify-between mt-5">
-          <section className="md:w-[70%]">
-            <p className="text-sm">{course.long_description || "Deskripsi tidak tersedia."}</p>
-          </section>
-          <section className="md:w-[25%] border-2 border-gray-400 p-3">
-            <IsiTabel title="Lamanya" value={`${course.duration} jam`} Icon={FaRegClock} />
-            <IsiTabel title="Harga" value={`${course.price}$`} Icon={IoIosPricetags} />
-            <IsiTabel title="Bahasa" value={course.language} Icon={MdOutlineLanguage} />
-            <IsiTabel title="Kategori" value={course.category_name || "Kategori tidak tersedia"} Icon={MdCategory} />
+        {/* Tentang Kelas */}
+        <section className="mb-8 pb-8 border-b border-gray-300">
+          <h1 className="font-bold text-2xl text-gray-800">Tentang Kelas ini</h1>
+          <section className="md:flex md:justify-between mt-5">
+            <section className="md:w-[70%]">
+              <p className="text-sm text-gray-600">{course.description || "Deskripsi tidak tersedia."}</p>
+            </section>
+            <section className="md:w-[25%] border-2 border-gray-400 rounded-lg p-5 shadow-sm">
+              <IsiTabel title="Lamanya" value={`${course.duration} jam`} Icon={FaRegClock} />
+              <IsiTabel title="Harga" value={`Rp. ${course.price}`} Icon={IoIosPricetags} />
+              <IsiTabel title="Bahasa" value={course.language} Icon={MdOutlineLanguage} />
+              <IsiTabel title="Kategori" value={course.category_name || "Kategori tidak tersedia"} Icon={MdCategory} />
+            </section>
           </section>
         </section>
-      </section>
 
-      {/* Learning List */}
-      <section className="mt-10">
-        <h1 className="font-bold text-2xl">Learning List</h1>
-        {course.learningList?.length > 0 ? (
-          course.learningList.map((item, index) => (
-            <div key={index} className="flex items-center mt-2">
-              <div className="w-2 h-2 bg-gray-500 rounded-full mr-2"></div>
-              <p className="text-sm">{item.name || "Nama tidak tersedia"}</p>
+        {/* Learning List */}
+        <section className="mb-8 pb-8 border-b border-gray-300">
+          <h1 className="font-bold text-2xl text-gray-800">Learning List</h1>
+          {course.learningList?.length > 0 ? (
+            course.learningList.map((item, index) => (
+              <div key={index} className="flex items-center mt-2">
+                <div className="w-2 h-2 bg-gray-500 rounded-full mr-2"></div>
+                <p className="text-sm text-gray-600">{item.name || "Nama tidak tersedia"}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">Tidak ada materi dalam daftar belajar.</p>
+          )}
+        </section>
+
+        {/* Instruktur */}
+        <section className="mb-8 pb-8 border-b border-gray-300">
+          <h1 className="font-bold text-2xl text-gray-800">Temui Dosen Anda</h1>
+          <div className="flex items-center mt-5">
+            <img src={course.instructor?.image_url || "https://via.placeholder.com/100"} alt={course.instructor?.full_name} className="w-24 h-24 rounded-full mr-5 border-2 border-gray-300" />
+            <div>
+              <h2 className="font-bold text-lg text-gray-800">{course.instructor?.name || "Nama dosen tidak tersedia"}</h2>
+              <p className="text-sm text-gray-600">{course.instructor?.email || "Email tidak tersedia"}</p>
             </div>
-          ))
-        ) : (
-          <p className="text-gray-500">Tidak ada materi dalam daftar belajar.</p>
-        )}
-      </section>
-
-      {/* Instruktur */}
-      <section className="mt-10">
-        <h1 className="font-bold text-2xl">Temui Dosen Anda</h1>
-        <div className="flex items-center mt-5">
-          <img src={course.instructor?.image_url || "https://via.placeholder.com/100"} alt={course.instructor?.full_name} className="w-24 h-24 rounded-full mr-5" />
-          <div>
-            <h2 className="font-bold text-lg">{course.instructor?.name || "Nama dosen tidak tersedia"}</h2>
-            <p className="text-sm">{course.instructor?.email || "Email tidak tersedia"}</p>
           </div>
-        </div>
+        </section>
       </section>
-      </section>
-    <LandingFooter />
+      <LandingFooter />
     </>
-
   );
 };
 
-export default DetailInformasiKelas;
-
 const IsiTabel = ({ title, value, Icon }) => (
-  <div className="flex justify-between my-2">
-    <div className="flex items-center">
-      <Icon className="w-4 h-4 mr-2" />
-      <h2>{title}</h2>
+  <div className="flex justify-between my-4">
+    <div className="flex items-center text-gray-600">
+      <Icon className="w-5 h-5 text-blue-500 mr-2" />
+      <h2 className="font-medium">{title}</h2>
     </div>
-    <h2>{value}</h2>
+    <h2 className="font-semibold">{value}</h2>
   </div>
 );
+
+export default DetailInformasiKelas;

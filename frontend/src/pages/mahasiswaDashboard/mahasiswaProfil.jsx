@@ -94,7 +94,7 @@ const MahasiswaProfil = () => {
           <section className="">
             <div className="mt-5 flex justify-center">
               <div className="w-20 h-20 md:w-40 md:h-40 rounded-full overflow-hidden">
-                <img src={`http://localhost:3000/${siswa.profile_picture}`} alt="" className="w-full h-full" />
+                <img src={siswa.profile_picture} alt="" className="w-full h-full" />
               </div>
             </div>
 

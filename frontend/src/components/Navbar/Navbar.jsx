@@ -41,20 +41,6 @@ const Navbar = () => {
         <div className="mr-[25px]">
           <h1 className="font-bold text-[18px] md:text-[24px] text-white">Fe Open Courses</h1>
         </div>
-
-        {/* Menu links for desktop */}
-        <div className="hidden md:flex gap-3">
-          <NavLink to="/" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
-            Kelas
-          </NavLink>
-          <NavLink to="/sertifikat" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
-            Sertifikat Terprogram
-          </NavLink>
-          <NavLink to="/tentang" className={({ isActive }) => `text-white text-[16px] ${isActive ? "underline font-bold" : ""} hover:underline hover:text-black`}>
-            Tentang
-          </NavLink>
-        </div>
-
         {/* Hamburger menu for mobile */}
         <button className="md:hidden text-white focus:outline-none" onClick={toggleMenu}>
           {isMenuOpen ? <AiOutlineClose size={24} /> : <FiMenu size={24} />}

@@ -86,11 +86,32 @@ const CourseDetail = () => {
       <div className="flex">
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-        <div className={`flex-1 flex flex-col md:flex-row max-w-6xl mx-auto p-6 transition-all duration-300 ease-in-out ${isSidebarOpen ? "ml-0" : "md:ml-64"}`}>
+        <div
+          className={`flex-1 flex flex-col md:flex-row max-w-6xl mx-auto p-6 transition-all duration-300 ease-in-out ${
+            isSidebarOpen ? "ml-0" : "md:ml-64"
+          }`}
+        >
           <div className="md:w-2/3">
             <h1 className="text-2xl font-bold mb-4">{course.name}</h1>
             <ClassDetail Sections={course.Sections} announcement={course.announcement} />
           </div>
+          {role === 0 && (
+              <div className="md:w-1/3 md:ml-6 md:mt-10">
+                <div className="bg-white text-blue-800 p-4 border-2 border-blue-600 rounded-lg shadow-md max-w-md mx-auto">
+                  <h3 className="text-xl font-semibold mb-4 text-center border-b border-blue-700">
+                    Kerjakan Quiz
+                  </h3>
+                  <p className="text-sm text-gray-600 text-center mb-4">
+                    Selesaikan soal untuk meningkatkan pemahaman Anda.
+                  </p>
+                  <Link to={`/quiz/${id}`}>
+                    <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-md shadow-md hover:bg-purple-700">
+                      Kerjakan Quiz
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
 
           {role === 1 && (
             <div className="md:w-1/3 md:ml-6 md:mt-10">
@@ -123,7 +144,10 @@ const CourseDetail = () => {
                   Lihat Selengkapnya
                 </button>
               )}
-              <button onClick={openAddMemberModal} className="mt-4 w-full bg-green-500 text-white py-2 rounded-md font-semibold hover:bg-green-600">
+              <button
+                onClick={openAddMemberModal}
+                className="mt-4 w-full bg-green-500 text-white py-2 rounded-md font-semibold hover:bg-green-600"
+              >
                 Tambah Anggota
               </button>
             </div>

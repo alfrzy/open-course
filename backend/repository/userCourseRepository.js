@@ -25,7 +25,7 @@ class UserCourseRepository {
         {
           model: Course,
           as: "CourseRelation",
-          attributes: ["name", "instructor_id", "duration"],
+          attributes: ["name", "instructor_id", "duration", "description", "thumbnail"],
           include: [
             {
               model: User,

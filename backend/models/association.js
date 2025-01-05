@@ -6,6 +6,8 @@ const Section = require("./section");
 const UserCourses = require("./userCourse");
 const User = require("./user");
 const Purchase = require("./purchase");
+const Question = require("./question");
+const Score = require("./score");
 
 // learning list dengan course
 LearningList.belongsTo(Course, {
@@ -114,4 +116,37 @@ User.belongsToMany(Course, {
   through: UserCourses,
   as: "Courses",
   foreignKey: "user_id",
+});
+
+// Relasi antara Question dan Course
+Question.belongsTo(Course, {
+  foreignKey: "course_id",
+  as: "Course",
+});
+
+Course.hasMany(Question, {
+  foreignKey: "course_id",
+  as: "Questions",
+});
+
+// Relasi antara Scores dan Users
+Score.belongsTo(User, {
+  foreignKey: "user_id",
+  as: "User",
+});
+
+User.hasMany(Score, {
+  foreignKey: "user_id",
+  as: "Scores",
+});
+
+// Relasi antara Scores dan Courses
+Score.belongsTo(Course, {
+  foreignKey: "course_id",
+  as: "Course",
+});
+
+Course.hasMany(Score, {
+  foreignKey: "course_id",
+  as: "Scores",
 });

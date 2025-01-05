@@ -49,7 +49,7 @@ const LandingFooter = () => {
               </li>
               <li className="flex items-center">
                 <FiMail className="mr-2" />
-                fe@unissula.ac.id
+                fe@opencourse.ac.id
               </li>
             </ul>
           </div>

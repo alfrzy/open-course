@@ -80,11 +80,15 @@ const MahasiswaKelas = () => {
               className="mb-4 md:w-[30%] md:mr-10"
             >
               <section key={kelas.course_id}>
-                <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
+                <div className="w-full bg-white p-[5%] rounded-t-lg">
+                  <img
+                  src={kelas.CourseRelation.thumbnail}
+                  alt={kelas.CourseRelation.name}
+                  className="w-full h-[150px] object-cover rounded-t-lg"/>
+                </div>
                 <h1 className="font-bold text-lg">{kelas.CourseRelation.name}</h1>
                 <p className="text-sm">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis culpa aperiam sunt fuga.
+                {kelas.CourseRelation.description}
                 </p>
                 <div className="mt-2">
                   <div className="flex gap-3 items-center">
@@ -119,11 +123,15 @@ const MahasiswaKelas = () => {
               className="mb-4 md:w-[30%] md:mr-10"
             >
               <section key={kelas.course_id}>
-                <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
+              <div className="w-full bg-white p-[5%] rounded-t-lg">
+                  <img
+                  src={kelas.CourseRelation.thumbnail}
+                  alt={kelas.CourseRelation.name}
+                  className="w-full h-[150px] object-cover rounded-t-lg"/>
+                </div>
                 <h1 className="font-bold text-lg">{kelas.CourseRelation?.name}</h1>
                 <p className="text-sm">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis culpa aperiam sunt fuga.
+                {kelas.CourseRelation.description}
                 </p>
                 <div className="mt-2">
                   <div className="flex gap-3 items-center">
@@ -158,11 +166,15 @@ const MahasiswaKelas = () => {
               className="mb-4 md:w-[30%] md:mr-10"
             >
               <section key={kelas.course_id}>
-                <div className="bg-red-500 w-full h-36 mb-0 p-4"></div>
+              <div className="w-full bg-white p-[5%] rounded-t-lg">
+                  <img
+                  src={kelas.CourseRelation.thumbnail}
+                  alt={kelas.CourseRelation.name}
+                  className="w-full h-[150px] object-cover rounded-t-lg"/>
+                </div>
                 <h1 className="font-bold text-lg">{kelas.CourseRelation?.name}</h1>
                 <p className="text-sm">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Debitis culpa aperiam sunt fuga.
+                {kelas.CourseRelation.description}
                 </p>
                 <div className="mt-2">
                   <div className="flex gap-3 items-center">
