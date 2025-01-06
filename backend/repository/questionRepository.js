@@ -1,8 +1,18 @@
 const Question = require("../models/question");
+const Course = require("../models/course")
 
 class QuestionRepository {
   async findAllByCourse(courseId) {
-    return await Question.findAll({ where: { course_id: courseId } });
+    return await Question.findAll({
+      where: { course_id: courseId },
+      include: [
+        {
+          model: Course,
+          as: "Course",
+          attributes: ["name"], // Ambil hanya atribut `name` dari Course
+        },
+      ],
+    });
   }
 
   async create(data) {

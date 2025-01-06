@@ -29,7 +29,7 @@ const ClassDetail = ({ Sections = [] }) => {
               {Section.title === "Pengumuman" ? (
                 Section.title
               ) : (
-                `BAB ${index + 1}: ${Section.title}`
+                `${Section.title}`
               )}
             </button>
             

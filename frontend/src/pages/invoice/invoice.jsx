@@ -3,6 +3,7 @@ import { CgDanger } from "react-icons/cg";
 import { FaCopy } from "react-icons/fa";
 import { useFetchPurchases } from "../../Data/dataPurchase";
 import { useParams } from "react-router-dom";
+import DashboardNavbar from "../../components/Navbar/DashboardNavbar";
 
 const Purchase = () => {
   const { id } = useParams();
@@ -19,6 +20,8 @@ const Purchase = () => {
 
   return (
     <>
+    <div className="min-h-screen font-poppins bg-gray-200">
+    <DashboardNavbar />
       <section className="bg-gray-100">
         <section className="p-10 md:p-14 font-poppins md:w-[80%] md:mx-auto  ">
           <section className=" md:flex md:justify-between md:flex-row-reverse">
@@ -115,6 +118,7 @@ const Purchase = () => {
           </div>
         </section>
       </section>
+      </div>
     </>
   );
 };

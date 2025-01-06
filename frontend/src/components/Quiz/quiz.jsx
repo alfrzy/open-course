@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { fetchQuestions } from "../../Data/DataNilai"; // Pastikan ini mengarah ke lokasi yang benar
-import { useParams } from "react-router-dom"; // Untuk mendapatkan courseId dari URL
+import { useParams, useNavigate } from "react-router-dom"; // Untuk mendapatkan courseId dari URL dan navigasi
+import Swal from "sweetalert2";
 
 const Quiz = () => {
   const { courseId } = useParams(); // Mengambil courseId dari URL
+  const navigate = useNavigate(); // Untuk navigasi setelah selesai
   const [questions, setQuestions] = useState([]);
+  const [courseName, setCourseName] = useState("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -19,9 +21,9 @@ const Quiz = () => {
 
       try {
         const data = await fetchQuestions(courseId);
-        console.log("Data Questions:", data); 
         if (Array.isArray(data) && data.length > 0) {
           setQuestions(data);
+          setCourseName(data[0]?.Course?.name || "");
         } else {
           throw new Error("Invalid data format: Expected an array of questions.");
         }
@@ -36,8 +38,6 @@ const Quiz = () => {
 
   const handleAnswer = (selectedOption) => {
     const currentQuestion = questions[currentQuestionIndex];
-    console.log("Selected Option:", selectedOption);
-    console.log("Correct Answer:", currentQuestion.correct_answer);
 
     // Bandingkan pilihan siswa dengan jawaban benar
     if (selectedOption === currentQuestion.correct_answer) {
@@ -48,7 +48,15 @@ const Quiz = () => {
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      setIsFinished(true);
+      // Tampilkan SweetAlert ketika selesai
+      Swal.fire({
+        title: "Selamat!",
+        text: `Anda telah menyelesaikan kuis ini. Skor Anda adalah ${score + 1} dari ${questions.length}.`,
+        icon: "success",
+        confirmButtonText: "Kembali ke halaman kelas",
+      }).then(() => {
+        navigate(`/mahasiswa-detail-kelas/${courseId}/dashboard`); // Navigasi ke halaman detail kelas
+      });
     }
   };
 
@@ -68,31 +76,17 @@ const Quiz = () => {
     );
   }
 
-  if (isFinished) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <h2 className="text-2xl font-semibold text-gray-800">
-          Skor Anda: {score}/{questions.length}
-        </h2>
-        <button
-          className="mt-5 px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
-          onClick={() => {
-            setScore(0);
-            setCurrentQuestionIndex(0);
-            setIsFinished(false);
-          }}
-        >
-          Coba Lagi
-        </button>
-      </div>
-    );
-  }
-
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 py-10">
       <div className="w-full max-w-2xl p-5 bg-white shadow-md rounded-lg">
+        {/* Nama kursus */}
+        {courseName && (
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Kursus: {courseName}
+          </h2>
+        )}
         <h3 className="text-xl font-bold text-gray-800 mb-4">
           Pertanyaan {currentQuestionIndex + 1} dari {questions.length}
         </h3>
