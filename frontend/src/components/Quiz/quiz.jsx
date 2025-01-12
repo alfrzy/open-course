@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { fetchQuestions } from "../../Data/DataNilai"; // Pastikan ini mengarah ke lokasi yang benar
+import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom"; // Untuk mendapatkan courseId dari URL dan navigasi
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Quiz = () => {
   const { courseId } = useParams(); // Mengambil courseId dari URL
@@ -11,6 +13,9 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [error, setError] = useState(null);
+
+  const user = useSelector((state) => state.auth.user);
+ 
 
   useEffect(() => {
     const loadQuestions = async () => {
@@ -38,28 +43,60 @@ const Quiz = () => {
 
   const handleAnswer = (selectedOption) => {
     const currentQuestion = questions[currentQuestionIndex];
-
+  
     // Bandingkan pilihan siswa dengan jawaban benar
     if (selectedOption === currentQuestion.correct_answer) {
       setScore(score + 1);
     }
-
+  
     // Lanjutkan ke pertanyaan berikutnya atau akhiri kuis
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Tampilkan SweetAlert ketika selesai
+      // Kirim nilai ke backend setelah siswa selesai menjawab semua soal
+      const correctAnswers = score + 1; // Jawaban benar
+      const totalQuestions = questions.length; // Jumlah total soal
+      const finalScore = Math.round((score + 1) / questions.length * 100);  // Misalnya, persentase
+
+      submitScore(finalScore, totalQuestions, correctAnswers);
+  
+      // Tampilkan hasil ke siswa setelah mengirim nilai
       Swal.fire({
         title: "Selamat!",
-        text: `Anda telah menyelesaikan kuis ini. Skor Anda adalah ${score + 1} dari ${questions.length}.`,
+        text: `Anda telah menyelesaikan kuis ini. Skor Anda adalah ${finalScore} dari ${questions.length} soal.`,
         icon: "success",
         confirmButtonText: "Kembali ke halaman kelas",
       }).then(() => {
-        navigate(`/mahasiswa-detail-kelas/${courseId}/dashboard`); // Navigasi ke halaman detail kelas
+        navigate(`/mahasiswa-detail-kelas/${courseId}/dashboard`);
       });
     }
   };
+  
+  const submitScore = async (finalScore, totalQuestions, correctAnswers) => {
+    try {
+      // Kirim nilai ke backend secara langsung
+      console.log('user_id:', user.id);
+      console.log('course_id:', courseId);
+      const response = await axios.post('http://localhost:3000/api/v1/score/upsert', {
+        user_id: user.id,
+        course_id: courseId,
+        score: finalScore,
+        total_questions: totalQuestions,  // Tambahkan total soal
+        correct_answers: correctAnswers,  // Tambahkan jumlah jawaban benar
+      });
 
+      console.log('Response dari backend:', response.data);
+      console.log(response.data.message); // Tampilkan pesan sukses atau lakukan logging
+    } catch (error) {
+      console.error('Gagal menyimpan nilai:', error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Gagal menyimpan nilai. Silakan coba lagi.',
+        icon: 'error',
+      });
+    }
+  };
+  
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">

@@ -17,6 +17,7 @@ const CourseDetail = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isMembersModalOpen, setIsMembersModalOpen] = useState(false);
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
+  
   const user = useSelector((state) => state.auth.user);
   const loggedInUserId = user?.id;
   const role = user?.role ?? null;
@@ -76,11 +77,11 @@ const CourseDetail = () => {
           <span className="font-medium">{course.name}</span>
         </nav>
 
-        {(role === 1 || role === 2) && (
+        {/* {(role === 1 || role === 2) && (
           <Link to={`/edit-kelas/${id}`}>
             <ComponentButton text={"Edit Kelas"} color={"bg-blue-600"} />
           </Link>
-        )}
+        )} */}
       </div>
 
       <div className="flex">
@@ -113,16 +114,16 @@ const CourseDetail = () => {
               </div>
             )}
 
-          {role === 1 && (
+          {/* {role === 1 && (
             <div className="md:w-1/3 md:ml-6 md:mt-10">
               <div className="bg-white text-blue-800 p-4 border-2 border-blue-600 rounded-lg shadow-md max-w-md mx-auto">
                 <h3 className="text-xl font-semibold mb-4 text-center border-b border-blue-700">Jumlah Siswa</h3>
                 <p className="text-4xl font-bold text-center">{course.userCount} Siswa</p>
               </div>
             </div>
-          )}
+          )} */}
 
-          {role === 2 && (
+          {(role === 1 || role === 2) && (
             <div className="bg-yellow-100 text-gray-800 p-4 border-2 border-yellow-500 rounded-lg shadow-md max-w-md mx-auto md:w-1/3 md:ml-6 md:mt-10">
               <h3 className="text-lg font-semibold mb-4 text-center border-b border-yellow-700">Anggota Kelas</h3>
               <div className="space-y-2">

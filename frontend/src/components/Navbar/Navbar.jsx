@@ -38,8 +38,8 @@ const Navbar = () => {
       {/* Left section */}
       <section className="flex items-center justify-between w-full md:w-auto gap-3">
         <ReactLogo color={"white"} height={"50"} width={"50"} />
-        <div className="mr-[25px]">
-          <h1 className="font-bold text-[18px] md:text-[24px] text-white">Fe Open Courses</h1>
+        <div className="text-xl font-bold text-white">
+        <a href="/">FE OPEN COURSE</a>
         </div>
         {/* Hamburger menu for mobile */}
         <button className="md:hidden text-white focus:outline-none" onClick={toggleMenu}>

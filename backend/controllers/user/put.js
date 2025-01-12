@@ -52,7 +52,7 @@ update.put("/update/:id", upload.single('profile_picture'), async (req, res) => 
 
     // Cek jika file gambar diupload
     if (req.file) {
-      req.body.profile_picture = `/uploads/${req.file.filename}`;
+      req.body.profile_picture = `uploads/images/${req.file.filename}`;
     }
 
     // Jika password ada di request body, hash password sebelum disimpan

@@ -7,19 +7,19 @@ import useFetchData from "../../Data/DataSiswa";
 const DashboardNavbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.user?.id);
 
   const { dataSiswa, loading } = useFetchData();
 
   // Cari data pengguna berdasarkan userId
-  const currentUser = dataSiswa.find((user) => user.id === userId);
+  const currentUser = dataSiswa.find((user) => String(user.id) === String(userId));
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleLogout = () => {
     dispatch(logout());
-    Navigate("/");
+    navigate("/");
   };
 
   if (loading) {
@@ -39,7 +39,7 @@ const DashboardNavbar = () => {
         >
           {/* Gambar Profil */}
           <img
-            src={currentUser?.profile_picture || "https://via.placeholder.com/40"} // Ganti dengan foto profil
+            src={`http://localhost:3000/${currentUser?.profile_picture || "default-profile.png"}`}
             alt="Profile"
             className="w-10 h-10 rounded-full"
           />

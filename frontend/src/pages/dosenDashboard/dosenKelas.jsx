@@ -64,7 +64,7 @@ const DosenKelas = () => {
             {filteredClasses.map((kelas) => (
               <Link
                 key={kelas.id}
-                to={`/admin-detail-kelas/${kelas.id}/dashboard`}
+                to={`/dosen-detail-kelas/${kelas.id}/dashboard`}
                 className="w-full h-40 mt-6 md:w-[23%] relative"
               >
                 <div className={`max-w-xs bg-white p-[5%] ${kelas.is_publish === false ? "relative" : ""}`}>

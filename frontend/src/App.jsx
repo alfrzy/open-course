@@ -33,6 +33,7 @@ import AddMemberModal from "./components/Form/tambahAnggota";
 import MahasiswaProfil from "./pages/mahasiswaDashboard/mahasiswaProfil";
 import AdminKelas from "./pages/adminDashboard/kelas/adminKelas";
 import DetailQuiz from "./pages/DetailQuiz/DetailQuiz";
+import ScorePage from "./pages/Nilai/nilai";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/pembelian" element={<Pembelian />} />
         <Route path="/:courseId/tambah-anggota" element={<AddMemberModal />} />
         <Route path="/quiz/:courseId" element={<DetailQuiz />} />
+        <Route path="/user/:userId/score" element={<ScorePage />} />
         {/* test ui sebelum masuk ke private route */}
         {/* mhs */}
         <Route path="/listpurchase" element={<ListPurchase />} />
