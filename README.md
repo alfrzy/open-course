@@ -2,7 +2,7 @@
 ## 1. Cloning project
 
 ```bash
-https://gitlab.com/azura-labs/internship/choolifah-intern-batch2-2024.git
+git clone https://github.com/alfrzy/open-course.git
 ```
 
 ## 2. Enter project
